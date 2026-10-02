@@ -12,6 +12,9 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 
 const BlogList = () => {
   useResetThemeForPublic();
+  useEffect(() => {
+    document.title = "Notícias | Cartórios de Protesto MT";
+  }, []);
   const [posts, setPosts] = useState<any[]>([]);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);

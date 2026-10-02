@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Variáveis de ambiente (configurar no provedor de hospedagem)
+.env
+.env.*
+!.env.example

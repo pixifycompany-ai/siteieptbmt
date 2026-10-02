@@ -6,13 +6,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/guards/ProtectedRoute";
-import Login from "@/pages/Login";
-import BlogList from "@/pages/blog/BlogList";
-import BlogPost from "@/pages/blog/BlogPost";
-import CartoriosList from "@/pages/cartorios/CartoriosList";
-import NotFound from "@/pages/NotFound";
-import ChangePassword from "@/pages/ChangePassword";
 import Home from "@/site/pages/Home";
+
+// Lazy: blog público e autenticação (a home do site é a entrada principal)
+const BlogList = lazy(() => import("@/pages/blog/BlogList"));
+const BlogPost = lazy(() => import("@/pages/blog/BlogPost"));
+const CartoriosList = lazy(() => import("@/pages/cartorios/CartoriosList"));
+const Login = lazy(() => import("@/pages/Login"));
+const ChangePassword = lazy(() => import("@/pages/ChangePassword"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 // Lazy: demais páginas do site institucional
 const Servicos = lazy(() => import("@/site/pages/Servicos"));

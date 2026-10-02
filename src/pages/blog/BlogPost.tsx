@@ -29,6 +29,10 @@ const BlogPost = () => {
   const s = settings || defaultSettings;
 
   useEffect(() => {
+    if (post?.title) document.title = `${post.title} | Cartórios de Protesto MT`;
+  }, [post?.title]);
+
+  useEffect(() => {
     const fetchData = async () => {
       const { data } = await supabase
         .from("posts")
