@@ -34,8 +34,8 @@ const Footer = () => {
   const { pathname } = useLocation();
 
   return (
-    <footer className="bg-[#2a2d33] px-6 py-12 text-[#eff2f5] min-[810px]:px-10 min-[1200px]:px-16 min-[1200px]:pb-[13px] min-[1200px]:pt-16">
-      <div className="flex flex-col gap-10 min-[810px]:flex-row min-[810px]:items-start min-[810px]:justify-between">
+    <footer className="bg-[#2a2d33] px-8 pb-4 pt-16 text-[#eff2f5] min-[810px]:px-10 min-[1200px]:px-16 min-[1200px]:pb-[13px]">
+      <div className="flex flex-col gap-[45px] min-[810px]:flex-row min-[810px]:items-start min-[810px]:justify-between">
         <div>
           <Link to="/" aria-label="Página inicial">
             <img
@@ -63,8 +63,8 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-10 min-[810px]:items-end min-[810px]:gap-[14px] min-[810px]:self-stretch min-[810px]:pt-[98px]">
-          <ul className="space-y-[11px] min-[810px]:text-right">
+        <div className="flex flex-col gap-[21px] min-[810px]:items-end min-[810px]:gap-[14px] min-[810px]:self-stretch min-[810px]:pt-[98px]">
+          <ul className="space-y-[19px] min-[810px]:space-y-[11px] min-[810px]:text-right">
             {links.map((l) => (
               // Como no original, o link da página atual fica oculto (mas mantém o espaço).
               <li key={l.label} className={l.to === pathname ? "invisible" : undefined}>
@@ -100,8 +100,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-12 flex flex-col gap-4 min-[810px]:mt-[46px] min-[810px]:flex-row min-[810px]:items-end min-[810px]:justify-between">
-        <div className="text-[13px] font-bold leading-[1.2] text-[#eff2f5]/80">
+      <div className="mt-[47px] flex flex-col gap-2 min-[810px]:mt-[46px] min-[810px]:flex-row min-[810px]:items-end min-[810px]:justify-between">
+        <div className="text-[9px] font-bold leading-[1.2] text-[#eff2f5]/80 min-[810px]:text-[13px]">
           <p>
             Instituto de Estudos de Protesto de Títulos do Brasil – Seção Mato
             Grosso (IEPTB-MT) · CNPJ 10.864.384/0001-44

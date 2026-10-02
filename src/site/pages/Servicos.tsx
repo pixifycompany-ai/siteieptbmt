@@ -53,35 +53,35 @@ const pill =
   "inline-flex h-[26px] items-center rounded-full bg-[#0061ff] px-3 text-[10px] font-normal leading-none text-white transition-colors duration-300";
 
 const SectionHeading = ({ children }: { children: ReactNode }) => (
-  <h2 className="text-center text-[28px] font-normal leading-[1.2] text-[#2a2d33]/70 min-[810px]:text-[32px]">{children}</h2>
+  <h2 className="text-center text-[24px] font-normal leading-[1.2] text-[#2a2d33]/70 min-[810px]:text-[32px]">{children}</h2>
 );
 
 const Servicos = () => (
   <SiteLayout title="Serviços | Cartórios de Protesto de Mato Grosso" background="#ffffff">
     {/* Hero */}
-    <section className="relative overflow-hidden min-[1200px]:-mt-[10px] min-[1200px]:h-[900px]">
+    <section className="relative -mt-[10px] h-[844px] overflow-hidden min-[810px]:h-auto min-[1200px]:h-[900px]">
       <img
         src={img("xV0iRaFgKTyEwbvhVGw5aMHZtCc")}
         alt=""
         fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover object-[70%_50%] min-[1200px]:object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[69.3%_35.2%] min-[1200px]:object-center"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,#fff_27%,rgba(255,255,255,0)_77%)] max-[809px]:bg-[linear-gradient(90deg,#fff_45%,rgba(255,255,255,0.6)_100%)]" />
-      <div className="relative flex min-h-[620px] items-center px-6 py-16 min-[810px]:px-16 min-[1200px]:h-full min-[1200px]:px-24">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#fff_0%,rgba(255,255,255,0)_127%)] min-[810px]:bg-[linear-gradient(90deg,#fff_27%,rgba(255,255,255,0)_77%)]" />
+      <div className="relative flex h-full flex-col items-center px-6 pt-[271px] text-center min-[810px]:min-h-[620px] min-[810px]:flex-row min-[810px]:px-16 min-[810px]:py-16 min-[810px]:text-left min-[1200px]:h-full min-[1200px]:px-24">
         <div className="max-w-[896px]">
-          <h1 className="max-w-[806px] text-[38px] font-medium leading-none text-[#2a2d33] min-[810px]:text-[52px] min-[1200px]:text-[64px]">
+          <h1 className="max-w-[806px] text-[28px] font-medium leading-none text-[#2a2d33] min-[810px]:text-[52px] min-[1200px]:text-[64px]">
             79 cartórios de protesto de Mato Grosso, conectados em uma plataforma.
           </h1>
-          <p className="mt-2.5 max-w-[806px] text-[16px] font-light leading-[1.2] text-[#2a2d33]">
+          <p className="mt-2.5 max-w-[806px] text-[14px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[16px]">
             Do envio do título ao cancelamento extrajudicial — tudo <br className="hidden min-[1200px]:block" />
             eletrônico, integrado à base estadual do Cartórios de Protesto MT.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3 min-[810px]:gap-6">
+          <div className="mt-8 flex w-full flex-col gap-6 min-[810px]:w-auto min-[810px]:flex-row">
             <a
               href={EXTERNAL.pesquisaProtesto}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-[51px] items-center rounded-lg bg-[#0061ff] px-4 text-[16px] font-light text-[#eff2f5] transition-colors duration-300 hover:bg-[#2a2d33]"
+              className="flex h-[51px] items-center justify-center rounded-lg bg-[#0061ff] px-4 text-[16px] font-light text-[#eff2f5] transition-colors duration-300 hover:bg-[#2a2d33]"
             >
               Consulta gratuita
             </a>
@@ -89,7 +89,7 @@ const Servicos = () => (
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-[51px] items-center rounded-lg border border-[#0061ff] bg-[#eff2f5]/20 px-4 text-[16px] font-normal text-[#0061ff] transition-colors duration-300 hover:bg-[#0061ff] hover:text-white"
+              className="flex h-[51px] items-center justify-center rounded-lg border border-[#0061ff] bg-[#eff2f5]/20 px-4 text-[16px] font-normal text-[#0061ff] transition-colors duration-300 hover:bg-[#0061ff] hover:text-white"
             >
               Falar com consultor
             </a>
@@ -99,7 +99,7 @@ const Servicos = () => (
     </section>
 
     {/* Serviços principais */}
-    <section className="px-4 pt-8 min-[810px]:px-16">
+    <section className="px-6 pt-8 min-[810px]:px-16">
       <SectionHeading>Serviços principais</SectionHeading>
       <div className="mt-6 grid gap-6 min-[810px]:grid-cols-2 min-[1200px]:grid-cols-3">
         {MAIN.map((s) => (
@@ -130,7 +130,7 @@ const Servicos = () => (
     </section>
 
     {/* Recursos */}
-    <section className="px-4 pb-24 pt-24 min-[810px]:px-16">
+    <section className="px-6 pb-16 pt-16 min-[810px]:px-16 min-[1200px]:pb-24 min-[1200px]:pt-24">
       <SectionHeading>Recursos</SectionHeading>
       <div className="mt-[25px] grid gap-6 min-[680px]:grid-cols-2 min-[1200px]:grid-cols-4">
         {RESOURCES.map((r) => {

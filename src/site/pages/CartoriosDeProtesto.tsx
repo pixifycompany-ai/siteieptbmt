@@ -4,21 +4,24 @@ import CartoriosWidget from "@/pages/cartorios/CartoriosWidget";
 
 /**
  * Lista dos cartórios de MT. No Framer era um iframe de /cartorios/widget (app do blog, raiz 14.4px);
- * aqui o mesmo widget é renderizado direto na página, com zoom .9 para manter a escala original.
+ * aqui o mesmo widget é renderizado direto na página (zoom .9 mantém a escala original).
  */
 const CartoriosDeProtesto = () => (
   <SiteLayout title="Cartórios de Protesto | Cartórios de Protesto de Mato Grosso">
-    <section className="px-4 pb-16 pt-12 min-[810px]:px-16 min-[1200px]:pt-[86px]">
-      <h1 className="text-center text-[44px] font-medium leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
+    <section className="px-6 pb-16 pt-[94px] min-[810px]:px-16 min-[810px]:pt-12 min-[1200px]:pb-32 min-[1200px]:pt-[86px]">
+      <h1 className="text-center text-[28px] font-medium leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
         <BlurText text="Cartórios de Protesto" />
       </h1>
       <Reveal>
-        <p className="text-center text-[16px] font-light leading-[1.6] text-[#2a2d33]/80">
+        <p className="text-center text-[13px] font-light leading-[1.6] text-[#2a2d33]/80 min-[810px]:text-[16px]">
           Encontre aqui o cartório mais próximo de você
         </p>
       </Reveal>
-      <div className="mt-6" style={{ zoom: 0.9 }}>
-        <CartoriosWidget />
+      {/* Mesma "janela" do iframe original: 900px de altura com rolagem interna. */}
+      <div className="h-[900px] overflow-y-auto overscroll-contain min-[810px]:mt-6">
+        <div style={{ zoom: 0.9 }}>
+          <CartoriosWidget />
+        </div>
       </div>
     </section>
   </SiteLayout>

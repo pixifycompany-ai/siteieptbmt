@@ -41,7 +41,7 @@ const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, backgr
   return (
     <div className="site min-h-screen" style={{ background }}>
       <Navbar />
-      <main className="pt-[70px] min-[1200px]:pt-20">{children}</main>
+      <main className="pt-20">{children}</main>
       <Footer />
       <CookieBanner />
     </div>

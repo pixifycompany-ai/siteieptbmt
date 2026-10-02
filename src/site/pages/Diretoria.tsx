@@ -98,12 +98,12 @@ const MemberCard = ({ m }: { m: Member }) => {
 const Header = ({ badge, title, delay = 0 }: { badge: string; title: string; delay?: number }) => (
   <div className="flex flex-col items-center border-b border-[#2a2d33]/10 pb-4">
     <Reveal y={10} delay={delay} transition={{ type: "spring", bounce: 0, duration: 0.6 }}>
-      <span className="inline-flex h-[26px] items-center rounded-full bg-[#2a2d33] px-4 text-[12px] font-light text-[#eff2f5]">
+      <span className="inline-flex h-6 items-center rounded-full bg-[#2a2d33] px-4 text-[10px] font-light text-[#eff2f5] min-[810px]:h-[26px] min-[810px]:text-[12px]">
         {badge}
       </span>
     </Reveal>
     <Reveal y={10} delay={delay + 0.2} transition={{ type: "spring", bounce: 0, duration: 0.6 }}>
-      <h2 className="mt-2.5 text-center text-[40px] font-semibold leading-[1.2] text-[#0061ff] min-[810px]:text-[48px]">{title}</h2>
+      <h2 className="mt-2.5 text-center text-[28px] font-semibold leading-[1.2] text-[#0061ff] min-[810px]:text-[48px]">{title}</h2>
     </Reveal>
   </div>
 );
@@ -120,7 +120,7 @@ const Grid = ({ members, delay = 0 }: { members: Member[]; delay?: number }) => 
 
 const Diretoria = () => (
   <SiteLayout title="Diretoria | Cartórios de Protesto de Mato Grosso">
-    <section className="px-6 pb-16 pt-16 min-[810px]:px-[72px] min-[1200px]:pt-[110px]">
+    <section className="px-4 pb-16 pt-[53px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[110px]">
       <Header badge="Gestão 2025/2026" title="Diretoria" />
       <Grid members={DIRETORIA} delay={0.4} />
       <div className="mt-16">

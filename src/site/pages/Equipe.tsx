@@ -158,16 +158,21 @@ const FlipCard = ({ p }: { p: Person }) => {
 
 const Equipe = () => (
   <SiteLayout title="Nossa Equipe | Cartórios de Protesto de Mato Grosso" background="#2a2d33">
-    <section className="px-6 pb-[88px] pt-16 min-[810px]:px-[72px] min-[1200px]:pt-[82px]">
+    <section className="px-6 pb-[88px] pt-[88px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[82px]">
       <Reveal className="flex flex-col items-center border-b border-[#eff2f5]/10 pb-4">
-        <span className="inline-flex h-[26px] items-center rounded-full bg-[#0061ff] px-4 text-[12px] font-light text-[#eff2f5]">
+        <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 text-[10px] font-light text-[#eff2f5] min-[810px]:h-[26px] min-[810px]:text-[12px]">
           Quem faz acontecer
         </span>
-        <h1 className="mt-2.5 text-[40px] font-semibold leading-[1.2] text-[#eff2f5] min-[810px]:text-[48px]">Nossa Equipe</h1>
+        <h1 className="mt-2.5 text-[28px] font-semibold leading-[1.2] text-[#eff2f5] min-[810px]:text-[48px]">Nossa Equipe</h1>
       </Reveal>
-      <div className="mx-auto mt-12 flex max-w-[1096px] flex-wrap justify-center gap-x-8 gap-y-[72px]">
-        {TEAM.map((p) => (
-          <FlipCard key={p.name} p={p} />
+      {/* Mesma divisão do original: fileiras de 4, 4 e 3 (no celular cada fileira empilha). */}
+      <div className="mt-12 flex flex-col items-center gap-20 min-[810px]:gap-[72px]">
+        {[TEAM.slice(0, 4), TEAM.slice(4, 8), TEAM.slice(8)].map((row, i) => (
+          <div key={i} className="flex max-w-[1096px] flex-wrap justify-center gap-8">
+            {row.map((p) => (
+              <FlipCard key={p.name} p={p} />
+            ))}
+          </div>
         ))}
       </div>
     </section>

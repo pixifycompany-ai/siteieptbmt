@@ -35,19 +35,19 @@ const PRESIDENTS = [
   ["2025 a 2026", "Wellington Ribeiro Campos"],
 ];
 
-const paragraph = "text-balance whitespace-pre-wrap text-[18px] font-light leading-[1.6] text-[#2a2d33]/80 min-[810px]:text-[22px]";
+const paragraph = "text-balance whitespace-pre-wrap text-[13px] font-light leading-[1.55] text-[#2a2d33]/80 min-[810px]:text-[22px] min-[810px]:leading-[1.6]";
 const strong = "font-normal";
 
 const Instituicao = () => (
   <SiteLayout title="Instituição | Cartórios de Protesto de Mato Grosso" background="#ffffff">
     {/* Sobre Nós */}
-    <section className="px-6 pb-20 pt-12 min-[810px]:px-16 min-[1200px]:pb-28 min-[1200px]:pt-20">
+    <section className="px-4 pb-[51px] pt-20 min-[810px]:px-16 min-[810px]:pb-20 min-[1200px]:pb-28">
       <div className="border-b border-[#2a2d33]/10">
-        <h1 className="text-[48px] font-bold leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
+        <h1 className="text-[28px] font-bold leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
           <BlurText text="Sobre Nós" />
         </h1>
       </div>
-      <Reveal className="mt-6 max-w-[1181px] space-y-[1.6em] text-[18px] min-[810px]:text-[22px]">
+      <Reveal className="mt-3.5 max-w-[1181px] space-y-[1.55em] text-[13px] min-[810px]:mt-6 min-[810px]:space-y-[1.6em] min-[810px]:text-[22px]">
         <p className={paragraph}>
           O Instituto de Estudos de Protesto de Títulos do Brasil Seção Mato Grosso - IEPTB/MT é uma entidade civil, sem
           fins lucrativos, que representa os cartórios de protesto de títulos e documentos de dívida do Estado do Mato
@@ -68,19 +68,19 @@ const Instituicao = () => (
     </section>
 
     {/* Missão, Visão e Valores */}
-    <section className="bg-[#0061ff] px-6 py-16 min-[810px]:px-16">
+    <section className="bg-[#0061ff] px-4 pb-11 pt-16 min-[810px]:px-16 min-[810px]:pb-16">
       <div className="space-y-8">
         {PHILOSOPHY.map((item) => (
           <Reveal
             key={item.title}
-            className="flex items-center gap-5 border-b border-[#eff2f5]/30 pb-11 min-[810px]:gap-8"
+            className="flex items-center gap-8 border-b border-[#eff2f5]/30 pb-8 min-[810px]:pb-11"
           >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#eff2f5] text-[#eff2f5]">
               {item.icon}
             </span>
             <div className="max-w-[1181px]">
-              <h2 className="text-[44px] font-normal leading-[1.2] text-white min-[810px]:text-[64px]">{item.title}</h2>
-              <p className="text-balance text-[16px] font-light leading-[1.6] text-[#eff2f5]/70">{item.text}</p>
+              <h2 className="text-[25px] font-normal leading-[1.2] text-white min-[810px]:text-[64px]">{item.title}</h2>
+              <p className="text-balance text-[13px] font-light leading-[1.6] text-[#eff2f5]/70 min-[810px]:text-[16px]">{item.text}</p>
             </div>
           </Reveal>
         ))}
@@ -88,30 +88,31 @@ const Instituicao = () => (
     </section>
 
     {/* Presidentes */}
-    <section className="px-6 pb-16 pt-16 min-[810px]:px-16 min-[1200px]:pt-[90px]">
+    <section className="px-4 pb-4 pt-8 min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-16 min-[1200px]:pt-[90px]">
       <div className="border-b border-[#2a2d33]/10">
-        <h2 className="text-balance text-center text-[40px] font-bold leading-[1.1] text-[#0061ff] min-[810px]:text-[64px]">
+        <h2 className="text-balance px-6 text-center text-[28px] font-bold leading-[1.1] text-[#0061ff] min-[810px]:px-0 min-[810px]:text-[64px]">
           <BlurText text="Presidentes que marcaram nossa história" />
         </h2>
         <Reveal>
-          <p className="mx-auto mt-6 text-balance text-center text-[18px] font-light leading-[1.6] text-[#2a2d33]/80 min-[810px]:mt-[50px] min-[810px]:text-[22px]">
-            Do início da nossa jornada até os dias atuais, cada presidente do IEPTB-MT contribuiu para consolidar o
-            serviço de protesto como pilar essencial da segurança jurídica e da recuperação de crédito em Mato Grosso.
+          <p className="mx-auto mt-[45px] text-balance text-center text-[22px] font-light leading-[1.55] text-[#2a2d33]/80 min-[810px]:mt-[50px] min-[810px]:leading-[1.6]">
+            Do início da nossa jornada até os dias atuais, cada presidente do IEPTB-MT contribuiu para consolidar
+            <br />o serviço de protesto como pilar essencial da segurança jurídica e da recuperação de crédito em Mato
+            Grosso.
           </p>
         </Reveal>
 
-        <div className="relative mt-6 py-8">
-          <span className="absolute bottom-0 left-[7px] top-0 w-0.5 bg-[#e0e0e0] min-[810px]:left-1/2 min-[810px]:-translate-x-1/2" />
+        <div className="relative mt-6 pb-8 pt-[62px] min-[810px]:pt-8">
+          <span className="absolute bottom-0 left-6 top-0 w-0.5 bg-[#e0e0e0] min-[810px]:left-1/2 min-[810px]:-translate-x-1/2" />
           <ol className="space-y-7">
             {PRESIDENTS.map(([period, name], i) => {
               const right = i % 2 === 1;
               return (
                 <li key={period} className="relative min-[810px]:grid min-[810px]:grid-cols-2 min-[810px]:gap-[88px] min-[810px]:px-5">
-                  <span className="absolute left-[2px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-[#0061ff] min-[810px]:left-1/2" />
+                  <span className="absolute left-1/2 top-1/2 hidden h-3 w-3 -translate-y-1/2 rounded-full bg-[#0061ff] min-[810px]:block" />
                   <Reveal
                     blur
                     y={20}
-                    className={`ml-8 rounded-2xl bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] min-[810px]:ml-0 ${right ? "min-[810px]:col-start-2" : ""}`}
+                    className={`ml-5 w-[246px] rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] min-[810px]:ml-0 min-[810px]:w-auto min-[810px]:p-6 ${right ? "min-[810px]:col-start-2" : ""}`}
                   >
                     <p className="text-[14px] font-medium leading-[1.4] text-[#666]">{period}</p>
                     <p className="mt-[7px] text-[18px] font-semibold leading-[1.3] text-black">{name}</p>

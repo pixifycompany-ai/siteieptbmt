@@ -135,8 +135,8 @@ const Navbar = () => {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-[70px] bg-white min-[1200px]:h-20">
-      <nav className="flex h-full items-center justify-between px-6 min-[810px]:px-10 min-[1200px]:px-16">
+    <header className="fixed inset-x-0 top-0 z-50 h-20 bg-white">
+      <nav className="flex h-full items-center justify-between px-4 min-[810px]:px-10 min-[1200px]:px-16">
         <div className="flex items-center gap-[68px]">
           <Link to="/" aria-label="Página inicial" className="text-[#2a2d33]">
             <LogoMark className="h-[34px] w-[34px]" />
@@ -191,7 +191,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: [0.44, 0, 0.56, 1] }}
-            className="fixed inset-x-0 bottom-0 top-[70px] overflow-y-auto bg-white px-6 pb-10 min-[810px]:px-10 min-[1200px]:hidden"
+            className="fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-white px-4 pb-10 min-[810px]:px-10 min-[1200px]:hidden"
           >
             <MobileSection title="Institucional" items={INSTITUCIONAL_MENU} onNavigate={() => setMobileOpen(false)} />
             <MobileSection title="Serviços" items={SERVICOS_MENU} onNavigate={() => setMobileOpen(false)} />

@@ -50,40 +50,40 @@ const FAQ = [
 
 const SectionTitle = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <h2
-    className={`text-balance px-4 text-center text-[32px] font-semibold leading-[1.1] text-[#2a2d33] min-[810px]:text-[40px] min-[1200px]:text-[48px] min-[1200px]:leading-none ${className}`}
+    className={`text-balance px-4 text-center text-[28px] font-semibold leading-none text-[#2a2d33] min-[810px]:text-[40px] min-[1200px]:text-[48px] ${className}`}
   >
     {children}
   </h2>
 );
 
 const Hero = () => (
-  <section className="relative h-[640px] overflow-hidden min-[810px]:h-[720px] min-[1200px]:-mt-[10px] min-[1200px]:h-[800px]">
+  <section className="relative -mt-[10px] h-[844px] overflow-hidden min-[810px]:h-[720px] min-[1200px]:h-[800px]">
     <img
       src={img("l02yOJdgGRdf1I3Vrawzmx2k")}
       alt=""
-      className="absolute inset-0 h-full w-full object-cover object-[62%_0%] min-[810px]:object-[50%_0%]"
+      className="absolute inset-0 h-full w-full object-cover object-[59.4%_44.2%] min-[810px]:object-[50%_0%]"
       fetchPriority="high"
     />
     {/* Névoa clara à esquerda: mesmo gradiente vetorial do Framer (sólido até 40%, some em 62%, opacidade .84) */}
-    <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(90deg,#eff2f5_40%,rgba(239,242,245,0)_62%)] opacity-[0.84] min-[1200px]:h-[1000px] min-[1200px]:w-[1366px]" />
-    <div className="relative flex h-full flex-col justify-center px-6 min-[810px]:px-16 min-[1200px]:justify-start min-[1200px]:px-32 min-[1200px]:pt-[160px]">
+    <div className="absolute left-0 top-0 h-[1000px] w-[724px] bg-[linear-gradient(90deg,#eff2f5_40%,rgba(239,242,245,0)_62%)] opacity-[0.84] min-[810px]:h-full min-[810px]:w-full min-[1200px]:h-[1000px] min-[1200px]:w-[1366px]" />
+    <div className="relative flex h-full flex-col items-center px-6 pt-[226px] text-center min-[810px]:items-start min-[810px]:justify-center min-[810px]:px-16 min-[810px]:pt-0 min-[810px]:text-left min-[1200px]:justify-start min-[1200px]:px-32 min-[1200px]:pt-[160px]">
       <Reveal>
-        <span className="inline-flex h-[22px] items-center rounded-full bg-[#2a2d33] px-2.5 text-[12px] font-light leading-none text-[#eff2f5]">
+        <span className="inline-flex h-[19px] items-center rounded-full bg-[#2a2d33] px-2.5 text-[9px] font-light leading-none text-[#eff2f5] min-[810px]:h-[22px] min-[810px]:text-[12px]">
           Cartórios de Protesto · MT
         </span>
-        <h1 className="mt-2.5 max-w-[558px] text-[30px] font-medium leading-none text-[#0061ff] min-[810px]:text-[38px]">
+        <h1 className="mt-2.5 max-w-[558px] text-[28px] font-medium leading-none text-[#0061ff] min-[810px]:text-[38px]">
           Protesto de títulos com segurança jurídica
         </h1>
-        <p className="mt-2.5 max-w-[558px] text-[13px] font-light leading-[1.2] text-[#2a2d33]">
+        <p className="mx-auto mt-2.5 max-w-[300px] text-[14px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:mx-0 min-[810px]:max-w-[558px] min-[810px]:text-[13px]">
           Rápido, digital e com a segurança jurídica dos Cartórios de Mato Grosso.
         </p>
       </Reveal>
-      <Reveal className="mt-6 flex flex-wrap gap-3 min-[810px]:gap-6">
+      <Reveal className="mt-6 flex w-[280px] flex-col gap-4 min-[810px]:w-auto min-[810px]:flex-row min-[810px]:gap-6">
         <a
           href={EXTERNAL.pesquisaProtesto}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-[51px] items-center rounded-lg bg-[#2a2d33] px-4 text-[16px] font-light text-[#eff2f5] transition-colors duration-300 hover:bg-[#0061ff]"
+          className="flex h-[49px] items-center justify-center rounded-lg bg-[#2a2d33] px-4 text-[14px] font-light text-[#eff2f5] transition-colors duration-300 hover:bg-[#0061ff] min-[810px]:h-[51px] min-[810px]:text-[16px]"
         >
           Pesquisar protesto
         </a>
@@ -91,12 +91,12 @@ const Hero = () => (
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-[51px] items-center rounded-lg border border-[#0061ff] bg-[#eff2f5]/20 px-4 text-[16px] font-normal text-[#0061ff] backdrop-blur-[2px] transition-colors duration-300 hover:bg-[#0061ff] hover:text-white"
+          className="flex h-[49px] items-center justify-center rounded-lg border border-[#0061ff] bg-[#eff2f5]/20 px-4 text-[14px] font-normal text-[#0061ff] backdrop-blur-[2px] transition-colors duration-300 hover:bg-[#0061ff] hover:text-white min-[810px]:h-[51px] min-[810px]:text-[16px]"
         >
           Quero ser conveniado
         </a>
       </Reveal>
-      <Reveal className="mt-8">
+      <Reveal className="mt-12 text-left min-[810px]:mt-8">
         <div className="flex items-center gap-2">
           <span className="text-[44px] font-medium leading-none text-[#0061ff]">+</span>
           <CountUp to={140} className="text-[64px] font-medium leading-none text-[#2a2d33]" />
@@ -108,7 +108,7 @@ const Hero = () => (
 );
 
 const Solutions = () => (
-  <section className="flex flex-col items-center justify-center bg-white px-4 py-24 min-[1200px]:min-h-[900px] min-[1200px]:py-[219px]">
+  <section className="flex flex-col items-center justify-center bg-white px-4 py-8 min-[810px]:py-24 min-[1200px]:min-h-[900px] min-[1200px]:py-[219px]">
     <SectionBadge>Soluções para você</SectionBadge>
     <SectionTitle className="mt-2.5 max-w-[1000px]">
       Como o Cartórios de Protesto de Mato Grosso pode te ajudar
@@ -143,9 +143,12 @@ const News = () => (
       <SectionBadge>Notícias</SectionBadge>
       <SectionTitle className="mt-2.5">Acompanhe o universo do Protesto</SectionTitle>
     </div>
-    {/* O widget original rodava num iframe do blog (raiz 14.4px = 90% de 16px); o zoom mantém a mesma escala. */}
-    <div className="mt-8 px-4" style={{ zoom: 0.9 }}>
-      <NewsGrid showLoadMore={false} />
+    {/* O widget original era um iframe do blog: 800px de altura com rolagem interna e raiz 14.4px
+        (90% de 16px). A caixa rolável + zoom .9 reproduzem exatamente esse comportamento. */}
+    <div className="mx-4 mt-8 h-[800px] overflow-y-auto overscroll-contain">
+      <div style={{ zoom: 0.9 }}>
+        <NewsGrid />
+      </div>
     </div>
   </section>
 );
@@ -154,7 +157,7 @@ const Location = () => (
   <section className="bg-[#eff2f5] px-4 pb-16 pt-16">
     <div className="flex flex-col items-center">
       <SectionBadge tone="blue">Como chegar</SectionBadge>
-      <SectionTitle className="mt-2.5 min-[1200px]:!leading-[1.2]">Localização</SectionTitle>
+      <SectionTitle className="mt-2.5 !leading-[1.2]">Localização</SectionTitle>
     </div>
     <div className="mt-8 overflow-hidden rounded-[20px]">
       <iframe
@@ -165,7 +168,7 @@ const Location = () => (
         referrerPolicy="no-referrer-when-downgrade"
       />
     </div>
-    <p className="mt-2.5 text-center text-[13px] font-light leading-[1.2] text-[#2a2d33]">{ADDRESS}</p>
+    <p className="mt-2.5 text-center text-[9px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[13px]">{ADDRESS}</p>
   </section>
 );
 
@@ -219,13 +222,13 @@ const Faq = () => {
       return next;
     });
   return (
-    <section className="bg-white px-4 pb-16 pt-16">
+    <section className="bg-white pb-16 pt-16 min-[810px]:px-4">
       <div className="flex flex-col items-center">
         <SectionBadge>FAQ</SectionBadge>
         <SectionTitle className="mt-2.5">Dúvidas recorrentes que escutamos</SectionTitle>
       </div>
-      <div className="mx-auto mt-8 max-w-[1200px] min-[1200px]:p-8">
-        <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-b from-[#f3f4f6] to-[#f9fafb] p-6 min-[810px]:p-12">
+      <div className="mx-auto mt-8 max-w-[1200px] bg-white p-4 min-[810px]:p-0 min-[1200px]:p-8">
+        <div className="relative overflow-hidden rounded-[32px] border border-[#e5e7eb] bg-gradient-to-b from-[#f3f4f6] to-[#f9fafb] p-4 min-[810px]:border-0 min-[810px]:p-12">
           <span
             aria-hidden="true"
             className="gradient-text pointer-events-none absolute bottom-[26px] left-[27px] hidden select-none bg-[linear-gradient(0deg,rgba(228,230,235,0)_0%,#d2d6db_100%)] font-['Figtree'] text-[250px] font-semibold leading-[1.3] min-[810px]:block"

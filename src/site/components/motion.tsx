@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { animate, motion, useInView, useReducedMotion, type Transition } from "framer-motion";
 
 // Transições reproduzidas dos "appear effects" do Framer original.
@@ -67,18 +67,20 @@ export const BlurText = ({ text, className, delay = 0 }: { text: string; classNa
       aria-label={text}
     >
       {words.map((w, i) => (
-        <motion.span
-          key={`${w}-${i}`}
-          aria-hidden="true"
-          className="inline-block whitespace-pre"
-          variants={{
-            hidden: { opacity: 0, filter: "blur(10px)", y: 10 },
-            visible: { opacity: 1, filter: "blur(0px)", y: 0 },
-          }}
-          transition={{ duration: 0.6, ease: [0.12, 0.23, 0, 1] }}
-        >
-          {i < words.length - 1 ? `${w} ` : w}
-        </motion.span>
+        <Fragment key={`${w}-${i}`}>
+          <motion.span
+            aria-hidden="true"
+            className="inline-block"
+            variants={{
+              hidden: { opacity: 0, filter: "blur(10px)", y: 10 },
+              visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+            }}
+            transition={{ duration: 0.6, ease: [0.12, 0.23, 0, 1] }}
+          >
+            {w}
+          </motion.span>
+          {i < words.length - 1 && " "}
+        </Fragment>
       ))}
     </motion.span>
   );
