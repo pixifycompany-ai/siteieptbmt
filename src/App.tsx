@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +12,7 @@ import BlogPost from "@/pages/blog/BlogPost";
 import CartoriosList from "@/pages/cartorios/CartoriosList";
 import NotFound from "@/pages/NotFound";
 import ChangePassword from "@/pages/ChangePassword";
+import Home from "@/site/pages/Home";
 
 // Lazy: widgets (carregados em iframe — devem entrar leves)
 const Widget = lazy(() => import("@/pages/Widget"));
@@ -42,8 +43,10 @@ const App = () => (
         <AuthProvider>
           <Suspense fallback={<Fallback />}>
             <Routes>
-              {/* Public */}
-              <Route path="/" element={<Navigate to="/blog" replace />} />
+              {/* Site institucional */}
+              <Route path="/" element={<Home />} />
+
+              {/* Blog público */}
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/widget" element={<Widget />} />
