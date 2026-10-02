@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LogoMark } from "./icons";
@@ -26,7 +26,7 @@ const ItemLink = ({ item, onNavigate }: { item: MenuItem; onNavigate?: () => voi
   );
 };
 
-const Dropdown = ({ label, items, active }: { label: string; items: MenuItem[]; active: boolean }) => {
+const Dropdown = ({ label, items }: { label: string; items: MenuItem[] }) => {
   const [open, setOpen] = useState(false);
   const timer = useRef<number>();
   const show = () => {
@@ -44,7 +44,7 @@ const Dropdown = ({ label, items, active }: { label: string; items: MenuItem[]; 
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
         onFocus={show}
-        className={`${linkBase} flex items-center gap-1 ${open || active ? "text-[#0061ff]" : "text-[#2a2d33] hover:text-[#0061ff]"}`}
+        className={`${linkBase} flex items-center gap-1 ${open ? "text-[#0061ff]" : "text-[#2a2d33] hover:text-[#0061ff]"}`}
       >
         {label}
         <ChevronDown
@@ -85,8 +85,8 @@ const SocialButton = ({ href, label, children }: { href: string; label: string; 
   </a>
 );
 
-const navClass = ({ isActive }: { isActive: boolean }) =>
-  `${linkBase} ${isActive ? "text-[#0061ff]" : "text-[#2a2d33] hover:text-[#0061ff]"}`;
+// O original não destaca a página ativa no menu.
+const navClass = `${linkBase} text-[#2a2d33] hover:text-[#0061ff]`;
 
 const MobileSection = ({ title, items, onNavigate }: { title: string; items: MenuItem[]; onNavigate: () => void }) => {
   const [open, setOpen] = useState(false);
@@ -134,9 +134,6 @@ const Navbar = () => {
     };
   }, [mobileOpen]);
 
-  const instActive = INSTITUCIONAL_MENU.some((i) => i.href === pathname);
-  const servActive = pathname === "/servicos";
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-[70px] bg-white min-[1200px]:h-20">
       <nav className="flex h-full items-center justify-between px-6 min-[810px]:px-10 min-[1200px]:px-16">
@@ -145,17 +142,17 @@ const Navbar = () => {
             <LogoMark className="h-[34px] w-[34px]" />
           </Link>
           <div className="hidden items-center gap-10 min-[1200px]:flex">
-            <Dropdown label="Institucional" items={INSTITUCIONAL_MENU} active={instActive} />
-            <Dropdown label="Serviços" items={SERVICOS_MENU} active={servActive} />
-            <NavLink to="/blog" className={navClass}>
+            <Dropdown label="Institucional" items={INSTITUCIONAL_MENU} />
+            <Dropdown label="Serviços" items={SERVICOS_MENU} />
+            <Link to="/blog" className={navClass}>
               Notícias
-            </NavLink>
-            <NavLink to="/contato" className={navClass}>
+            </Link>
+            <Link to="/contato" className={navClass}>
               Contato
-            </NavLink>
-            <NavLink to="/privacidade" className={navClass}>
+            </Link>
+            <Link to="/privacidade" className={navClass}>
               Privacidade
-            </NavLink>
+            </Link>
           </div>
         </div>
 

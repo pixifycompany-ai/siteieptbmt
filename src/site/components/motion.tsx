@@ -52,6 +52,38 @@ export const Reveal = ({
   );
 };
 
+/** Título que surge palavra a palavra saindo do desfoque (efeito de texto do Framer). */
+export const BlurText = ({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) => {
+  const reduce = useReducedMotion();
+  const words = text.split(" ");
+  if (reduce) return <span className={className}>{text}</span>;
+  return (
+    <motion.span
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ staggerChildren: 0.06, delayChildren: delay }}
+      aria-label={text}
+    >
+      {words.map((w, i) => (
+        <motion.span
+          key={`${w}-${i}`}
+          aria-hidden="true"
+          className="inline-block whitespace-pre"
+          variants={{
+            hidden: { opacity: 0, filter: "blur(10px)", y: 10 },
+            visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+          }}
+          transition={{ duration: 0.6, ease: [0.12, 0.23, 0, 1] }}
+        >
+          {i < words.length - 1 ? `${w} ` : w}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
 /** Contador animado (ex.: "+140 municípios atendidos"). */
 export const CountUp = ({ to, duration = 2, className }: { to: number; duration?: number; className?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);

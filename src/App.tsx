@@ -14,6 +14,11 @@ import NotFound from "@/pages/NotFound";
 import ChangePassword from "@/pages/ChangePassword";
 import Home from "@/site/pages/Home";
 
+// Lazy: demais páginas do site institucional
+const Servicos = lazy(() => import("@/site/pages/Servicos"));
+const Contato = lazy(() => import("@/site/pages/Contato"));
+const Instituicao = lazy(() => import("@/site/pages/Instituicao"));
+
 // Lazy: widgets (carregados em iframe — devem entrar leves)
 const Widget = lazy(() => import("@/pages/Widget"));
 const CartoriosWidget = lazy(() => import("@/pages/cartorios/CartoriosWidget"));
@@ -45,6 +50,9 @@ const App = () => (
             <Routes>
               {/* Site institucional */}
               <Route path="/" element={<Home />} />
+              <Route path="/servicos" element={<Servicos />} />
+              <Route path="/contato" element={<Contato />} />
+              <Route path="/instituicao" element={<Instituicao />} />
 
               {/* Blog público */}
               <Route path="/blog" element={<BlogList />} />
