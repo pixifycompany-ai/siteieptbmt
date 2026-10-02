@@ -123,7 +123,7 @@ const Servicos = () => (
               src={s.image}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.08]"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-900 ease-out-quint will-change-transform group-hover:scale-[1.08]"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />
             <div className="absolute inset-x-6 bottom-8">
@@ -148,7 +148,7 @@ const Servicos = () => (
             href={r.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-[250px] flex-col overflow-hidden rounded-xl border border-[#0061ff]/30 bg-white p-6 outline-none transition-[transform,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[#0061ff] hover:shadow-[0_20px_40px_-18px_rgba(0,97,255,0.45)] focus-visible:border-[#0061ff] focus-visible:ring-2 focus-visible:ring-[#0061ff]/40"
+            className="group relative flex h-[250px] flex-col overflow-hidden rounded-xl border border-[#0061ff]/30 bg-white p-6 outline-none transition-[transform,border-color,box-shadow] duration-500 ease-out-quint hover:-translate-y-1 hover:border-[#0061ff] hover:shadow-[0_20px_40px_-18px_rgba(0,97,255,0.45)] focus-visible:border-[#0061ff] focus-visible:ring-2 focus-visible:ring-[#0061ff]/40"
           >
             {/* brilho azul que sobe do rodapé do card no hover */}
             <span

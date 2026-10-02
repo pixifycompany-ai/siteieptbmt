@@ -123,7 +123,7 @@ const Solutions = () => (
             src={s.image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.08]"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-900 ease-out-quint will-change-transform group-hover:scale-[1.08]"
           />
           {/* véu igual ao SVG do Framer: transparente em 20% → preto em 84% */}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />
