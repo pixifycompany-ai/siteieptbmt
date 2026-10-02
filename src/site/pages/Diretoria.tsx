@@ -119,7 +119,10 @@ const Grid = ({ members, delay = 0 }: { members: Member[]; delay?: number }) => 
 );
 
 const Diretoria = () => (
-  <SiteLayout title="Diretoria | Cartórios de Protesto de Mato Grosso">
+  <SiteLayout
+    title="Diretoria | Cartórios de Protesto de Mato Grosso"
+    description="Diretoria e Conselho Fiscal do IEPTB-MT, gestão 2025/2026: os tabeliães de protesto que conduzem o instituto em Mato Grosso."
+  >
     <section className="px-4 pb-16 pt-[53px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[110px]">
       <Header badge="Gestão 2025/2026" title="Diretoria" />
       <Grid members={DIRETORIA} delay={0.4} />

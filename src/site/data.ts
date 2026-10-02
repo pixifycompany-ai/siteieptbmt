@@ -13,6 +13,8 @@ export const EXTERNAL = {
   tabelaEmolumentos:
     "https://drive.google.com/file/d/18L54G4REHQpkVTUUo4kFtsgJEJU9wE9_/view?usp=sharing",
   edital: "https://mt.edital21.com.br/publicacao/consultar",
+  // Lei Federal nº 9.492/1997 — regulamenta o protesto de títulos e outros documentos de dívida
+  leiProtesto: "https://www.planalto.gov.br/ccivil_03/leis/l9492.htm",
   pixify: "https://www.pixify.company/",
   mapsEmbed: "https://maps.google.com/maps?q=IEPTB%20MT&z=15&output=embed",
 };

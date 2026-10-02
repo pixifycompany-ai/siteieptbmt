@@ -44,7 +44,10 @@ const Item = ({ question, answer }: { question: string; answer: string }) => {
 };
 
 const Privacidade = () => (
-  <SiteLayout title="Aviso de Privacidade | Cartórios de Protesto de Mato Grosso">
+  <SiteLayout
+    title="Aviso de Privacidade | Cartórios de Protesto de Mato Grosso"
+    description="Aviso de privacidade do IEPTB-MT: quais dados pessoais tratamos, para quê, como os protegemos e como exercer seus direitos conforme a LGPD."
+  >
     <section className="px-6 pb-6 pt-[62px] min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-8 min-[1200px]:pt-[22px]">
       <Reveal>
         <h1 className="text-center text-[28px] font-medium leading-[1.4] text-[#2a2d33] min-[810px]:text-[48px]">

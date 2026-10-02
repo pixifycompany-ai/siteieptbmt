@@ -31,8 +31,14 @@ const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, backgr
 
   useEffect(() => {
     document.title = title;
-    document.querySelector('meta[name="description"]')?.setAttribute("content", description);
-  }, [title, description]);
+    const set = (selector: string, value: string) => document.querySelector(selector)?.setAttribute("content", value);
+    set('meta[name="description"]', description);
+    set('meta[property="og:title"]', title);
+    set('meta[property="og:description"]', description);
+    set('meta[name="twitter:title"]', title);
+    set('meta[name="twitter:description"]', description);
+    set('meta[property="og:url"]', `https://www.cartoriosdeprotestomt.com.br${pathname === "/" ? "/" : pathname}`);
+  }, [title, description, pathname]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -32,11 +32,11 @@ const SOLUTIONS = [
 const FAQ = [
   {
     q: "O que é protesto de títulos?",
-    a: "O protesto é um ato formal e público realizado pelo cartório que comprova a inadimplência de uma dívida. Ele é regulado pela Lei Federal nº 9.492/1997 e tem duas funções principais: provar oficialmente que o devedor não pagou e servir como instrumento extrajudicial para recuperar o crédito, sem precisar entrar com ação na Justiça.",
+    a: "O protesto é um ato formal e público, realizado pelo tabelião, que comprova o não cumprimento de uma obrigação representada em título ou documento. Regulado pela Lei Federal nº 9.492/1997, ele tem duas funções principais: dar publicidade oficial à pendência e oferecer uma via extrajudicial, rápida e segura, para a sua regularização, sem a necessidade de ação na Justiça.",
   },
   {
     q: "Quem paga os emolumentos cobrados pelo cartório?",
-    a: "Em regra, quem paga é o devedor, no momento da quitação da dívida no tabelionato (art. 19 da Lei 9.492/97). O credor não tem custo direto para apresentar o título a protesto — uma das principais vantagens desse mecanismo em comparação com a cobrança judicial. Se o devedor não pagar e o protesto for lavrado, posteriormente ele também arca com as custas do cancelamento.",
+    a: "Em regra, quem paga é o devedor, no momento da quitação da dívida no tabelionato (art. 19 da Lei 9.492/97). O credor não tem custo direto para apresentar o título a protesto — uma das principais vantagens desse mecanismo em comparação com a via judicial. Se o devedor não pagar e o protesto for lavrado, posteriormente ele também arca com as custas do cancelamento.",
   },
   {
     q: "Quanto tempo tenho para pagar antes que o protesto seja registrado?",
@@ -123,7 +123,7 @@ const Solutions = () => (
             src={s.image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.08]"
           />
           {/* véu igual ao SVG do Framer: transparente em 20% → preto em 84% */}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />

@@ -108,7 +108,9 @@ const Photo = ({ src, className }: { src?: { photo: string; position: string }; 
     <div aria-hidden="true" className={className} style={{ backgroundImage: PLACEHOLDER, backgroundSize: "64px auto" }} />
   );
 
-const face = "absolute inset-0 overflow-hidden rounded-2xl [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
+// A sombra fica em cada face (e não no container): assim nada aparece por trás durante o giro.
+const face =
+  "absolute inset-0 overflow-hidden rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
 
 /** Card que vira no eixo X ao passar o mouse (componente "Flip Card" do Framer: vertical, 0.6s, easeInOut). */
 const FlipCard = ({ p }: { p: Person }) => {
@@ -118,7 +120,7 @@ const FlipCard = ({ p }: { p: Person }) => {
 
   return (
     <div
-      className="relative h-[280px] w-[250px] rounded-2xl bg-[#eff2f5]/40 shadow-[0_4px_20px_rgba(0,0,0,0.1)] [perspective:1000px]"
+      className="relative h-[280px] w-[250px] rounded-2xl outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[#0061ff] focus-visible:ring-offset-4 focus-visible:ring-offset-[#2a2d33]"
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onClick={() => setFlipped((f) => !f)}
@@ -157,7 +159,11 @@ const FlipCard = ({ p }: { p: Person }) => {
 };
 
 const Equipe = () => (
-  <SiteLayout title="Nossa Equipe | Cartórios de Protesto de Mato Grosso" background="#2a2d33">
+  <SiteLayout
+    title="Nossa Equipe | Cartórios de Protesto de Mato Grosso"
+    description="Conheça a equipe do IEPTB-MT que atende cartórios, conveniados e cidadãos em todo o estado de Mato Grosso."
+    background="#2a2d33"
+  >
     <section className="px-6 pb-[88px] pt-[88px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[82px]">
       <Reveal className="flex flex-col items-center border-b border-[#eff2f5]/10 pb-4">
         <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 text-[10px] font-light text-[#eff2f5] min-[810px]:h-[26px] min-[810px]:text-[12px]">

@@ -29,8 +29,10 @@ const BlogPost = () => {
   const s = settings || defaultSettings;
 
   useEffect(() => {
-    if (post?.title) document.title = `${post.title} | Cartórios de Protesto MT`;
-  }, [post?.title]);
+    if (!post?.title) return;
+    document.title = `${post.title} | Cartórios de Protesto MT`;
+    if (post.excerpt) document.querySelector('meta[name="description"]')?.setAttribute("content", post.excerpt);
+  }, [post?.title, post?.excerpt]);
 
   useEffect(() => {
     const fetchData = async () => {

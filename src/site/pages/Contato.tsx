@@ -41,7 +41,11 @@ const CHANNELS: { label: string; title: string; description: string; icon: React
 ];
 
 const Contato = () => (
-  <SiteLayout title="Contato | Cartórios de Protesto de Mato Grosso" background="#ffffff">
+  <SiteLayout
+    title="Contato | Cartórios de Protesto de Mato Grosso"
+    description="Fale com o Cartórios de Protesto de Mato Grosso: atendimento institucional, suporte à Central de Remessa (CRA-MT) e convênios. Telefones, e-mail, WhatsApp e endereço em Cuiabá."
+    background="#ffffff"
+  >
     {/* Cabeçalho + canais */}
     <section className="px-6 pb-12 pt-[94px] min-[810px]:px-16 min-[810px]:pt-12 min-[1200px]:pt-[54px]">
       <Reveal>

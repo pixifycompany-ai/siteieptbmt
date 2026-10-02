@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BookOpen, Building, Newspaper, SquaresFour } from "@phosphor-icons/react";
+import { ArrowUpRight, BookOpen, Building, Newspaper, SquaresFour } from "@phosphor-icons/react";
 import SiteLayout from "../components/SiteLayout";
 import { EXTERNAL, WHATSAPP_URL, img } from "../data";
 
@@ -27,13 +27,18 @@ const MAIN = [
   },
 ];
 
-type Resource = { title: string; description: string; icon: ReactNode; href?: string };
+type Resource = { title: string; description: string; icon: ReactNode; href: string };
 
-const iconProps = { size: 24, color: "#0061ff", weight: "regular" as const };
+const iconProps = { size: 24, weight: "regular" as const };
 
 const RESOURCES: Resource[] = [
   { title: "Convênios", description: "Empresas e órgãos públicos", icon: <Building {...iconProps} />, href: WHATSAPP_URL },
-  { title: "Legislação", description: "Marco regulatório do protesto", icon: <BookOpen {...iconProps} /> },
+  {
+    title: "Legislação",
+    description: "Marco regulatório do protesto",
+    icon: <BookOpen {...iconProps} />,
+    href: EXTERNAL.leiProtesto,
+  },
   {
     title: "Tabela de emolumentos",
     description: "Valores por operação",
@@ -57,7 +62,11 @@ const SectionHeading = ({ children }: { children: ReactNode }) => (
 );
 
 const Servicos = () => (
-  <SiteLayout title="Serviços | Cartórios de Protesto de Mato Grosso" background="#ffffff">
+  <SiteLayout
+    title="Serviços | Cartórios de Protesto de Mato Grosso"
+    description="Consulta de protesto gratuita por CPF ou CNPJ, envio eletrônico de títulos pela CRA-MT e cancelamento online nos 79 cartórios de protesto de Mato Grosso."
+    background="#ffffff"
+  >
     {/* Hero */}
     <section className="relative -mt-[10px] h-[844px] overflow-hidden min-[810px]:h-auto min-[1200px]:h-[900px]">
       <img
@@ -114,7 +123,7 @@ const Servicos = () => (
               src={s.image}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.08]"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />
             <div className="absolute inset-x-6 bottom-8">
@@ -133,28 +142,35 @@ const Servicos = () => (
     <section className="px-6 pb-16 pt-16 min-[810px]:px-16 min-[1200px]:pb-24 min-[1200px]:pt-24">
       <SectionHeading>Recursos</SectionHeading>
       <div className="mt-[25px] grid gap-6 min-[680px]:grid-cols-2 min-[1200px]:grid-cols-4">
-        {RESOURCES.map((r) => {
-          const body = (
-            <>
-              <span className="block">{r.icon}</span>
-              <span className="mt-3 block min-h-0 flex-1" />
-              <span className="block text-[20px] font-medium leading-none text-[#2a2d33]">{r.title}</span>
-              <span className="mt-1 block text-[12px] font-extralight leading-none text-[#2a2d33]">{r.description}</span>
-              <span className={`${pill} mt-6 shrink-0 self-start`}>Saber mais</span>
-            </>
-          );
-          const cls =
-            "flex h-[250px] flex-col rounded-lg border border-[#0061ff] px-6 pb-4 pt-[100px] transition-colors duration-300 hover:bg-[#eff2f5]";
-          return r.href ? (
-            <a key={r.title} href={r.href} target="_blank" rel="noopener noreferrer" className={cls}>
-              {body}
-            </a>
-          ) : (
-            <div key={r.title} className={cls}>
-              {body}
-            </div>
-          );
-        })}
+        {RESOURCES.map((r) => (
+          <a
+            key={r.title}
+            href={r.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex h-[250px] flex-col overflow-hidden rounded-xl border border-[#0061ff]/30 bg-white p-6 outline-none transition-[transform,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[#0061ff] hover:shadow-[0_20px_40px_-18px_rgba(0,97,255,0.45)] focus-visible:border-[#0061ff] focus-visible:ring-2 focus-visible:ring-[#0061ff]/40"
+          >
+            {/* brilho azul que sobe do rodapé do card no hover */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0061ff]/[0.07] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            />
+            <span className="relative flex items-start justify-between">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0061ff]/[0.08] text-[#0061ff] transition-colors duration-500 group-hover:bg-[#0061ff] group-hover:text-white">
+                {r.icon}
+              </span>
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0061ff]/25 text-[#0061ff] transition-all duration-500 group-hover:border-[#0061ff] group-hover:bg-[#0061ff] group-hover:text-white">
+                <ArrowUpRight size={14} weight="bold" className="transition-transform duration-500 group-hover:-translate-y-px group-hover:translate-x-px group-hover:rotate-45" />
+              </span>
+            </span>
+            <span className="relative mt-3 block min-h-0 flex-1" />
+            <span className="relative block text-[20px] font-medium leading-none text-[#2a2d33]">{r.title}</span>
+            <span className="relative mt-1.5 block text-[12px] font-light leading-[1.35] text-[#2a2d33]/70">{r.description}</span>
+            <span className={`${pill} relative mt-5 shrink-0 self-start group-hover:bg-[#2a2d33]`}>
+              Saber mais
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   </SiteLayout>

@@ -39,7 +39,11 @@ const paragraph = "text-balance whitespace-pre-wrap text-[13px] font-light leadi
 const strong = "font-normal";
 
 const Instituicao = () => (
-  <SiteLayout title="Instituição | Cartórios de Protesto de Mato Grosso" background="#ffffff">
+  <SiteLayout
+    title="Instituição | Cartórios de Protesto de Mato Grosso"
+    description="Conheça o IEPTB-MT, entidade sem fins lucrativos que representa os cartórios de protesto de Mato Grosso desde 2005: missão, visão, valores e presidentes."
+    background="#ffffff"
+  >
     {/* Sobre Nós */}
     <section className="px-4 pb-[51px] pt-20 min-[810px]:px-16 min-[810px]:pb-20 min-[1200px]:pb-28">
       <div className="border-b border-[#2a2d33]/10">
@@ -96,8 +100,8 @@ const Instituicao = () => (
         <Reveal>
           <p className="mx-auto mt-[45px] text-balance text-center text-[22px] font-light leading-[1.55] text-[#2a2d33]/80 min-[810px]:mt-[50px] min-[810px]:leading-[1.6]">
             Do início da nossa jornada até os dias atuais, cada presidente do IEPTB-MT contribuiu para consolidar
-            <br />o serviço de protesto como pilar essencial da segurança jurídica e da recuperação de crédito em Mato
-            Grosso.
+            <br />o serviço de protesto como pilar essencial da segurança jurídica e da confiança nas relações
+            comerciais em Mato Grosso.
           </p>
         </Reveal>
 

@@ -14,6 +14,9 @@ const BlogList = () => {
   useResetThemeForPublic();
   useEffect(() => {
     document.title = "Notícias | Cartórios de Protesto MT";
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", "Notícias sobre protesto de títulos, cartórios de Mato Grosso e o IEPTB-MT.");
   }, []);
   const [posts, setPosts] = useState<any[]>([]);
   const [page, setPage] = useState(0);
