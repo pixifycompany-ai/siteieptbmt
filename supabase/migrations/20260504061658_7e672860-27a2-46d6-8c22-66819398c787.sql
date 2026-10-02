@@ -1,0 +1,1 @@
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS allowed_sections text[] NOT NULL DEFAULT '{}';

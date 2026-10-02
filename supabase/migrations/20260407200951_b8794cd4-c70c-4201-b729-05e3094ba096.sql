@@ -1,0 +1,1 @@
+ALTER TABLE public.blog_settings ADD COLUMN homepage_url text NOT NULL DEFAULT '/';

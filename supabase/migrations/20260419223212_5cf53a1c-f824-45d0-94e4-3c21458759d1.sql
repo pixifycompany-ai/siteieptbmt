@@ -1,0 +1,1 @@
+ALTER TABLE public.cartorios ADD COLUMN site_url text NULL;

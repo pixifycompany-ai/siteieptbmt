@@ -1,0 +1,3 @@
+CREATE POLICY "Colaborador can read all posts" ON public.posts FOR SELECT TO authenticated USING (get_user_role(auth.uid()) = 'colaborador');
+CREATE POLICY "Colaborador can update all posts" ON public.posts FOR UPDATE TO authenticated USING (get_user_role(auth.uid()) = 'colaborador');
+CREATE POLICY "Colaborador can delete all posts" ON public.posts FOR DELETE TO authenticated USING (get_user_role(auth.uid()) = 'colaborador');

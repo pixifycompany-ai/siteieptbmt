@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__515a2680-fa84-4dfe-82ce-eb02d61919de__get_project",
+      "mcp__515a2680-fa84-4dfe-82ce-eb02d61919de__list_workspaces",
+      "mcp__515a2680-fa84-4dfe-82ce-eb02d61919de__list_projects",
+      "Bash(curl -s -L \"https://www.cartoriosdeprotestomt.com.br/sitemap.xml\" -A \"Mozilla/5.0\")",
+      "Bash(curl -s -L \"https://www.cartoriosdeprotestomt.com.br/robots.txt\" -A \"Mozilla/5.0\")",
+      "mcp__515a2680-fa84-4dfe-82ce-eb02d61919de__list_files",
+      "Bash(which curl; ls -la /usr/bin/curl 2>/dev/null; echo \"PATH=$PATH\")"
+    ]
+  }
+}

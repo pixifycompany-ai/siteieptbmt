@@ -1,0 +1,1 @@
+ALTER TABLE public.cartorios_settings ADD COLUMN IF NOT EXISTS card_gap integer NOT NULL DEFAULT 24;

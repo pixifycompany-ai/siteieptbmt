@@ -1,0 +1,1 @@
+ALTER TABLE public.cartorios ADD COLUMN tabeliao_genero text NOT NULL DEFAULT 'tabeliao';
