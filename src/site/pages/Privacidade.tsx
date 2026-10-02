@@ -59,7 +59,7 @@ const Privacidade = () => (
       </div>
 
       <div className="mt-6 space-y-0 text-center text-[14px] font-light leading-[1.5] text-[#2a2d33]/90">
-        <p className="min-[1200px]:-mx-4 min-[1200px]:whitespace-nowrap">
+        <p className="min-[1440px]:-mx-4 min-[1440px]:whitespace-nowrap">
           Em caso de dúvidas acerca dos seus direitos, ou da forma como exercê-los, entre em contato com o nosso
           Encarregado de Dados Pessoais, Laura Amaranta de Almeida Lima, via e-mail:{" "}
           <a href={`mailto:${CONTACTS.institucional.email}`} className="hover:text-[#0061ff]">
