@@ -18,6 +18,10 @@ import Home from "@/site/pages/Home";
 const Servicos = lazy(() => import("@/site/pages/Servicos"));
 const Contato = lazy(() => import("@/site/pages/Contato"));
 const Instituicao = lazy(() => import("@/site/pages/Instituicao"));
+const Diretoria = lazy(() => import("@/site/pages/Diretoria"));
+const Equipe = lazy(() => import("@/site/pages/Equipe"));
+const CartoriosDeProtesto = lazy(() => import("@/site/pages/CartoriosDeProtesto"));
+const Privacidade = lazy(() => import("@/site/pages/Privacidade"));
 
 // Lazy: widgets (carregados em iframe — devem entrar leves)
 const Widget = lazy(() => import("@/pages/Widget"));
@@ -53,6 +57,10 @@ const App = () => (
               <Route path="/servicos" element={<Servicos />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/instituicao" element={<Instituicao />} />
+              <Route path="/diretoria" element={<Diretoria />} />
+              <Route path="/equipe" element={<Equipe />} />
+              <Route path="/cartoriosdeprotesto" element={<CartoriosDeProtesto />} />
+              <Route path="/privacidade" element={<Privacidade />} />
 
               {/* Blog público */}
               <Route path="/blog" element={<BlogList />} />
