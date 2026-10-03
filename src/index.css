@@ -182,6 +182,29 @@ html.site-root {
 .site .text-balance {
   text-wrap: balance;
 }
+
+/* Escala tipográfica do site — a mesma em todas as páginas (celular → 810px → 1200px).
+   hero: título da página · title: título de seção · lead: subtítulo/descrição de destaque
+   card: título de card · body: texto corrido · small: descrição de card/legenda · eyebrow: pílula acima do título */
+.site .type-hero { font-size: 34px; line-height: 1.12; font-weight: 600; letter-spacing: -0.01em; }
+.site .type-title { font-size: 28px; line-height: 1.18; font-weight: 600; letter-spacing: -0.005em; }
+.site .type-lead { font-size: 16px; line-height: 1.55; font-weight: 300; }
+.site .type-card { font-size: 20px; line-height: 1.25; font-weight: 500; }
+.site .type-body { font-size: 15px; line-height: 1.65; font-weight: 300; }
+.site .type-small { font-size: 14px; line-height: 1.45; font-weight: 300; }
+.site .type-eyebrow { font-size: 11px; line-height: 1; font-weight: 400; }
+@media (min-width: 810px) {
+  .site .type-hero { font-size: 46px; line-height: 1.1; }
+  .site .type-title { font-size: 36px; line-height: 1.15; }
+  .site .type-lead { font-size: 18px; }
+  .site .type-body { font-size: 16px; }
+  .site .type-eyebrow { font-size: 12px; }
+}
+@media (min-width: 1200px) {
+  .site .type-hero { font-size: 56px; line-height: 1.08; }
+  .site .type-title { font-size: 44px; line-height: 1.12; }
+  .site .type-lead { font-size: 20px; }
+}
 .site .gradient-text {
   -webkit-background-clip: text;
   background-clip: text;

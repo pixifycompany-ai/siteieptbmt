@@ -64,7 +64,7 @@ export const SectionBadge = ({ children, tone = "light" }: { children: ReactNode
     dark: "bg-[#2a2d33] text-[#eff2f5]",
   }[tone];
   return (
-    <span className={`inline-flex h-6 items-center rounded-full px-3 text-[10px] font-light leading-none ${styles}`}>
+    <span className={`inline-flex h-6 items-center rounded-full px-3 type-eyebrow min-[810px]:h-[26px] ${styles}`}>
       {children}
     </span>
   );

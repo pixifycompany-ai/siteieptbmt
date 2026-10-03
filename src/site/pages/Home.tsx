@@ -53,7 +53,7 @@ const FAQ = [
 
 const SectionTitle = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <h2
-    className={`text-balance px-4 text-center text-[28px] font-semibold leading-none text-[#2a2d33] min-[810px]:text-[40px] min-[1200px]:text-[48px] ${className}`}
+    className={`type-title text-balance px-4 text-center text-[#2a2d33] ${className}`}
   >
     {children}
   </h2>
@@ -73,13 +73,13 @@ const Hero = () => (
     <div className="absolute left-0 top-0 h-full w-[724px] bg-[linear-gradient(90deg,#eff2f5_40%,rgba(239,242,245,0)_62%)] opacity-[0.84] min-[810px]:w-full min-[1200px]:w-[1366px]" />
     <div className="relative flex h-full flex-col items-center justify-center px-6 pb-10 text-center min-[810px]:items-start min-[810px]:px-16 min-[810px]:text-left min-[1200px]:px-32 min-[1200px]:pb-[8vh]">
       <Reveal immediate>
-        <span className="inline-flex h-[19px] items-center rounded-full bg-[#2a2d33] px-2.5 text-[9px] font-light leading-none text-[#eff2f5] min-[810px]:h-[22px] min-[810px]:text-[12px]">
+        <span className="inline-flex h-6 items-center rounded-full bg-[#2a2d33] px-3 type-eyebrow text-[#eff2f5] min-[810px]:h-[26px]">
           Cartórios de Protesto · MT
         </span>
-        <h1 className="mt-2.5 max-w-[558px] text-[28px] font-medium leading-none text-[#0061ff] min-[810px]:text-[38px]">
+        <h1 className="type-hero mt-3 max-w-[640px] text-balance text-[#0061ff]">
           Protesto de títulos com segurança jurídica
         </h1>
-        <p className="mx-auto mt-2.5 max-w-[300px] text-[14px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:mx-0 min-[810px]:max-w-[558px] min-[810px]:text-[13px]">
+        <p className="type-lead mx-auto mt-3 max-w-[320px] text-balance text-[#2a2d33] min-[810px]:mx-0 min-[810px]:max-w-[560px]">
           Rápido, digital e com a segurança jurídica dos Cartórios de Mato Grosso.
         </p>
       </Reveal>
@@ -135,8 +135,8 @@ const Solutions = () => (
           {/* véu igual ao SVG do Framer: transparente em 20% → preto em 84% */}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />
           <div className="absolute inset-x-6 bottom-8">
-            <h3 className="text-[20px] font-medium leading-none text-[#eff2f5]">{s.title}</h3>
-            <p className="mt-2.5 text-[12px] font-extralight leading-none text-[#eff2f5]/80">{s.description}</p>
+            <h3 className="type-card text-[#eff2f5]">{s.title}</h3>
+            <p className="type-small mt-1.5 text-[#eff2f5]/85">{s.description}</p>
           </div>
         </article>
       ))}
@@ -173,12 +173,12 @@ const Location = () => (
   <section className="bg-[#eff2f5] px-4 pb-16 pt-16">
     <div className="flex flex-col items-center">
       <SectionBadge tone="blue">Como chegar</SectionBadge>
-      <SectionTitle className="mt-2.5 !leading-[1.2]">Localização</SectionTitle>
+      <SectionTitle className="mt-2.5">Localização</SectionTitle>
     </div>
     <div className="mt-8 overflow-hidden rounded-[20px]">
       <LazyMap title="Mapa — Cartórios de Protesto MT" className="h-[375px] w-full" />
     </div>
-    <p className="mt-2.5 text-center text-[9px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[13px]">{ADDRESS}</p>
+    <p className="type-small mt-3 text-center text-[#2a2d33]">{ADDRESS}</p>
   </section>
 );
 

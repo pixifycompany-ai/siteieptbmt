@@ -155,8 +155,8 @@ const FlipCard = ({ p }: { p: Person }) => {
         transition={transition}
       >
         <Photo src={p.front} size={92} className="h-[92px] w-[92px] shrink-0 rounded-full" />
-        <h2 className="mt-6 text-[20px] font-semibold leading-[1.4] text-[#2a2d33]">{p.name}</h2>
-        <p className="text-[16px] font-normal leading-[1.4] text-[#2a2d33]/80">{p.role}</p>
+        <h2 className="type-card mt-6 text-[#2a2d33]">{p.name}</h2>
+        <p className="type-body mt-0.5 text-[#2a2d33]/80">{p.role}</p>
         <p className="absolute bottom-6 text-[10px] font-light leading-[1.4] text-[#2a2d33]/80">
           {/* Texto pelo tipo de aparelho, em CSS (funciona no HTML pré-renderizado). */}
           <span className="[@media(hover:hover)]:hidden">toque no card</span>
@@ -171,9 +171,9 @@ const FlipCard = ({ p }: { p: Person }) => {
         animate={{ rotateX: flipped ? 0 : 180 }}
         transition={transition}
       >
-        <h2 className="text-[20px] font-semibold leading-[1.4] text-white">{p.name}</h2>
-        <p className="text-[14px] font-normal leading-[1.4] text-white">{p.role}</p>
-        <p className="mt-4 text-[12px] font-extralight leading-[1.4] text-white/95">{p.description}</p>
+        <h2 className="type-card text-white">{p.name}</h2>
+        <p className="type-small text-white">{p.role}</p>
+        <p className="type-small mt-3 pr-14 text-white/95">{p.description}</p>
         <Photo src={p.back} size={64} className="absolute bottom-6 right-6 h-16 w-16 rounded-lg" />
       </motion.div>
     </div>
@@ -184,10 +184,10 @@ const Equipe = () => (
   <SiteLayout {...SEO["/equipe"]} background="#2a2d33">
     <section className="px-6 pb-[88px] pt-[88px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[82px]">
       <Reveal immediate className="flex flex-col items-center border-b border-[#eff2f5]/10 pb-4">
-        <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 text-[10px] font-light text-white min-[810px]:h-[26px] min-[810px]:text-[12px]">
+        <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 type-eyebrow text-white min-[810px]:h-[26px]">
           Quem faz acontecer
         </span>
-        <h1 className="mt-2.5 text-[28px] font-semibold leading-[1.2] text-[#eff2f5] min-[810px]:text-[48px]">Nossa Equipe</h1>
+        <h1 className="type-hero mt-3 text-[#eff2f5]">Nossa Equipe</h1>
       </Reveal>
       {/* Mesma divisão do original: fileiras de 4, 4 e 3 (no celular cada fileira empilha). */}
       <div className="mt-12 flex flex-col items-center gap-20 min-[810px]:gap-[72px]">

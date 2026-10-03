@@ -56,10 +56,10 @@ const RESOURCES: Resource[] = [
 ];
 
 const pill =
-  "inline-flex h-[26px] items-center rounded-full bg-[#0061ff] px-3 text-[10px] font-normal leading-none text-white transition-colors duration-300";
+  "inline-flex h-[26px] items-center rounded-full bg-[#0061ff] px-3 type-eyebrow text-white transition-colors duration-300";
 
 const SectionHeading = ({ children }: { children: ReactNode }) => (
-  <h2 className="text-center text-[24px] font-normal leading-[1.2] text-[#2a2d33]/70 min-[810px]:text-[32px]">{children}</h2>
+  <h2 className="type-title text-center text-[#2a2d33]">{children}</h2>
 );
 
 const Servicos = () => (
@@ -77,10 +77,10 @@ const Servicos = () => (
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#fff_0%,rgba(255,255,255,0)_127%)] min-[810px]:bg-[linear-gradient(90deg,#fff_27%,rgba(255,255,255,0)_77%)]" />
       <div className="relative flex h-full flex-col items-center px-6 pt-[271px] text-center min-[810px]:min-h-[620px] min-[810px]:flex-row min-[810px]:px-16 min-[810px]:py-16 min-[810px]:text-left min-[1200px]:h-full min-[1200px]:px-24">
         <div className="max-w-[896px]">
-          <h1 className="max-w-[806px] text-[28px] font-medium leading-none text-[#2a2d33] min-[810px]:text-[52px] min-[1200px]:text-[64px]">
+          <h1 className="type-hero max-w-[806px] text-balance text-[#2a2d33]">
             79 cartórios de protesto de Mato Grosso, conectados em uma plataforma.
           </h1>
-          <p className="mt-2.5 max-w-[806px] text-[14px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[16px]">
+          <p className="type-lead mt-3 max-w-[620px] text-balance text-[#2a2d33]">
             Do envio do título ao cancelamento extrajudicial — tudo <br className="hidden min-[1200px]:block" />
             eletrônico, integrado à base estadual do Cartórios de Protesto MT.
           </p>
@@ -128,8 +128,8 @@ const Servicos = () => (
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,#000_84%)]" />
             <div className="absolute inset-x-6 bottom-8">
-              <h3 className="text-[20px] font-medium leading-none text-[#eff2f5]">{s.title}</h3>
-              <p className="mt-1 max-w-[252px] text-[12px] font-extralight leading-none text-[#eff2f5]/80">
+              <h3 className="type-card text-[#eff2f5]">{s.title}</h3>
+              <p className="type-small mt-1.5 max-w-[280px] text-[#eff2f5]/85">
                 {s.description}
               </p>
               <span className={`${pill} mt-[18px] group-hover:bg-white group-hover:text-[#0061ff]`}>{s.cta}</span>
@@ -165,8 +165,8 @@ const Servicos = () => (
               </span>
             </span>
             <span className="relative mt-3 block min-h-0 flex-1" />
-            <span className="relative block text-[20px] font-medium leading-none text-[#2a2d33]">{r.title}</span>
-            <span className="relative mt-1.5 block text-[12px] font-light leading-[1.35] text-[#2a2d33]/70">{r.description}</span>
+            <span className="type-card relative block text-[#2a2d33]">{r.title}</span>
+            <span className="type-small relative mt-1.5 block text-[#2a2d33]/70">{r.description}</span>
             <span className={`${pill} relative mt-5 shrink-0 self-start group-hover:bg-[#2a2d33]`}>
               Saber mais
             </span>

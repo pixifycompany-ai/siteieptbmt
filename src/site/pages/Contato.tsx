@@ -47,11 +47,11 @@ const Contato = () => (
     {/* Cabeçalho + canais */}
     <section className="px-6 pb-12 pt-[94px] min-[810px]:px-16 min-[810px]:pt-12 min-[1200px]:pt-[54px]">
       <Reveal immediate>
-        <p className="text-[12px] font-light leading-[1.2] text-[#0061ff]">Fale com a equipe certa</p>
-        <h1 className="text-[28px] font-medium leading-[1.3] text-[#2a2d33] min-[810px]:text-[48px]">
+        <p className="type-eyebrow text-[#0061ff]">Fale com a equipe certa</p>
+        <h1 className="type-hero mt-2 text-[#2a2d33]">
           Como podemos ajudar você?
         </h1>
-        <p className="mt-2.5 text-[13px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[16px]">
+        <p className="type-lead mt-3 text-[#2a2d33]">
           Cada motivo de contato tem um canal direto. Escolha abaixo para falar com quem resolve mais rápido.
         </p>
       </Reveal>
@@ -65,19 +65,19 @@ const Contato = () => (
             <span className="flex h-[34px] w-[34px] items-center justify-center rounded-[10px] bg-[#eff2f5]">
               {c.icon}
             </span>
-            <p className="mt-2.5 text-[10px] font-normal leading-[1.2] text-[#2a2d33]">{c.label}</p>
-            <h2 className="mt-1 text-[18px] font-medium leading-[1.2] text-[#2a2d33]">{c.title}</h2>
-            <p className="mt-1 text-[14px] font-light leading-[1.2] text-[#2a2d33]">{c.description}</p>
+            <p className="type-eyebrow mt-2.5 text-[#2a2d33]/70">{c.label}</p>
+            <h2 className="type-card mt-1 text-[#2a2d33]">{c.title}</h2>
+            <p className="type-small mt-1 text-[#2a2d33]">{c.description}</p>
             <a
               href={tel(c.phone)}
-              className="mt-2.5 flex items-center gap-2.5 text-[14px] font-light leading-[1.2] text-[#2a2d33] transition-colors hover:text-[#0061ff] min-[810px]:text-[18px]"
+              className="mt-2.5 flex items-center gap-2.5 type-body text-[#2a2d33] transition-colors hover:text-[#0061ff]"
             >
               <Phone className="h-3.5 w-3.5 min-[810px]:h-[18px] min-[810px]:w-[18px]" />
               {c.phone}
             </a>
             <a
               href={`mailto:${c.email}`}
-              className="mt-2.5 flex items-center gap-2.5 break-all text-[13px] font-light leading-[1.2] text-[#2a2d33] transition-colors hover:text-[#0061ff] min-[810px]:text-[18px]"
+              className="mt-2.5 flex items-center gap-2.5 break-all type-body text-[#2a2d33] transition-colors hover:text-[#0061ff]"
             >
               <EnvelopeSimple className="h-3.5 w-3.5 shrink-0 min-[810px]:h-[18px] min-[810px]:w-[18px]" />
               {c.email}
@@ -93,8 +93,8 @@ const Contato = () => (
         <LazyMap title="Mapa — Sede do Cartórios de Protesto MT" className="h-[375px] w-full shrink-0" />
         <div className="flex flex-1 flex-col items-start justify-between gap-4 px-6 py-5 min-[810px]:flex-row min-[810px]:flex-wrap min-[810px]:items-center min-[810px]:py-6 min-[810px]:pl-8 min-[810px]:pr-6">
           <div>
-            <p className="text-[15px] font-medium leading-[1.3] text-[#2a2d33] min-[810px]:text-[18px]">CARTÓRIOS DE PROTESTO MT · Sede</p>
-            <p className="mt-1 text-[13px] font-light leading-[1.3] text-[#2a2d33] min-[810px]:mt-2.5 min-[810px]:text-[16px]">
+            <p className="type-card text-[#2a2d33]">CARTÓRIOS DE PROTESTO MT · Sede</p>
+            <p className="type-body mt-1 text-[#2a2d33] min-[810px]:mt-2.5">
               Rua General Amilcar Magalhães, 38
               <br />
               Duque de Caxias, Cuiabá–MT
@@ -114,12 +114,12 @@ const Contato = () => (
 
       <div className="flex flex-col gap-8">
         <div className="rounded-[20px] bg-[#0061ff] px-8 pb-6 pt-4 text-white">
-          <p className="text-[18px] font-medium leading-[1.3]">HORÁRIO DE FUNCIONAMENTO</p>
-          <p className="mt-2.5 flex items-center gap-2.5 text-[14px] font-light leading-[1.3] min-[810px]:text-[16px]">
+          <p className="type-card">HORÁRIO DE FUNCIONAMENTO</p>
+          <p className="type-body mt-2.5 flex items-center gap-2.5">
             <Clock className="h-4 w-4 min-[810px]:h-6 min-[810px]:w-6" />
             Segunda a sexta, 8h às 17h.
           </p>
-          <p className="mt-2.5 flex items-center gap-2.5 text-[14px] font-light leading-[1.3] min-[810px]:text-[16px]">
+          <p className="type-body mt-2.5 flex items-center gap-2.5">
             <CalendarDots className="h-4 w-4 min-[810px]:h-6 min-[810px]:w-6" />
             Exceto feriados nacionais
           </p>
@@ -128,9 +128,9 @@ const Contato = () => (
         <div className="flex flex-1 flex-col rounded-[20px] bg-[#2a2d33] px-6 py-4 text-[#eff2f5] min-[810px]:p-8 min-[1200px]:min-h-[337px]">
           <div className="flex items-center gap-2.5">
             <ChatCircle color="#00d4d4" className="h-6 w-6 min-[810px]:h-12 min-[810px]:w-12" />
-            <p className="text-[24px] font-medium leading-[1.3] min-[810px]:text-[48px]">WhatsApp</p>
+            <p className="type-title">WhatsApp</p>
           </div>
-          <p className="mt-2.5 text-[14px] font-light leading-[1.3] min-[810px]:text-[24px]">
+          <p className="type-lead mt-2.5">
             Resposta rápida em horário comercial.
           </p>
           <a

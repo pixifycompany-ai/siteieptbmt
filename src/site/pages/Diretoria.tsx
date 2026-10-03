@@ -68,8 +68,8 @@ const MemberCard = ({ m, priority = false }: { m: Member; priority?: boolean }) 
         />
         <ProgressiveBlur />
         <div className="absolute inset-x-0 bottom-0 p-6">
-          <h3 className="text-[16px] font-medium leading-[1.2] text-white">{m.name}</h3>
-          <p className="text-[12px] font-normal leading-[1.2] text-white/60">{m.role}</p>
+          <h3 className="type-card text-white">{m.name}</h3>
+          <p className="type-small text-white/70">{m.role}</p>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ const MemberCard = ({ m, priority = false }: { m: Member; priority?: boolean }) 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-            className="overflow-hidden rounded-2xl bg-[#2a2d33] text-center text-[10px] font-normal leading-[1.2] text-[#eff2f5]"
+            className="type-small overflow-hidden rounded-2xl bg-[#2a2d33] text-center text-[#eff2f5]"
           >
             <div className="space-y-1 p-3">
               <p>{m.office}</p>
@@ -104,15 +104,32 @@ const MemberCard = ({ m, priority = false }: { m: Member; priority?: boolean }) 
   );
 };
 
-const Header = ({ badge, title, delay = 0, immediate = false }: { badge: string; title: string; delay?: number; immediate?: boolean }) => (
+/** `page`: título principal da página (h1, estilo hero); os demais são títulos de seção (h2). */
+const Header = ({
+  badge,
+  title,
+  delay = 0,
+  immediate = false,
+  page = false,
+}: {
+  badge: string;
+  title: string;
+  delay?: number;
+  immediate?: boolean;
+  page?: boolean;
+}) => (
   <div className="flex flex-col items-center border-b border-[#2a2d33]/10 pb-4">
     <Reveal y={10} delay={delay} immediate={immediate} transition={{ type: "spring", bounce: 0, duration: 0.6 }}>
-      <span className="inline-flex h-6 items-center rounded-full bg-[#2a2d33] px-4 text-[10px] font-light text-[#eff2f5] min-[810px]:h-[26px] min-[810px]:text-[12px]">
+      <span className="inline-flex h-6 items-center rounded-full bg-[#2a2d33] px-4 type-eyebrow text-[#eff2f5] min-[810px]:h-[26px]">
         {badge}
       </span>
     </Reveal>
     <Reveal y={10} delay={delay + 0.2} immediate={immediate} transition={{ type: "spring", bounce: 0, duration: 0.6 }}>
-      <h2 className="mt-2.5 text-center text-[28px] font-semibold leading-[1.2] text-[#0061ff] min-[810px]:text-[48px]">{title}</h2>
+      {page ? (
+        <h1 className="type-hero mt-3 text-center text-[#0061ff]">{title}</h1>
+      ) : (
+        <h2 className="type-title mt-3 text-center text-[#0061ff]">{title}</h2>
+      )}
     </Reveal>
   </div>
 );
@@ -130,7 +147,7 @@ const Grid = ({ members, delay = 0, immediate = false }: { members: Member[]; de
 const Diretoria = () => (
   <SiteLayout {...SEO["/diretoria"]}>
     <section className="px-6 pb-16 pt-[53px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[110px]">
-      <Header badge="Gestão 2025/2026" title="Diretoria" immediate />
+      <Header badge="Gestão 2025/2026" title="Diretoria" immediate page />
       <Grid members={DIRETORIA} delay={0.4} immediate />
       <div className="mt-16">
         <Header badge="Titulares e Suplentes" title="Conselho Fiscal" />

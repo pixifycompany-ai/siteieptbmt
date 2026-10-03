@@ -36,7 +36,7 @@ const PRESIDENTS = [
   ["2025 a 2026", "Wellington Ribeiro Campos"],
 ];
 
-const paragraph = "text-balance whitespace-pre-wrap text-[13px] font-light leading-[1.55] text-[#2a2d33]/80 min-[810px]:text-[22px] min-[810px]:leading-[1.6]";
+const paragraph = "type-lead text-balance whitespace-pre-wrap text-[#2a2d33]/80";
 const strong = "font-normal";
 
 const Instituicao = () => (
@@ -44,11 +44,11 @@ const Instituicao = () => (
     {/* Sobre Nós */}
     <section className="px-4 pb-[51px] pt-20 min-[810px]:px-16 min-[810px]:pb-20 min-[1200px]:pb-28">
       <div className="border-b border-[#2a2d33]/10">
-        <h1 className="text-[28px] font-bold leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
+        <h1 className="type-hero pb-3 text-[#0061ff] min-[810px]:pb-4">
           <BlurText text="Sobre Nós" immediate />
         </h1>
       </div>
-      <Reveal immediate delay={0.15} className="mt-3.5 max-w-[1181px] space-y-[1.55em] text-[13px] min-[810px]:mt-6 min-[810px]:space-y-[1.6em] min-[810px]:text-[22px]">
+      <Reveal immediate delay={0.15} className="mt-5 max-w-[1181px] space-y-5 min-[810px]:mt-8 min-[810px]:space-y-6">
         <p className={paragraph}>
           O Instituto de Estudos de Protesto de Títulos do Brasil Seção Mato Grosso - IEPTB/MT é uma entidade civil, sem
           fins lucrativos, que representa os cartórios de protesto de títulos e documentos de dívida do Estado do Mato
@@ -80,8 +80,8 @@ const Instituicao = () => (
               {item.icon}
             </span>
             <div className="max-w-[1181px]">
-              <h2 className="text-[25px] font-normal leading-[1.2] text-white min-[810px]:text-[64px]">{item.title}</h2>
-              <p className="text-balance text-[13px] font-light leading-[1.6] text-white/95 min-[810px]:text-[16px]">{item.text}</p>
+              <h2 className="type-title text-white">{item.title}</h2>
+              <p className="type-body mt-2 text-balance text-white/95">{item.text}</p>
             </div>
           </Reveal>
         ))}
@@ -91,11 +91,11 @@ const Instituicao = () => (
     {/* Presidentes */}
     <section className="px-6 pb-4 pt-8 min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-16 min-[1200px]:pt-[90px]">
       <div className="border-b border-[#2a2d33]/10">
-        <h2 className="text-balance px-4 text-center text-[28px] font-bold leading-[1.1] text-[#0061ff] min-[810px]:px-0 min-[810px]:text-[64px]">
+        <h2 className="type-title text-balance px-4 text-center text-[#0061ff] min-[810px]:px-0">
           <BlurText text="Presidentes que marcaram nossa história" />
         </h2>
         <Reveal>
-          <p className="mx-auto mt-[45px] text-balance text-center text-[22px] font-light leading-[1.55] text-[#2a2d33]/80 min-[810px]:mt-[50px] min-[810px]:leading-[1.6]">
+          <p className="type-lead mx-auto mt-6 max-w-[980px] text-balance text-center text-[#2a2d33]/80 min-[810px]:mt-8">
             Do início da nossa jornada até os dias atuais, cada presidente do IEPTB-MT contribuiu para consolidar
             <br />o serviço de protesto como pilar essencial da segurança jurídica e da confiança nas relações
             comerciais em Mato Grosso.
@@ -115,8 +115,8 @@ const Instituicao = () => (
                     y={20}
                     className={`ml-8 rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] min-[810px]:ml-0 min-[810px]:w-auto min-[810px]:p-6 ${right ? "min-[810px]:col-start-2" : ""}`}
                   >
-                    <p className="text-[14px] font-medium leading-[1.4] text-[#666]">{period}</p>
-                    <p className="mt-[7px] text-[18px] font-semibold leading-[1.3] text-black">{name}</p>
+                    <p className="type-small !font-medium text-[#666]">{period}</p>
+                    <p className="type-card mt-1.5 text-black">{name}</p>
                   </Reveal>
                 </li>
               );
