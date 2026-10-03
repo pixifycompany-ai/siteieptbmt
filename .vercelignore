@@ -1,0 +1,9 @@
+assets-src
+dist
+dist-ssr
+.env
+.env.*
+!.env.example
+.claude
+supabase/.temp
+.DS_Store

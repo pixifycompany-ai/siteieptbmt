@@ -32,11 +32,11 @@
   ],
   "rewrites": [
     {
-      "source": "/:path((?!assets/|site/).*)",
+      "source": "/((?!assets/|site/).*)",
       "has": [{ "type": "host", "value": "blog.cartoriosdeprotestomt.com.br" }],
-      "destination": "/spa.html"
+      "destination": "/spa"
     },
-    { "source": "/:path((?!assets/|site/).*)", "destination": "/spa.html" }
+    { "source": "/((?!assets/|site/).*)", "destination": "/spa" }
   ],
   "headers": [
     {

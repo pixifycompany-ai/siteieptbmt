@@ -1,0 +1,42 @@
+# Deploy automático no Vercel (time pixify1, projeto siteieptbmt).
+#
+# - push na main      → produção (www.cartoriosdeprotestomt.com.br e blog.cartoriosdeprotestomt.com.br)
+# - pull request      → preview (o link aparece no log do job)
+#
+# Requer um único segredo no repositório: VERCEL_TOKEN (vercel.com/account/tokens, escopo pixify1).
+# O build roda no próprio Vercel, com as variáveis de ambiente cadastradas no projeto.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: team_XAuRy6E1uEZviTFX8KA9EDx1
+  VERCEL_PROJECT_ID: prj_o44ZXJCo2A6xkWfrg84kAJ3Q9G8u
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Segredo ausente
+        if: env.VERCEL_TOKEN == ''
+        run: echo "::warning::Defina o segredo VERCEL_TOKEN no repositório para ativar o deploy automático."
+
+      - uses: actions/checkout@v4
+        if: env.VERCEL_TOKEN != ''
+
+      - name: Deploy de produção
+        if: env.VERCEL_TOKEN != '' && github.event_name != 'pull_request'
+        run: npx --yes vercel@latest deploy --prod --yes --token="$VERCEL_TOKEN"
+
+      - name: Deploy de preview
+        if: env.VERCEL_TOKEN != '' && github.event_name == 'pull_request'
+        run: npx --yes vercel@latest deploy --yes --token="$VERCEL_TOKEN"
