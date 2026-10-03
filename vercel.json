@@ -17,6 +17,11 @@
       "permanent": true
     },
     {
+      "source": "/cartorios",
+      "destination": "https://www.cartoriosdeprotestomt.com.br/cartoriosdeprotesto",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {
@@ -28,7 +33,7 @@
       "permanent": false
     },
     {
-      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)",
+      "source": "/:section(blog|admin|editor|login|alterar-senha|widget)",
       "has": [
         {
           "type": "host",
@@ -59,7 +64,7 @@
           "value": "blog.cartoriosdeprotestomt.com.br"
         }
       ],
-      "destination": "/spa"
+      "destination": "/blog-app"
     },
     {
       "source": "/((?!assets/|site/).*)",

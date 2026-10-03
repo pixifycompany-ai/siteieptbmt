@@ -10,7 +10,6 @@ import ProtectedRoute from "@/components/guards/ProtectedRoute";
 // tooltips) só é carregado quando o visitante entra numa dessas rotas — o site fica leve.
 const BlogList = lazy(() => import("@/pages/blog/BlogList"));
 const BlogPost = lazy(() => import("@/pages/blog/BlogPost"));
-const CartoriosList = lazy(() => import("@/pages/cartorios/CartoriosList"));
 const Login = lazy(() => import("@/pages/Login"));
 const ChangePassword = lazy(() => import("@/pages/ChangePassword"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
@@ -47,7 +46,6 @@ const BlogRoutes = () => (
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/widget" element={<Widget />} />
-          <Route path="/cartorios" element={<CartoriosList />} />
           <Route path="/cartorios/widget" element={<CartoriosWidget />} />
           <Route path="/login" element={<Login />} />
           <Route path="/alterar-senha" element={<ChangePassword />} />

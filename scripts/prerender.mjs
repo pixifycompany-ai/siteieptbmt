@@ -78,6 +78,21 @@ for (const [route, { title, description }] of Object.entries(SEO)) {
   console.log(`✓ ${route} (${(html.length / 1024).toFixed(0)} KB)`);
 }
 
+// Blog (blog-app.html, subdomínio blog.): o esqueleto da lista já vem no HTML. CSS crítico embutido e
+// JavaScript pedido logo após o primeiro paint (sem esperar o "load", que aguardaria as capas).
+{
+  const file = path.join(DIST, "blog-app.html");
+  let blog = await beasties.process(await readFile(file, "utf8"));
+  const deps = [...blog.matchAll(/<link rel="modulepreload" crossorigin href="([^"]+)">/g)].map((m) => m[1]);
+  const entry = blog.match(/<script type="module" crossorigin src="([^"]+)"><\/script>/)[1];
+  blog = blog.replace(/<link rel="modulepreload"[^>]*>\s*/g, "").replace(/<script type="module" crossorigin src="[^"]+"><\/script>\s*/, "");
+  const loader =
+    `<script>(function(){var go=function(){${JSON.stringify(deps)}.forEach(function(h){var l=document.createElement("link");l.rel="modulepreload";l.href=h;document.head.appendChild(l)});` +
+    `var s=document.createElement("script");s.type="module";s.src=${JSON.stringify(entry)};document.head.appendChild(s)};requestAnimationFrame(function(){setTimeout(go,0)})})()</script>`;
+  await writeFile(file, blog.replace("</body>", `  ${loader}\n  </body>`));
+  console.log(`✓ blog-app.html (${deps.length + 1} módulos após o primeiro paint)`);
+}
+
 // Sitemap do site institucional (o blog fica no subdomínio próprio).
 const today = new Date().toISOString().slice(0, 10);
 const urls = Object.keys(SEO)

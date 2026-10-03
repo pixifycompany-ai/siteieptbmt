@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { setBlogCanonical } from "@/lib/hosts";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { takePrefetch } from "@/lib/blogPrefetch";
 import { useBlogSettings, defaultSettings, hexToRgba } from "@/hooks/useBlogSettings";
 import { useResetThemeForPublic } from "@/contexts/ThemeContext";
 import BlogCard from "@/components/blog/BlogCard";
@@ -21,6 +22,7 @@ const BlogList = () => {
       ?.setAttribute("content", "Notícias sobre protesto de títulos, cartórios de Mato Grosso e o IEPTB-MT.");
   }, []);
   const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
@@ -51,7 +53,19 @@ const BlogList = () => {
     fetchTags();
   }, []);
 
+  const showPage = (data: any[]) => {
+    setPosts(data.slice(0, PER_PAGE));
+    setHasMore(data.length > PER_PAGE);
+    setLoading(false);
+  };
+
   const fetchPosts = async () => {
+    // Primeira página sem filtros: usa a consulta já disparada pelo blog-app.html.
+    if (page === 0 && !search && !dateFilter && selectedTags.length === 0) {
+      const pre = await takePrefetch<any>("posts");
+      if (pre) return showPage(pre);
+    }
+
     let query = supabase
       .from("posts")
       .select("id,title,slug,excerpt,cover_image,published_at,tags,source")
@@ -86,10 +100,7 @@ const BlogList = () => {
     query = query.range(page * PER_PAGE, (page + 1) * PER_PAGE);
 
     const { data } = await query;
-    if (data) {
-      setPosts(data.slice(0, PER_PAGE));
-      setHasMore(data.length > PER_PAGE);
-    }
+    if (data) showPage(data);
   };
 
   useEffect(() => { fetchPosts(); }, [page, search, dateFilter, selectedTags]);
@@ -150,6 +161,7 @@ const BlogList = () => {
               onChange={e => setSearchInput(e.target.value)}
               onKeyDown={e => e.key === "Enter" && handleSearch()}
               placeholder="Procurar posts..."
+              aria-label="Procurar posts"
               className="w-full pl-10 pr-4 py-2.5 rounded-full border text-sm focus:outline-none transition-colors blog-search-input"
               style={{
                 background: searchBg,
@@ -174,6 +186,7 @@ const BlogList = () => {
                 variant="ghost"
                 size="icon"
                 className="rounded-full hover:bg-white/10"
+                aria-label="Filtros"
                 style={{
                   color: loadMore,
                   background: hasActiveFilters ? accentSoft : "transparent",
@@ -277,11 +290,17 @@ const BlogList = () => {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map(post => (
-            <BlogCard key={post.id} post={post} settings={s} />
-          ))}
+          {loading
+            ? Array.from({ length: PER_PAGE }).map((_, i) => (
+                <div key={i} className="space-y-3 overflow-hidden rounded-2xl" aria-hidden="true">
+                  <div className="aspect-video w-full animate-pulse rounded-lg bg-black/5" />
+                  <div className="h-5 w-3/4 animate-pulse rounded bg-black/5" />
+                  <div className="h-4 w-1/3 animate-pulse rounded bg-black/5" />
+                </div>
+              ))
+            : posts.map((post, i) => <BlogCard key={post.id} post={post} settings={s} priority={page === 0 && i < 3} />)}
         </div>
-        {posts.length === 0 && (
+        {!loading && posts.length === 0 && (
           <p className="text-center py-12" style={{ color: loadMoreMuted }}>Nenhum post encontrado.</p>
         )}
         {(page > 0 || hasMore) && (

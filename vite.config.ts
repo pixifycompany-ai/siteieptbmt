@@ -12,6 +12,10 @@ export default defineConfig(() => ({
     },
   },
   plugins: [react()],
+  build: {
+    // index.html = site institucional (+ fallback); blog-app.html = subdomínio do blog, só com o blog/CMS.
+    rollupOptions: { input: { main: path.resolve(__dirname, "index.html"), blog: path.resolve(__dirname, "blog-app.html") } },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

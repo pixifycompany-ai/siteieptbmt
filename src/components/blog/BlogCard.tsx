@@ -4,6 +4,7 @@ import { ArrowUpRight, Clock } from "lucide-react";
 import { formatPostDate } from "@/lib/formatDate";
 import { estimateReadingTime } from "@/lib/readingTime";
 import { hexToRgba, type BlogSettings } from "@/lib/blogSettings";
+import { COVER_SIZES, coverSrc, coverSrcSet } from "@/lib/coverImage";
 
 interface Props {
   post: any;
@@ -14,13 +15,6 @@ interface Props {
   baseUrl?: string;
 }
 
-// Add Supabase storage on-the-fly transformations to keep card images small
-const optimizeImage = (url: string | null | undefined, width = 600): string | undefined => {
-  if (!url) return undefined;
-  if (!url.includes("supabase") || !url.includes("/storage/v1/object/")) return url;
-  const sep = url.includes("?") ? "&" : "?";
-  return `${url}${sep}width=${width}&quality=75`;
-};
 
 const BlogCard = ({ post, settings, targetTop, priority, baseUrl }: Props) => {
   const [hovered, setHovered] = useState(false);
@@ -61,7 +55,11 @@ const BlogCard = ({ post, settings, targetTop, priority, baseUrl }: Props) => {
         <div style={{ borderRadius: `${s.card_image_radius}px`, overflow: "hidden", margin: "8px 8px 0" }} className="md:!m-[12px_12px_0]">
           {post.cover_image ? (
             <img
-              src={optimizeImage(post.cover_image)}
+              src={coverSrc(post.cover_image)}
+              srcSet={coverSrcSet(post.cover_image)}
+              sizes={COVER_SIZES}
+              width={640}
+              height={360}
               alt={post.title}
               className="w-full aspect-video object-cover"
               loading={priority ? "eager" : "lazy"}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="%VITE_SUPABASE_URL%" crossorigin />
+    <link rel="dns-prefetch" href="%VITE_SUPABASE_URL%" />
+
+    <script>
+      // Lista do blog: busca posts e configurações enquanto o JavaScript ainda baixa, e já
+      // pré-carrega a primeira capa (mesma regra de src/lib/coverImage.ts).
+      (function () {
+        if (!/^\/(blog\/?)?$/.test(location.pathname) || location.search) return;
+        var base = "%VITE_SUPABASE_URL%";
+        var key = "%VITE_SUPABASE_PUBLISHABLE_KEY%";
+        var get = function (q) {
+          return fetch(base + "/rest/v1/" + q, { headers: { apikey: key, Authorization: "Bearer " + key } }).then(
+            function (r) {
+              if (!r.ok) throw new Error(String(r.status));
+              return r.json();
+            },
+          );
+        };
+        var posts = get(
+          "posts?select=id,title,slug,excerpt,cover_image,published_at,tags,source&status=eq.published" +
+            "&published_at=lte." + encodeURIComponent(new Date().toISOString()) +
+            "&order=published_at.desc&offset=0&limit=10",
+        );
+        window.__blogPrefetch = { settings: get("blog_settings?select=*&limit=1"), posts: posts };
+        posts.then(function (rows) {
+          var url = rows[0] && rows[0].cover_image;
+          var obj = "/storage/v1/object/public/";
+          if (!url || url.indexOf(obj) < 0 || url.indexOf("?") >= 0) return;
+          var link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.setAttribute("fetchpriority", "high");
+          link.setAttribute(
+            "imagesrcset",
+            [400, 640, 800, 1080]
+              .map(function (w) {
+                return url.replace(obj, "/storage/v1/render/image/public/") + "?width=" + w + "&quality=75 " + w + "w";
+              })
+              .join(", "),
+          );
+          link.setAttribute("imagesizes", "(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw");
+          document.head.appendChild(link);
+        }, function () {});
+      })();
+    </script>
+    <title>Notícias | Cartórios de Protesto MT</title>
+    <meta name="description" content="Notícias sobre protesto de títulos, cartórios de Mato Grosso e o IEPTB-MT." />
+
+    <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Notícias | Cartórios de Protesto MT" />
+    <meta property="og:description" content="Notícias sobre protesto de títulos, cartórios de Mato Grosso e o IEPTB-MT." />
+    <meta property="og:image" content="https://www.cartoriosdeprotestomt.com.br/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body>
+    <div id="root">
+      <!-- Esqueleto da lista (mesmo layout de BlogList): aparece no primeiro paint e o React o substitui. -->
+      <div class="min-h-screen" style="background:#fff">
+        <header class="px-4 py-3 md:px-6 md:py-4 flex items-center justify-between border-b" style="border-color:rgba(21,22,25,0.2)">
+          <a href="/blog" class="text-xl font-bold" style="color:#151619">Blog</a>
+          <a href="https://www.cartoriosdeprotestomt.com.br/" class="text-sm" style="color:rgba(21,22,25,0.7)">Voltar para a página inicial</a>
+        </header>
+        <div class="max-w-6xl mx-auto px-4 py-6 md:px-6 md:py-8">
+          <div class="flex items-center gap-3 mb-6"><div class="flex-1 relative"><div class="w-full pl-10 pr-4 py-2.5 rounded-full border text-sm" style="border-color:rgba(21,22,25,0.16);color:rgba(21,22,25,0.32)">Procurar posts...</div></div></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          <div class="space-y-3 overflow-hidden rounded-2xl"><div class="aspect-video w-full animate-pulse rounded-lg bg-black/5"></div><div class="h-5 w-3/4 animate-pulse rounded bg-black/5"></div><div class="h-4 w-1/3 animate-pulse rounded bg-black/5"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // O esqueleto só vale para a lista; nas demais rotas (post, admin, login) a tela começa vazia.
+      if (!/^\/(blog\/?)?$/.test(location.pathname)) document.getElementById("root").textContent = "";
+    </script>
+    <script type="module" src="/src/blog-main.tsx"></script>
+  </body>
+</html>
