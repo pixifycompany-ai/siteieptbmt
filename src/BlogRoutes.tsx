@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -40,6 +40,9 @@ const BlogRoutes = () => (
     <AuthProvider>
       <Suspense fallback={<Fallback />}>
         <Routes>
+          {/* Raiz do subdomínio do blog → lista de posts (como no Lovable) */}
+          <Route path="/" element={<Navigate to="/blog" replace />} />
+
           {/* Blog público */}
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

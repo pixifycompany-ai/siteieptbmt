@@ -1,1 +1,0 @@
-ALTER TABLE public.posts ADD COLUMN IF NOT EXISTS attachments jsonb NOT NULL DEFAULT '[]'::jsonb;

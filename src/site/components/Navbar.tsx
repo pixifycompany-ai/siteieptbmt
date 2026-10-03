@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LogoMark } from "./icons";
+import { blogUrl } from "@/lib/hosts";
 import { INSTITUCIONAL_MENU, SERVICOS_MENU, SOCIAL, WHATSAPP_URL, type MenuItem } from "../data";
 
 const linkBase = "text-[16px] leading-[1.2] font-normal uppercase transition-colors duration-200";
@@ -144,9 +145,9 @@ const Navbar = () => {
           <div className="hidden items-center gap-10 min-[1200px]:flex">
             <Dropdown label="Institucional" items={INSTITUCIONAL_MENU} />
             <Dropdown label="Serviços" items={SERVICOS_MENU} />
-            <Link to="/blog" className={navClass}>
+            <a href={blogUrl("/blog")} className={navClass}>
               Notícias
-            </Link>
+            </a>
             <Link to="/contato" className={navClass}>
               Contato
             </Link>
@@ -196,17 +197,17 @@ const Navbar = () => {
             <MobileSection title="Institucional" items={INSTITUCIONAL_MENU} onNavigate={() => setMobileOpen(false)} />
             <MobileSection title="Serviços" items={SERVICOS_MENU} onNavigate={() => setMobileOpen(false)} />
             {[
-              ["Notícias", "/blog"],
+              ["Notícias", blogUrl("/blog")],
               ["Contato", "/contato"],
               ["Privacidade", "/privacidade"],
             ].map(([label, href]) => (
-              <Link
+              <a
                 key={href}
-                to={href}
+                href={href}
                 className="block border-b border-[#e5e7eb] py-4 text-[16px] uppercase text-[#2a2d33]"
               >
                 {label}
-              </Link>
+              </a>
             ))}
             <div className="mt-8 flex items-center gap-4">
               <a

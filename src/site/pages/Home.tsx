@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, Mail, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
+import { blogUrl } from "@/lib/hosts";
 import { SEO } from "../seo";
 import SiteLayout, { SectionBadge } from "../components/SiteLayout";
 import NewsGrid from "../components/NewsGrid";
@@ -156,13 +156,13 @@ const News = () => (
       <NewsGrid limit={6} />
     </div>
     <div className="mt-2 flex justify-center px-4">
-      <Link
-        to="/blog"
+      <a
+        href={blogUrl("/blog")}
         className="group inline-flex h-12 items-center gap-2 rounded-lg bg-[#2a2d33] px-6 text-[15px] font-normal text-[#eff2f5] transition-colors duration-300 hover:bg-[#0061ff]"
       >
         VER MAIS
         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
-      </Link>
+      </a>
     </div>
   </section>
 );

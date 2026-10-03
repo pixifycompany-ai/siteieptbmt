@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { setBlogCanonical } from "@/lib/hosts";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useBlogSettings, defaultSettings, hexToRgba } from "@/hooks/useBlogSettings";
@@ -14,6 +15,7 @@ const BlogList = () => {
   useResetThemeForPublic();
   useEffect(() => {
     document.title = "Notícias | Cartórios de Protesto MT";
+    setBlogCanonical("/blog");
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", "Notícias sobre protesto de títulos, cartórios de Mato Grosso e o IEPTB-MT.");

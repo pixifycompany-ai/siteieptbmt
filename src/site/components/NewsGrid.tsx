@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { restSelect } from "@/lib/supabaseRest";
 import { defaultSettings, type BlogSettings } from "@/lib/blogSettings";
 import BlogCard from "@/components/blog/BlogCard";
+import { blogUrl } from "@/lib/hosts";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const POST_FIELDS = "id,title,slug,excerpt,cover_image,published_at,tags,source";
@@ -46,7 +47,7 @@ const NewsGrid = ({ limit = 6 }: { limit?: number }) => {
                 </div>
               </div>
             ))
-          : (posts ?? []).map((post) => <BlogCard key={post.id} post={post} settings={s} />)}
+          : (posts ?? []).map((post) => <BlogCard key={post.id} post={post} settings={s} baseUrl={blogUrl("")} />)}
       </div>
     </div>
   );

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "cartoriosdeprotestomt.com.br" }],
+      "destination": "https://www.cartoriosdeprotestomt.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "blog.cartoriosdeprotestomt.com.br" }],
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)/:rest*",
+      "has": [{ "type": "host", "value": "www.cartoriosdeprotestomt.com.br" }],
+      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section/:rest*",
+      "permanent": true
+    },
+    {
+      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)",
+      "has": [{ "type": "host", "value": "www.cartoriosdeprotestomt.com.br" }],
+      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path((?!assets/|site/).*)",
+      "has": [{ "type": "host", "value": "blog.cartoriosdeprotestomt.com.br" }],
+      "destination": "/spa.html"
+    },
+    { "source": "/:path((?!assets/|site/).*)", "destination": "/spa.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/site/img/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

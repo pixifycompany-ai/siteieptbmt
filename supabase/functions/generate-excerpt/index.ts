@@ -1,87 +1,90 @@
+// Gera um resumo curto (até 200 caracteres, pt-BR) para um post do blog.
+//
+// Usa o Claude (Anthropic) quando o segredo ANTHROPIC_API_KEY está configurado no Supabase:
+//   supabase secrets set ANTHROPIC_API_KEY=...
+// Sem a chave — ou se a API falhar — cai num resumo extrativo (primeiras frases do texto),
+// para o botão "gerar resumo" do editor sempre funcionar.
+import Anthropic from "npm:@anthropic-ai/sdk";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders });
+const MAX_CHARS = 200;
+
+const json = (body: unknown, status = 200) =>
+  new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+
+/** Resumo sem IA: primeiras frases que cabem em 200 caracteres, cortando em palavra inteira. */
+function extractiveExcerpt(text: string): string {
+  if (text.length <= MAX_CHARS) return text;
+  const sentences = text.match(/[^.!?]+[.!?]+/g) ?? [];
+  let out = "";
+  for (const s of sentences) {
+    if ((out + s).trim().length > MAX_CHARS) break;
+    out += s;
   }
+  if (out.trim()) return out.trim();
+  const cut = text.slice(0, MAX_CHARS - 1);
+  return cut.slice(0, cut.lastIndexOf(" ")).trim() + "…";
+}
+
+async function aiExcerpt(apiKey: string, text: string): Promise<string | null> {
+  const client = new Anthropic({ apiKey });
+  const response = await client.beta.messages.create({
+    model: "claude-opus-5-5",
+    max_tokens: 4000,
+    output_config: { effort: "low" },
+    // Se o modelo recusar por política, o servidor refaz a requisição em outro modelo.
+    betas: ["server-side-fallback-2026-07-01"],
+    // deno-lint-ignore no-explicit-any
+    fallbacks: "default" as any,
+    system:
+      "Você cria resumos curtos para posts de blog de um instituto de cartórios de protesto. " +
+      `Escreva em português do Brasil, com no máximo ${MAX_CHARS} caracteres, tom informativo e neutro. ` +
+      "Responda apenas com o texto do resumo, sem aspas nem comentários.",
+    messages: [{ role: "user", content: `Resuma o post abaixo:\n\n${text}` }],
+  });
+
+  if (response.stop_reason === "refusal") return null;
+  const block = response.content.find((b) => b.type === "text");
+  const excerpt = block && block.type === "text" ? block.text.trim() : "";
+  if (!excerpt) return null;
+  return excerpt.length > MAX_CHARS ? extractiveExcerpt(excerpt) : excerpt;
+}
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
     const { content } = await req.json();
-    if (!content || typeof content !== "string") {
-      return new Response(JSON.stringify({ error: "content is required" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    if (!content || typeof content !== "string") return json({ error: "content is required" }, 400);
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
-      return new Response(JSON.stringify({ error: "LOVABLE_API_KEY not configured" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    // Texto puro (sem HTML) para a IA e para o resumo extrativo.
+    const plainText = content.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+    if (!plainText) return json({ excerpt: "" });
 
-    // Strip HTML tags for cleaner input
-    const plainText = content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [
-          {
-            role: "system",
-            content:
-              "Você é um assistente que cria resumos curtos para posts de blog. Gere um resumo de no máximo 200 caracteres em português brasileiro. Retorne APENAS o texto do resumo, sem aspas, sem explicações adicionais.",
-          },
-          {
-            role: "user",
-            content: `Crie um resumo curto (máximo 200 caracteres) para o seguinte conteúdo:\n\n${plainText.slice(0, 3000)}`,
-          },
-        ],
-      }),
-    });
-
-    if (!response.ok) {
-      if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "Limite de requisições excedido. Tente novamente em alguns segundos." }), {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+    const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
+    if (apiKey) {
+      try {
+        const excerpt = await aiExcerpt(apiKey, plainText);
+        if (excerpt) return json({ excerpt });
+      } catch (e) {
+        if (e instanceof Anthropic.RateLimitError) {
+          console.warn("generate-excerpt: limite de requisições da API, usando resumo extrativo");
+        } else if (e instanceof Anthropic.APIError) {
+          console.error(`generate-excerpt: erro da API ${e.status}:`, e.message);
+        } else {
+          console.error("generate-excerpt: falha ao chamar a IA:", e);
+        }
       }
-      if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "Créditos insuficientes. Adicione fundos na sua workspace." }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
-      const t = await response.text();
-      console.error("AI gateway error:", response.status, t);
-      return new Response(JSON.stringify({ error: "Erro ao gerar resumo" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
     }
 
-    const data = await response.json();
-    const excerpt = data.choices?.[0]?.message?.content?.trim().slice(0, 200) || "";
-
-    return new Response(JSON.stringify({ excerpt }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json({ excerpt: extractiveExcerpt(plainText) });
   } catch (e) {
     console.error("generate-excerpt error:", e);
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json({ error: e instanceof Error ? e.message : "Erro desconhecido" }, 500);
   }
 });

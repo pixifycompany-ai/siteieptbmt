@@ -12,7 +12,14 @@ const SSR_ENTRY = path.resolve("dist-ssr/entry-server.js");
 
 const { render, SEO, SITE_URL, HERO_PRELOAD } = await import(pathToFileURL(SSR_ENTRY).href);
 const template = await readFile(path.join(DIST, "index.html"), "utf8");
-await writeFile(path.join(DIST, "spa.html"), template);
+// spa.html atende o blog/CMS (subdomínio blog.) e rotas não pré-renderizadas: sem canonical/og:url
+// fixos da home do site (o blog define título e canonical por página).
+await writeFile(
+  path.join(DIST, "spa.html"),
+  template
+    .replace(/\s*<link rel="canonical"[^>]*>/, "")
+    .replace(/\s*<meta property="og:url"[^>]*>/, ""),
+);
 
 // Embute o CSS crítico de cada página no <head> e carrega o restante de forma assíncrona
 // (o CSS deixa de bloquear a primeira renderização).
@@ -70,6 +77,16 @@ for (const [route, { title, description }] of Object.entries(SEO)) {
   await writeFile(path.join(outDir, "index.html"), html);
   console.log(`✓ ${route} (${(html.length / 1024).toFixed(0)} KB)`);
 }
+
+// Sitemap do site institucional (o blog fica no subdomínio próprio).
+const today = new Date().toISOString().slice(0, 10);
+const urls = Object.keys(SEO)
+  .map((r) => `  <url><loc>${SITE_URL}${r === "/" ? "/" : r}</loc><lastmod>${today}</lastmod></url>`)
+  .join("\n");
+await writeFile(
+  path.join(DIST, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
+);
 
 await rm("dist-ssr", { recursive: true, force: true });
 

@@ -10,6 +10,8 @@ interface Props {
   settings: BlogSettings;
   targetTop?: boolean;
   priority?: boolean;
+  /** origem do blog quando o card é exibido fora dele (ex.: home do site) */
+  baseUrl?: string;
 }
 
 // Add Supabase storage on-the-fly transformations to keep card images small
@@ -20,14 +22,16 @@ const optimizeImage = (url: string | null | undefined, width = 600): string | un
   return `${url}${sep}width=${width}&quality=75`;
 };
 
-const BlogCard = ({ post, settings, targetTop, priority }: Props) => {
+const BlogCard = ({ post, settings, targetTop, priority, baseUrl }: Props) => {
   const [hovered, setHovered] = useState(false);
   const s = settings;
   const url = `/blog/${post.slug}`;
   const readTime = post.content ? estimateReadingTime(post.content) : null;
 
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
-    targetTop ? (
+    baseUrl ? (
+      <a href={baseUrl + url} className="block">{children}</a>
+    ) : targetTop ? (
       <a href={url} target="_top" className="block">{children}</a>
     ) : (
       <Link to={url} className="block">{children}</Link>

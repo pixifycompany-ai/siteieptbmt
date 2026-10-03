@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { setBlogCanonical } from "@/lib/hosts";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useBlogSettings, defaultSettings } from "@/hooks/useBlogSettings";
@@ -31,8 +32,9 @@ const BlogPost = () => {
   useEffect(() => {
     if (!post?.title) return;
     document.title = `${post.title} | Cartórios de Protesto MT`;
+    setBlogCanonical(`/blog/${post.slug}`);
     if (post.excerpt) document.querySelector('meta[name="description"]')?.setAttribute("content", post.excerpt);
-  }, [post?.title, post?.excerpt]);
+  }, [post?.title, post?.excerpt, post?.slug]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { blogUrl } from "@/lib/hosts";
 import logoLight from "../assets/logo-full-light.svg";
 import { FacebookIcon, InstagramIcon } from "./icons";
 import { CONTACTS, EXTERNAL, SOCIAL, tel } from "../data";
@@ -24,7 +25,7 @@ const links = [
   { label: "Sobre Nós", to: "/instituicao" },
   { label: "Cartórios de Protesto", to: "/cartoriosdeprotesto" },
   { label: "Serviços", to: "/servicos" },
-  { label: "Notícias", to: "/blog" },
+  { label: "Notícias", to: blogUrl("/blog"), external: true },
 ];
 
 const social =
@@ -68,12 +69,21 @@ const Footer = () => {
             {links.map((l) => (
               // Como no original, o link da página atual fica oculto (mas mantém o espaço).
               <li key={l.label} className={l.to === pathname ? "invisible" : undefined}>
-                <Link
-                  to={l.to}
-                  className="text-[16px] font-light leading-6 text-[#eff2f5] transition-colors hover:text-[#0099ff]"
-                >
-                  {l.label}
-                </Link>
+                {"external" in l ? (
+                  <a
+                    href={l.to}
+                    className="text-[16px] font-light leading-6 text-[#eff2f5] transition-colors hover:text-[#0099ff]"
+                  >
+                    {l.label}
+                  </a>
+                ) : (
+                  <Link
+                    to={l.to}
+                    className="text-[16px] font-light leading-6 text-[#eff2f5] transition-colors hover:text-[#0099ff]"
+                  >
+                    {l.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

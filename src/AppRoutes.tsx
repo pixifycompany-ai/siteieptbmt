@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "@/site/pages/Home";
+import { isBlogHost } from "@/lib/hosts";
 
 // Páginas do site institucional (a home entra no bundle principal; as demais sob demanda)
 const Servicos = lazy(() => import("@/site/pages/Servicos"));
@@ -17,7 +18,13 @@ const BlogRoutes = lazy(() => import("@/BlogRoutes"));
 const Fallback = () => <div className="min-h-screen" />;
 
 /** Rotas do app — compartilhadas pelo navegador (BrowserRouter) e pela pré-renderização (StaticRouter). */
-const AppRoutes = () => (
+const AppRoutes = () =>
+  // Em blog.cartoriosdeprotestomt.com.br o app inteiro é o blog/CMS (mesmos caminhos de antes).
+  isBlogHost() ? (
+    <Suspense fallback={<Fallback />}>
+      <BlogRoutes />
+    </Suspense>
+  ) : (
   <Suspense fallback={<Fallback />}>
     <Routes>
       <Route path="/" element={<Home />} />
@@ -31,6 +38,6 @@ const AppRoutes = () => (
       <Route path="/*" element={<BlogRoutes />} />
     </Routes>
   </Suspense>
-);
+  );
 
 export default AppRoutes;
