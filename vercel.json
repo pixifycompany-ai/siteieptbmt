@@ -7,45 +7,83 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "cartoriosdeprotestomt.com.br" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "cartoriosdeprotestomt.com.br"
+        }
+      ],
       "destination": "https://www.cartoriosdeprotestomt.com.br/:path*",
       "permanent": true
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "blog.cartoriosdeprotestomt.com.br" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.cartoriosdeprotestomt.com.br"
+        }
+      ],
       "destination": "/blog",
       "permanent": false
     },
     {
-      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)/:rest*",
-      "has": [{ "type": "host", "value": "www.cartoriosdeprotestomt.com.br" }],
-      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section/:rest*",
+      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.cartoriosdeprotestomt.com.br"
+        }
+      ],
+      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section",
       "permanent": true
     },
     {
-      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)",
-      "has": [{ "type": "host", "value": "www.cartoriosdeprotestomt.com.br" }],
-      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section",
+      "source": "/:section(blog|admin|editor|login|alterar-senha|widget|cartorios)/:rest+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.cartoriosdeprotestomt.com.br"
+        }
+      ],
+      "destination": "https://blog.cartoriosdeprotestomt.com.br/:section/:rest*",
       "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/((?!assets/|site/).*)",
-      "has": [{ "type": "host", "value": "blog.cartoriosdeprotestomt.com.br" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.cartoriosdeprotestomt.com.br"
+        }
+      ],
       "destination": "/spa"
     },
-    { "source": "/((?!assets/|site/).*)", "destination": "/spa" }
+    {
+      "source": "/((?!assets/|site/).*)",
+      "destination": "/spa"
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/site/img/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
