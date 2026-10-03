@@ -10,8 +10,10 @@ import {
   UploadSimple,
   UserPlus,
 } from "@phosphor-icons/react";
+import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
 import { Reveal } from "../components/motion";
+import LazyMap from "../components/LazyMap";
 import { CONTACTS, EXTERNAL, WHATSAPP_URL, tel } from "../data";
 
 const MAPS_SHARE = "https://share.google/mnS2B0CzDrfcK8dAA";
@@ -41,14 +43,10 @@ const CHANNELS: { label: string; title: string; description: string; icon: React
 ];
 
 const Contato = () => (
-  <SiteLayout
-    title="Contato | Cartórios de Protesto de Mato Grosso"
-    description="Fale com o Cartórios de Protesto de Mato Grosso: atendimento institucional, suporte à Central de Remessa (CRA-MT) e convênios. Telefones, e-mail, WhatsApp e endereço em Cuiabá."
-    background="#ffffff"
-  >
+  <SiteLayout {...SEO["/contato"]} background="#ffffff">
     {/* Cabeçalho + canais */}
     <section className="px-6 pb-12 pt-[94px] min-[810px]:px-16 min-[810px]:pt-12 min-[1200px]:pt-[54px]">
-      <Reveal>
+      <Reveal immediate>
         <p className="text-[12px] font-light leading-[1.2] text-[#0061ff]">Fale com a equipe certa</p>
         <h1 className="text-[28px] font-medium leading-[1.3] text-[#2a2d33] min-[810px]:text-[48px]">
           Como podemos ajudar você?
@@ -92,13 +90,7 @@ const Contato = () => (
     {/* Mapa + horário + WhatsApp */}
     <section className="grid gap-8 px-6 pb-8 pt-0 min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-8 min-[1200px]:grid-cols-[527px_656px] min-[1200px]:justify-between">
       <div className="order-last mt-8 flex flex-col overflow-hidden rounded-[20px] border border-[#2a2d33]/10 min-[810px]:mt-0 min-[1200px]:order-none min-[1200px]:h-[500px]">
-        <iframe
-          title="Mapa — Sede do Cartórios de Protesto MT"
-          src={EXTERNAL.mapsEmbed}
-          className="block h-[375px] w-full shrink-0 border-0"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <LazyMap title="Mapa — Sede do Cartórios de Protesto MT" className="h-[375px] w-full shrink-0" />
         <div className="flex flex-1 flex-col items-start justify-between gap-4 px-6 py-5 min-[810px]:flex-row min-[810px]:flex-wrap min-[810px]:items-center min-[810px]:py-6 min-[810px]:pl-8 min-[810px]:pr-6">
           <div>
             <p className="text-[15px] font-medium leading-[1.3] text-[#2a2d33] min-[810px]:text-[18px]">CARTÓRIOS DE PROTESTO MT · Sede</p>
@@ -112,7 +104,7 @@ const Contato = () => (
             href={MAPS_SHARE}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-8 items-center gap-1.5 rounded-full bg-[#0061ff] px-3 text-[12px] font-medium text-[#eff2f5] transition-colors hover:bg-[#2a2d33] min-[810px]:h-[34px] min-[810px]:px-4 min-[810px]:text-[14px]"
+            className="flex h-8 items-center gap-1.5 rounded-full bg-[#0061ff] px-3 text-[12px] font-medium text-white transition-colors hover:bg-[#2a2d33] min-[810px]:h-[34px] min-[810px]:px-4 min-[810px]:text-[14px]"
           >
             Abrir no Maps
             <ArrowUpRight size={14} weight="bold" />
@@ -121,7 +113,7 @@ const Contato = () => (
       </div>
 
       <div className="flex flex-col gap-8">
-        <div className="rounded-[20px] bg-[#0061ff] px-8 pb-6 pt-4 text-[#eff2f5]">
+        <div className="rounded-[20px] bg-[#0061ff] px-8 pb-6 pt-4 text-white">
           <p className="text-[18px] font-medium leading-[1.3]">HORÁRIO DE FUNCIONAMENTO</p>
           <p className="mt-2.5 flex items-center gap-2.5 text-[14px] font-light leading-[1.3] min-[810px]:text-[16px]">
             <Clock className="h-4 w-4 min-[810px]:h-6 min-[810px]:w-6" />

@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight, BookOpen, Building, Newspaper, SquaresFour } from "@phosphor-icons/react";
+import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
-import { EXTERNAL, WHATSAPP_URL, img } from "../data";
+import { EXTERNAL, WHATSAPP_URL, img, srcSet } from "../data";
 
 const MAIN = [
   {
@@ -9,21 +10,21 @@ const MAIN = [
     description: "Pesquisa gratuita por CPF ou CNPJ na base nacional do Cartórios de Protesto.",
     cta: "Consultar agora",
     href: "https://www.pesquisaprotesto.com.br/servico/consulta-documento",
-    image: img("LFyuOmQeLW8xYCSaK9Ai5xqY0"),
+    image: "LFyuOmQeLW8xYCSaK9Ai5xqY0",
   },
   {
     title: "Central de Remessa",
     description: "Envio eletrônico de títulos aos 79 cartórios do estado de MT.",
     cta: "Acessar CRA-MT",
     href: "https://cramt.crabr.com.br/cramt/site/admin.php",
-    image: img("REtfIkNvsjxYxCsD790UZo1Dquw"),
+    image: "REtfIkNvsjxYxCsD790UZo1Dquw",
   },
   {
     title: "Cancelamento Eletrônico",
     description: "Baixa do protesto após quitação da dívida pelo devedor.",
     cta: "Solicitar baixa",
     href: "https://www.pesquisaprotesto.com.br/servico/pedido-anuencia",
-    image: img("kbyGxA11oIjNr1Hnlu6mzaeZooE"),
+    image: "kbyGxA11oIjNr1Hnlu6mzaeZooE",
   },
 ];
 
@@ -62,15 +63,13 @@ const SectionHeading = ({ children }: { children: ReactNode }) => (
 );
 
 const Servicos = () => (
-  <SiteLayout
-    title="Serviços | Cartórios de Protesto de Mato Grosso"
-    description="Consulta de protesto gratuita por CPF ou CNPJ, envio eletrônico de títulos pela CRA-MT e cancelamento online nos 79 cartórios de protesto de Mato Grosso."
-    background="#ffffff"
-  >
+  <SiteLayout {...SEO["/servicos"]} background="#ffffff">
     {/* Hero */}
     <section className="relative -mt-[10px] h-[844px] overflow-hidden min-[810px]:h-auto min-[1200px]:h-[900px]">
       <img
-        src={img("xV0iRaFgKTyEwbvhVGw5aMHZtCc")}
+        src={img("xV0iRaFgKTyEwbvhVGw5aMHZtCc", 1920)}
+        srcSet={srcSet("xV0iRaFgKTyEwbvhVGw5aMHZtCc")}
+        sizes="100vw"
         alt=""
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover object-[69.3%_35.2%] min-[1200px]:object-center"
@@ -90,7 +89,7 @@ const Servicos = () => (
               href={EXTERNAL.pesquisaProtesto}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-[51px] items-center justify-center rounded-lg bg-[#0061ff] px-4 text-[16px] font-light text-[#eff2f5] transition-colors duration-300 hover:bg-[#2a2d33]"
+              className="flex h-[51px] items-center justify-center rounded-lg bg-[#0061ff] px-4 text-[16px] font-light text-white transition-colors duration-300 hover:bg-[#2a2d33]"
             >
               Consulta gratuita
             </a>
@@ -120,7 +119,9 @@ const Servicos = () => (
             className="group relative block h-[400px] overflow-hidden rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
           >
             <img
-              src={s.image}
+              src={img(s.image, 960)}
+              srcSet={srcSet(s.image)}
+              sizes="(min-width: 1200px) 30vw, (min-width: 810px) 50vw, 100vw"
               alt=""
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-900 ease-out-quint will-change-transform group-hover:scale-[1.08]"

@@ -1,3 +1,5 @@
+import manifest from "./image-manifest.json";
+
 // Dados compartilhados do site institucional (extraídos do site original no Framer).
 
 export const WHATSAPP_URL =
@@ -84,4 +86,17 @@ export const SERVICOS_MENU: MenuItem[] = [
   },
 ];
 
-export const img = (hash: string) => `/site/img/${hash}.webp`;
+// Imagens geradas por `npm run images` em várias larguras (ver src/site/image-manifest.json).
+const imageWidths = manifest as Record<string, number[]>;
+
+/** URL de uma variante da imagem (a menor largura >= `width`, ou a maior disponível). */
+export const img = (name: string, width = 1280) => {
+  const widths = imageWidths[name];
+  if (!widths) return `/site/img/${name}.webp`;
+  const w = widths.find((x) => x >= width) ?? widths[widths.length - 1];
+  return `/site/img/${name}-${w}.webp`;
+};
+
+/** `srcset` com todas as larguras disponíveis da imagem. */
+export const srcSet = (name: string) =>
+  (imageWidths[name] ?? []).map((w) => `/site/img/${name}-${w}.webp ${w}w`).join(", ");

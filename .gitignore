@@ -27,3 +27,8 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Originais das imagens do site (alta resolução) — regerar com: npm run images
+assets-src/
+
+dist-ssr

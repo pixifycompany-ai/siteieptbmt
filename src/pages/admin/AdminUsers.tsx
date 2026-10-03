@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { extensionFor, imageToWebp } from "@/lib/imageToWebp";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -148,11 +149,11 @@ const AdminUsers = () => {
     let avatarUrl = selectedUser.avatar_url;
 
     if (editAvatarFile) {
-      const ext = editAvatarFile.name.split(".").pop();
-      const path = `${selectedUser.id}.${ext}`;
+      const file = await imageToWebp(editAvatarFile, { maxSize: 512 });
+      const path = `${selectedUser.id}.${extensionFor(file)}`;
       const { error: uploadError } = await supabase.storage
         .from("avatars")
-        .upload(path, editAvatarFile, { upsert: true });
+        .upload(path, file, { upsert: true, contentType: file.type });
 
       if (uploadError) {
         toast({ title: "Erro no upload", description: uploadError.message, variant: "destructive" });

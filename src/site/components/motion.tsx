@@ -21,6 +21,8 @@ type RevealProps = {
   /** fração visível necessária para disparar (0–1) */
   amount?: number;
   as?: "div" | "section" | "li" | "span";
+  /** acima da dobra: anima em CSS no primeiro paint, sem esperar o JavaScript */
+  immediate?: boolean;
 };
 
 /** Entra na tela uma única vez, como os appear effects do Framer. */
@@ -35,8 +37,20 @@ export const Reveal = ({
   transition = SPRING_REVEAL,
   amount = 0,
   as = "div",
+  immediate = false,
 }: RevealProps) => {
   const reduce = useReducedMotion();
+  if (immediate) {
+    const Tag = as;
+    return (
+      <Tag
+        className={`site-appear ${className ?? ""}`}
+        style={{ "--appear-y": `${y}px`, "--appear-delay": `${delay}s` } as React.CSSProperties}
+      >
+        {children}
+      </Tag>
+    );
+  }
   const Comp = motion[as];
   if (reduce) return <Comp className={className}>{children}</Comp>;
   return (
@@ -53,23 +67,49 @@ export const Reveal = ({
 };
 
 /** Título que surge palavra a palavra saindo do desfoque (efeito de texto do Framer). */
-export const BlurText = ({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) => {
+export const BlurText = ({
+  text,
+  className,
+  delay = 0,
+  immediate = false,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  /** acima da dobra: anima em CSS no primeiro paint, sem esperar o JavaScript */
+  immediate?: boolean;
+}) => {
   const reduce = useReducedMotion();
   const words = text.split(" ");
+  if (immediate) {
+    return (
+      <span className={className}>
+        {words.map((w, i) => (
+          <Fragment key={`${w}-${i}`}>
+            <span className="site-blur-word" style={{ animationDelay: `${delay + i * 0.06}s` }}>
+              {w}
+            </span>
+            {i < words.length - 1 && " "}
+          </Fragment>
+        ))}
+      </span>
+    );
+  }
   if (reduce) return <span className={className}>{text}</span>;
   return (
+    <>
+      <span className="sr-only">{text}</span>
     <motion.span
       className={className}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       transition={{ staggerChildren: 0.06, delayChildren: delay }}
-      aria-label={text}
+      aria-hidden="true"
     >
       {words.map((w, i) => (
         <Fragment key={`${w}-${i}`}>
           <motion.span
-            aria-hidden="true"
             className="inline-block"
             variants={{
               hidden: { opacity: 0, filter: "blur(10px)", y: 10 },
@@ -83,6 +123,7 @@ export const BlurText = ({ text, className, delay = 0 }: { text: string; classNa
         </Fragment>
       ))}
     </motion.span>
+    </>
   );
 };
 

@@ -59,7 +59,7 @@ export default SiteLayout;
 /** Pílula pequena acima dos títulos de seção ("Soluções para você", "FAQ"...). */
 export const SectionBadge = ({ children, tone = "light" }: { children: ReactNode; tone?: "light" | "blue" | "dark" }) => {
   const styles = {
-    light: "bg-[#eff2f5] text-[#0061ff]",
+    light: "bg-[#eff2f5] text-[#0057e3]",
     blue: "bg-[#0061ff] text-white",
     dark: "bg-[#2a2d33] text-[#eff2f5]",
   }[tone];

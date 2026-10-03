@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { extensionFor, imageToWebp } from "@/lib/imageToWebp";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, useRole } from "@/contexts/AuthContext";
 import { Input } from "@/components/ui/input";
@@ -41,12 +42,14 @@ const AdminProfile = () => {
   }, [user]);
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !user) return;
+    const original = e.target.files?.[0];
+    if (!original || !user) return;
     setUploading(true);
-    const ext = file.name.split(".").pop();
-    const path = `${user.id}/avatar.${ext}`;
-    const { error } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
+    const file = await imageToWebp(original, { maxSize: 512 });
+    const path = `${user.id}/avatar.${extensionFor(file)}`;
+    const { error } = await supabase.storage
+      .from("avatars")
+      .upload(path, file, { upsert: true, contentType: file.type });
     if (error) {
       toast.error("Erro ao enviar imagem");
       setUploading(false);

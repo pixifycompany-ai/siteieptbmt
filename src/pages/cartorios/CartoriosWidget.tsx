@@ -51,11 +51,17 @@ const CartoriosWidget = () => {
         </div>
 
         {loading ? (
+          <>
+            {/* reserva a linha do contador para a grade não "pular" quando os dados chegam */}
+            <p className="text-sm text-gray-800 mb-4 text-center md:text-left" aria-hidden="true">
+              &nbsp;
+            </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: `${s.card_gap}px` }}>
             {Array.from({ length: 6 }).map((_, i) => (
               <Skeleton key={i} className="h-96 w-full rounded-3xl" />
             ))}
           </div>
+          </>
         ) : (
           <>
             <p className="text-sm text-gray-800 mb-4 text-center md:text-left">

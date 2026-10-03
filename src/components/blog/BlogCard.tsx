@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { formatPostDate } from "@/lib/formatDate";
 import { estimateReadingTime } from "@/lib/readingTime";
-import { hexToRgba, type BlogSettings } from "@/hooks/useBlogSettings";
+import { hexToRgba, type BlogSettings } from "@/lib/blogSettings";
 
 interface Props {
   post: any;

@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Kanit', 'sans-serif'],
+        sans: ['Kanit', 'Kanit Fallback', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

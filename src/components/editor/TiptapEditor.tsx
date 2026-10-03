@@ -12,7 +12,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { extensionFor, imageToWebp } from "@/lib/imageToWebp";
 
 interface Props {
   content: string;
@@ -25,6 +27,9 @@ const TiptapEditor = ({ content, onChange }: Props) => {
   const [linkText, setLinkText] = useState("");
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [imageUploading, setImageUploading] = useState(false);
+  const [imageError, setImageError] = useState("");
+  const imageFileRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
     extensions: [
@@ -78,6 +83,7 @@ const TiptapEditor = ({ content, onChange }: Props) => {
 
   const openImageDialog = useCallback(() => {
     setImageUrl("");
+    setImageError("");
     setImageDialogOpen(true);
   }, []);
 
@@ -86,6 +92,29 @@ const TiptapEditor = ({ content, onChange }: Props) => {
     editor.chain().focus().setImage({ src: imageUrl }).run();
     setImageDialogOpen(false);
   }, [editor, imageUrl]);
+
+  // Envia a imagem do computador já convertida para WebP e insere no texto.
+  const uploadImage = useCallback(
+    async (original: File) => {
+      if (!editor) return;
+      setImageUploading(true);
+      setImageError("");
+      const file = await imageToWebp(original);
+      const name = `conteudo/${Date.now()}.${extensionFor(file)}`;
+      const { error } = await supabase.storage
+        .from("blog-covers")
+        .upload(name, file, { contentType: file.type, cacheControl: "31536000" });
+      setImageUploading(false);
+      if (error) {
+        setImageError(`Não foi possível enviar a imagem: ${error.message}`);
+        return;
+      }
+      const { data } = supabase.storage.from("blog-covers").getPublicUrl(name);
+      editor.chain().focus().setImage({ src: data.publicUrl }).run();
+      setImageDialogOpen(false);
+    },
+    [editor],
+  );
 
   if (!editor) return null;
 
@@ -182,14 +211,40 @@ const TiptapEditor = ({ content, onChange }: Props) => {
           <DialogHeader>
             <DialogTitle>Inserir imagem</DialogTitle>
           </DialogHeader>
-          <div>
-            <Label>URL da imagem</Label>
-            <Input
-              value={imageUrl}
-              onChange={e => setImageUrl(e.target.value)}
-              placeholder="https://exemplo.com/imagem.jpg"
-              onKeyDown={e => e.key === "Enter" && confirmImage()}
-            />
+          <div className="space-y-4">
+            <div>
+              <Label>Enviar do computador</Label>
+              <input
+                ref={imageFileRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={e => {
+                  const f = e.target.files?.[0];
+                  if (f) uploadImage(f);
+                  e.target.value = "";
+                }}
+              />
+              <Button
+                type="button"
+                variant="outline"
+                className="mt-1.5 w-full"
+                disabled={imageUploading}
+                onClick={() => imageFileRef.current?.click()}
+              >
+                {imageUploading ? "Enviando…" : "Escolher imagem (convertida para WebP)"}
+              </Button>
+              {imageError && <p className="mt-1.5 text-xs text-destructive">{imageError}</p>}
+            </div>
+            <div>
+              <Label>Ou cole a URL da imagem</Label>
+              <Input
+                value={imageUrl}
+                onChange={e => setImageUrl(e.target.value)}
+                placeholder="https://exemplo.com/imagem.jpg"
+                onKeyDown={e => e.key === "Enter" && confirmImage()}
+              />
+            </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setImageDialogOpen(false)}>Cancelar</Button>

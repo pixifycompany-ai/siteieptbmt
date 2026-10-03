@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
 import { Reveal } from "../components/motion";
-import { img } from "../data";
+import { img, srcSet } from "../data";
 
 type Person = {
   name: string;
@@ -101,9 +102,17 @@ const PLACEHOLDER = `url("data:image/svg+xml,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgba(136,136,136,0.2)" fill-rule="evenodd"/></svg>',
 )}")`;
 
-const Photo = ({ src, className }: { src?: { photo: string; position: string }; className: string }) =>
+const Photo = ({ src, className, size }: { src?: { photo: string; position: string }; className: string; size: number }) =>
   src ? (
-    <img src={img(src.photo)} alt="" loading="lazy" className={`${className} object-cover`} style={{ objectPosition: src.position }} />
+    <img
+      src={img(src.photo, size * 2)}
+      srcSet={srcSet(src.photo)}
+      sizes={`${size}px`}
+      alt=""
+      loading="lazy"
+      className={`${className} object-cover`}
+      style={{ objectPosition: src.position }}
+    />
   ) : (
     <div aria-hidden="true" className={className} style={{ backgroundImage: PLACEHOLDER, backgroundSize: "64px auto" }} />
   );
@@ -136,10 +145,10 @@ const FlipCard = ({ p }: { p: Person }) => {
         animate={{ rotateX: flipped ? -180 : 0 }}
         transition={transition}
       >
-        <Photo src={p.front} className="h-[92px] w-[92px] shrink-0 rounded-full" />
-        <h3 className="mt-6 text-[20px] font-semibold leading-[1.4] text-[#2a2d33]">{p.name}</h3>
+        <Photo src={p.front} size={92} className="h-[92px] w-[92px] shrink-0 rounded-full" />
+        <h2 className="mt-6 text-[20px] font-semibold leading-[1.4] text-[#2a2d33]">{p.name}</h2>
         <p className="text-[16px] font-normal leading-[1.4] text-[#2a2d33]/80">{p.role}</p>
-        <p className="absolute bottom-6 text-[8px] font-extralight leading-[1.4] text-[#2a2d33]/80">passe o mouse</p>
+        <p className="absolute bottom-6 text-[10px] font-light leading-[1.4] text-[#2a2d33]/80">passe o mouse</p>
       </motion.div>
 
       {/* Verso */}
@@ -149,24 +158,20 @@ const FlipCard = ({ p }: { p: Person }) => {
         animate={{ rotateX: flipped ? 0 : 180 }}
         transition={transition}
       >
-        <h3 className="text-[20px] font-semibold leading-[1.4] text-[#eff2f5]">{p.name}</h3>
-        <p className="text-[14px] font-normal leading-[1.4] text-[#eff2f5]">{p.role}</p>
-        <p className="mt-4 text-[11px] font-extralight leading-[1.4] text-[#eff2f5]/80">{p.description}</p>
-        <Photo src={p.back} className="absolute bottom-6 right-6 h-16 w-16 rounded-lg" />
+        <h2 className="text-[20px] font-semibold leading-[1.4] text-white">{p.name}</h2>
+        <p className="text-[14px] font-normal leading-[1.4] text-white">{p.role}</p>
+        <p className="mt-4 text-[12px] font-extralight leading-[1.4] text-white/95">{p.description}</p>
+        <Photo src={p.back} size={64} className="absolute bottom-6 right-6 h-16 w-16 rounded-lg" />
       </motion.div>
     </div>
   );
 };
 
 const Equipe = () => (
-  <SiteLayout
-    title="Nossa Equipe | Cartórios de Protesto de Mato Grosso"
-    description="Conheça a equipe do IEPTB-MT que atende cartórios, conveniados e cidadãos em todo o estado de Mato Grosso."
-    background="#2a2d33"
-  >
+  <SiteLayout {...SEO["/equipe"]} background="#2a2d33">
     <section className="px-6 pb-[88px] pt-[88px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[82px]">
-      <Reveal className="flex flex-col items-center border-b border-[#eff2f5]/10 pb-4">
-        <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 text-[10px] font-light text-[#eff2f5] min-[810px]:h-[26px] min-[810px]:text-[12px]">
+      <Reveal immediate className="flex flex-col items-center border-b border-[#eff2f5]/10 pb-4">
+        <span className="inline-flex h-6 items-center rounded-full bg-[#0061ff] px-4 text-[10px] font-light text-white min-[810px]:h-[26px] min-[810px]:text-[12px]">
           Quem faz acontecer
         </span>
         <h1 className="mt-2.5 text-[28px] font-semibold leading-[1.2] text-[#eff2f5] min-[810px]:text-[48px]">Nossa Equipe</h1>

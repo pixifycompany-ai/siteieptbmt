@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Eye, Mountains, Target } from "@phosphor-icons/react";
+import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
 import { BlurText, Reveal } from "../components/motion";
 
@@ -39,19 +40,15 @@ const paragraph = "text-balance whitespace-pre-wrap text-[13px] font-light leadi
 const strong = "font-normal";
 
 const Instituicao = () => (
-  <SiteLayout
-    title="Instituição | Cartórios de Protesto de Mato Grosso"
-    description="Conheça o IEPTB-MT, entidade sem fins lucrativos que representa os cartórios de protesto de Mato Grosso desde 2005: missão, visão, valores e presidentes."
-    background="#ffffff"
-  >
+  <SiteLayout {...SEO["/instituicao"]} background="#ffffff">
     {/* Sobre Nós */}
     <section className="px-4 pb-[51px] pt-20 min-[810px]:px-16 min-[810px]:pb-20 min-[1200px]:pb-28">
       <div className="border-b border-[#2a2d33]/10">
         <h1 className="text-[28px] font-bold leading-[1.4] text-[#0061ff] min-[810px]:text-[64px]">
-          <BlurText text="Sobre Nós" />
+          <BlurText text="Sobre Nós" immediate />
         </h1>
       </div>
-      <Reveal className="mt-3.5 max-w-[1181px] space-y-[1.55em] text-[13px] min-[810px]:mt-6 min-[810px]:space-y-[1.6em] min-[810px]:text-[22px]">
+      <Reveal immediate delay={0.15} className="mt-3.5 max-w-[1181px] space-y-[1.55em] text-[13px] min-[810px]:mt-6 min-[810px]:space-y-[1.6em] min-[810px]:text-[22px]">
         <p className={paragraph}>
           O Instituto de Estudos de Protesto de Títulos do Brasil Seção Mato Grosso - IEPTB/MT é uma entidade civil, sem
           fins lucrativos, que representa os cartórios de protesto de títulos e documentos de dívida do Estado do Mato
@@ -84,7 +81,7 @@ const Instituicao = () => (
             </span>
             <div className="max-w-[1181px]">
               <h2 className="text-[25px] font-normal leading-[1.2] text-white min-[810px]:text-[64px]">{item.title}</h2>
-              <p className="text-balance text-[13px] font-light leading-[1.6] text-[#eff2f5]/70 min-[810px]:text-[16px]">{item.text}</p>
+              <p className="text-balance text-[13px] font-light leading-[1.6] text-white/95 min-[810px]:text-[16px]">{item.text}</p>
             </div>
           </Reveal>
         ))}

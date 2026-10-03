@@ -13,12 +13,12 @@ const readConsent = () => {
 };
 
 const CookieBanner = () => {
-  const [visible, setVisible] = useState(false);
+  // Visível por padrão (inclusive no HTML pré-renderizado); quem já respondeu nem chega a vê-lo,
+  // pois o script do <head> marca <html class="cookie-ok"> antes do primeiro paint.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (readConsent()) return;
-    const t = window.setTimeout(() => setVisible(true), 600);
-    return () => window.clearTimeout(t);
+    if (readConsent()) setVisible(false);
   }, []);
 
   const choose = (value: "accepted" | "declined") => {
@@ -27,6 +27,7 @@ const CookieBanner = () => {
     } catch {
       /* armazenamento indisponível: apenas fecha */
     }
+    document.documentElement.classList.add("cookie-ok");
     setVisible(false);
   };
 
@@ -34,14 +35,16 @@ const CookieBanner = () => {
     <AnimatePresence>
       {visible && (
         <motion.div
+          data-cookie-banner
           role="dialog"
           aria-live="polite"
           aria-label="Aviso de cookies"
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-          className="fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-[720px] rounded-2xl border border-white/[0.08] bg-[#101114] p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] min-[810px]:bottom-6"
+          style={{ "--appear-y": "24px", "--appear-delay": "0.6s", animationFillMode: "backwards" } as React.CSSProperties}
+          className="site-appear fixed inset-x-4 bottom-4 z-[60] mx-auto max-w-[720px] rounded-2xl border border-white/[0.08] bg-[#101114] p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] min-[810px]:bottom-6"
         >
           <div className="flex flex-col gap-4 min-[810px]:flex-row min-[810px]:items-center min-[810px]:gap-6">
             <div className="flex-1">

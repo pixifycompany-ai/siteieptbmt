@@ -1,31 +1,34 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Mail, Phone } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
+import { SEO } from "../seo";
 import SiteLayout, { SectionBadge } from "../components/SiteLayout";
 import NewsGrid from "../components/NewsGrid";
+import LazyMap from "../components/LazyMap";
 import { CountUp, Reveal, SLIDE_IN, TWEEN_SECTION } from "../components/motion";
-import { ADDRESS, CONTACTS, EXTERNAL, WHATSAPP_URL, img, tel } from "../data";
+import { ADDRESS, CONTACTS, EXTERNAL, WHATSAPP_URL, img, srcSet, tel } from "../data";
 
 const SOLUTIONS = [
   {
     title: "Consulta de Protesto",
     description: "Consulta gratuita por CPF ou CNPJ na plataforma oficial do IEPTB-BR",
-    image: img("LFyuOmQeLW8xYCSaK9Ai5xqY0"),
+    image: "LFyuOmQeLW8xYCSaK9Ai5xqY0",
   },
   {
     title: "Cancelamento Eletrônico",
     description: "Cancele protestos 100% online, sem ir ao cartório, com validade jurídica.",
-    image: img("kbyGxA11oIjNr1Hnlu6mzaeZooE"),
+    image: "kbyGxA11oIjNr1Hnlu6mzaeZooE",
   },
   {
     title: "Central de Remessa",
     description: "Envie arquivos de títulos para protesto com praticidade e rastreabilidade.",
-    image: img("REtfIkNvsjxYxCsD790UZo1Dquw"),
+    image: "REtfIkNvsjxYxCsD790UZo1Dquw",
   },
   {
     title: "Convênio",
     description: "Parcerias estratégicas.",
-    image: img("9Df0AS6XJ8kd3agQZDYe80DqMnk"),
+    image: "9Df0AS6XJ8kd3agQZDYe80DqMnk",
   },
 ];
 
@@ -57,17 +60,19 @@ const SectionTitle = ({ children, className = "" }: { children: React.ReactNode;
 );
 
 const Hero = () => (
-  <section className="relative -mt-[10px] h-[844px] overflow-hidden min-[810px]:h-[720px] min-[1200px]:h-[800px]">
+  <section className="relative -mt-[10px] h-[calc(100svh-70px)] min-h-[560px] overflow-hidden">
     <img
-      src={img("l02yOJdgGRdf1I3Vrawzmx2k")}
+      src={img("l02yOJdgGRdf1I3Vrawzmx2k", 1920)}
+      srcSet={srcSet("l02yOJdgGRdf1I3Vrawzmx2k")}
+      sizes="100vw"
       alt=""
       className="absolute inset-0 h-full w-full object-cover object-[59.4%_44.2%] min-[810px]:object-[50%_0%]"
       fetchPriority="high"
     />
     {/* Névoa clara à esquerda: mesmo gradiente vetorial do Framer (sólido até 40%, some em 62%, opacidade .84) */}
-    <div className="absolute left-0 top-0 h-[1000px] w-[724px] bg-[linear-gradient(90deg,#eff2f5_40%,rgba(239,242,245,0)_62%)] opacity-[0.84] min-[810px]:h-full min-[810px]:w-full min-[1200px]:h-[1000px] min-[1200px]:w-[1366px]" />
-    <div className="relative flex h-full flex-col items-center px-6 pt-[226px] text-center min-[810px]:items-start min-[810px]:justify-center min-[810px]:px-16 min-[810px]:pt-0 min-[810px]:text-left min-[1200px]:justify-start min-[1200px]:px-32 min-[1200px]:pt-[160px]">
-      <Reveal>
+    <div className="absolute left-0 top-0 h-full w-[724px] bg-[linear-gradient(90deg,#eff2f5_40%,rgba(239,242,245,0)_62%)] opacity-[0.84] min-[810px]:w-full min-[1200px]:w-[1366px]" />
+    <div className="relative flex h-full flex-col items-center justify-center px-6 pb-10 text-center min-[810px]:items-start min-[810px]:px-16 min-[810px]:text-left min-[1200px]:px-32 min-[1200px]:pb-[8vh]">
+      <Reveal immediate>
         <span className="inline-flex h-[19px] items-center rounded-full bg-[#2a2d33] px-2.5 text-[9px] font-light leading-none text-[#eff2f5] min-[810px]:h-[22px] min-[810px]:text-[12px]">
           Cartórios de Protesto · MT
         </span>
@@ -78,7 +83,7 @@ const Hero = () => (
           Rápido, digital e com a segurança jurídica dos Cartórios de Mato Grosso.
         </p>
       </Reveal>
-      <Reveal className="mt-6 flex w-[280px] flex-col gap-4 min-[810px]:w-auto min-[810px]:flex-row min-[810px]:gap-6">
+      <Reveal immediate delay={0.1} className="mt-6 flex w-[280px] flex-col gap-4 min-[810px]:w-auto min-[810px]:flex-row min-[810px]:gap-6">
         <a
           href={EXTERNAL.pesquisaProtesto}
           target="_blank"
@@ -96,7 +101,7 @@ const Hero = () => (
           Quero ser conveniado
         </a>
       </Reveal>
-      <Reveal className="mt-12 text-left min-[810px]:mt-8">
+      <Reveal immediate delay={0.2} className="mt-12 text-left min-[810px]:mt-8">
         <div className="flex items-center gap-2">
           <span className="text-[44px] font-medium leading-none text-[#0061ff]">+</span>
           <CountUp to={140} className="text-[64px] font-medium leading-none text-[#2a2d33]" />
@@ -120,7 +125,9 @@ const Solutions = () => (
           className="group relative aspect-square w-full max-w-[300px] overflow-hidden rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
         >
           <img
-            src={s.image}
+            src={img(s.image, 640)}
+            srcSet={srcSet(s.image)}
+            sizes="300px"
             alt=""
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-900 ease-out-quint will-change-transform group-hover:scale-[1.08]"
@@ -143,12 +150,19 @@ const News = () => (
       <SectionBadge>Notícias</SectionBadge>
       <SectionTitle className="mt-2.5">Acompanhe o universo do Protesto</SectionTitle>
     </div>
-    {/* O widget original era um iframe do blog: 800px de altura com rolagem interna e raiz 14.4px
-        (90% de 16px). A caixa rolável + zoom .9 reproduzem exatamente esse comportamento. */}
-    <div className="mx-4 mt-8 h-[800px] overflow-y-auto overscroll-contain">
-      <div style={{ zoom: 0.9 }}>
-        <NewsGrid />
-      </div>
+    {/* As 6 notícias mais recentes, direto na página (sem rolagem interna). O zoom .9 mantém a
+        escala do widget original, que rodava num iframe do blog com raiz 14.4px. */}
+    <div className="mx-4 mt-8" style={{ zoom: 0.9 }}>
+      <NewsGrid limit={6} />
+    </div>
+    <div className="mt-2 flex justify-center px-4">
+      <Link
+        to="/blog"
+        className="group inline-flex h-12 items-center gap-2 rounded-lg bg-[#2a2d33] px-6 text-[15px] font-normal text-[#eff2f5] transition-colors duration-300 hover:bg-[#0061ff]"
+      >
+        VER MAIS
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
+      </Link>
     </div>
   </section>
 );
@@ -160,13 +174,7 @@ const Location = () => (
       <SectionTitle className="mt-2.5 !leading-[1.2]">Localização</SectionTitle>
     </div>
     <div className="mt-8 overflow-hidden rounded-[20px]">
-      <iframe
-        title="Mapa — Cartórios de Protesto MT"
-        src={EXTERNAL.mapsEmbed}
-        className="block h-[375px] w-full border-0"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      />
+      <LazyMap title="Mapa — Cartórios de Protesto MT" className="h-[375px] w-full" />
     </div>
     <p className="mt-2.5 text-center text-[9px] font-light leading-[1.2] text-[#2a2d33] min-[810px]:text-[13px]">{ADDRESS}</p>
   </section>
@@ -231,7 +239,7 @@ const Faq = () => {
         <div className="relative overflow-hidden rounded-[32px] border border-[#e5e7eb] bg-gradient-to-b from-[#f3f4f6] to-[#f9fafb] p-4 min-[810px]:border-0 min-[810px]:p-12">
           <span
             aria-hidden="true"
-            className="gradient-text pointer-events-none absolute bottom-[26px] left-[27px] hidden select-none bg-[linear-gradient(0deg,rgba(228,230,235,0)_0%,#d2d6db_100%)] font-['Figtree'] text-[250px] font-semibold leading-[1.3] min-[810px]:block"
+            className="gradient-text pointer-events-none absolute bottom-[26px] left-[27px] hidden select-none bg-[linear-gradient(0deg,rgba(228,230,235,0)_0%,#d2d6db_100%)] font-['Figtree','Figtree_Fallback',sans-serif] text-[250px] font-semibold leading-[1.3] min-[810px]:block"
           >
             FAQ
           </span>
@@ -271,7 +279,7 @@ const Faq = () => {
 };
 
 const Home = () => (
-  <SiteLayout title="Cartórios de Protesto de Mato Grosso | IEPTB-MT">
+  <SiteLayout {...SEO["/"]}>
     <Hero />
     <Solutions />
     <News />

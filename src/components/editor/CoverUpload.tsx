@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { extensionFor, imageToWebp } from "@/lib/imageToWebp";
 
 interface Props {
   coverImage: string;
@@ -15,11 +16,13 @@ const CoverUpload = ({ coverImage, onCoverChange }: Props) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const upload = async (file: File) => {
+  const upload = async (original: File) => {
     setUploading(true);
-    const ext = file.name.split(".").pop();
-    const name = `${Date.now()}.${ext}`;
-    const { error } = await supabase.storage.from("blog-covers").upload(name, file);
+    const file = await imageToWebp(original);
+    const name = `${Date.now()}.${extensionFor(file)}`;
+    const { error } = await supabase.storage
+      .from("blog-covers")
+      .upload(name, file, { contentType: file.type, cacheControl: "31536000" });
     if (error) {
       toast({ title: "Erro no upload", description: error.message, variant: "destructive" });
     } else {
