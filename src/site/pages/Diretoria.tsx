@@ -53,13 +53,13 @@ const MemberCard = ({ m, priority = false }: { m: Member; priority?: boolean }) 
     <motion.div
       layout
       transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-      className="flex w-[300px] flex-col gap-[14px] rounded-[44px_44px_34px_34px] bg-white p-2.5"
+      className="flex w-full flex-col gap-[14px] min-[680px]:w-[300px] rounded-[44px_44px_34px_34px] bg-white p-2.5"
     >
       <div className="relative h-[260px] overflow-hidden rounded-[34px] shadow-[0_0.8px_0.8px_-0.5px_rgba(0,0,0,0.08),0_2.4px_2.4px_-1px_rgba(0,0,0,0.08),0_6.4px_6.4px_-1.5px_rgba(0,0,0,0.09),0_20px_20px_-2px_rgba(0,0,0,0.12)]">
         <img
           src={img(m.photo, 640)}
           srcSet={srcSet(m.photo)}
-          sizes="280px"
+          sizes="(min-width: 680px) 280px, 100vw"
           alt={m.name}
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
@@ -119,7 +119,7 @@ const Header = ({ badge, title, delay = 0, immediate = false }: { badge: string;
 
 const Grid = ({ members, delay = 0, immediate = false }: { members: Member[]; delay?: number; immediate?: boolean }) => (
   <Reveal y={10} delay={delay} immediate={immediate} transition={{ type: "spring", bounce: 0, duration: 0.6 }}>
-    <div className="mx-auto mt-8 grid w-fit grid-cols-1 items-start gap-8 min-[680px]:grid-cols-2 min-[1000px]:grid-cols-3">
+    <div className="mx-auto mt-8 grid w-full grid-cols-1 min-[680px]:w-fit items-start gap-8 min-[680px]:grid-cols-2 min-[1000px]:grid-cols-3">
       {members.map((m, i) => (
         <MemberCard key={m.name} m={m} priority={immediate && i < 3} />
       ))}
@@ -129,7 +129,7 @@ const Grid = ({ members, delay = 0, immediate = false }: { members: Member[]; de
 
 const Diretoria = () => (
   <SiteLayout {...SEO["/diretoria"]}>
-    <section className="px-4 pb-16 pt-[53px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[110px]">
+    <section className="px-6 pb-16 pt-[53px] min-[810px]:px-[72px] min-[810px]:pt-16 min-[1200px]:pt-[110px]">
       <Header badge="Gestão 2025/2026" title="Diretoria" immediate />
       <Grid members={DIRETORIA} delay={0.4} immediate />
       <div className="mt-16">

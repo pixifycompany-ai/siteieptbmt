@@ -22,7 +22,7 @@ const CartoriosDeProtesto = () => (
       {/* Lista completa direto na página (sem rolagem interna). */}
       <div className="min-[810px]:mt-6">
         <div style={{ zoom: 0.9 }}>
-          <CartoriosWidget />
+          <CartoriosWidget embedded />
         </div>
       </div>
     </section>

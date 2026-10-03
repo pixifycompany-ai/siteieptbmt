@@ -89,9 +89,9 @@ const Instituicao = () => (
     </section>
 
     {/* Presidentes */}
-    <section className="px-4 pb-4 pt-8 min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-16 min-[1200px]:pt-[90px]">
+    <section className="px-6 pb-4 pt-8 min-[810px]:px-16 min-[810px]:pb-16 min-[810px]:pt-16 min-[1200px]:pt-[90px]">
       <div className="border-b border-[#2a2d33]/10">
-        <h2 className="text-balance px-6 text-center text-[28px] font-bold leading-[1.1] text-[#0061ff] min-[810px]:px-0 min-[810px]:text-[64px]">
+        <h2 className="text-balance px-4 text-center text-[28px] font-bold leading-[1.1] text-[#0061ff] min-[810px]:px-0 min-[810px]:text-[64px]">
           <BlurText text="Presidentes que marcaram nossa história" />
         </h2>
         <Reveal>
@@ -103,17 +103,17 @@ const Instituicao = () => (
         </Reveal>
 
         <div className="relative mt-6 pb-8 pt-[62px] min-[810px]:pt-8">
-          <span className="absolute bottom-0 left-6 top-0 w-0.5 bg-[#e0e0e0] min-[810px]:left-1/2 min-[810px]:-translate-x-1/2" />
+          <span className="absolute bottom-0 left-[5px] top-0 w-0.5 bg-[#e0e0e0] min-[810px]:left-1/2 min-[810px]:-translate-x-1/2" />
           <ol className="space-y-7">
             {PRESIDENTS.map(([period, name], i) => {
               const right = i % 2 === 1;
               return (
                 <li key={period} className="relative min-[810px]:grid min-[810px]:grid-cols-2 min-[810px]:gap-[88px] min-[810px]:px-5">
-                  <span className="absolute left-1/2 top-1/2 hidden h-3 w-3 -translate-y-1/2 rounded-full bg-[#0061ff] min-[810px]:block" />
+                  <span className="absolute left-0 top-1/2 z-10 h-3 w-3 -translate-y-1/2 rounded-full bg-[#0061ff] ring-4 ring-white min-[810px]:left-1/2 min-[810px]:ring-0" />
                   <Reveal
                     blur
                     y={20}
-                    className={`ml-5 w-[246px] rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] min-[810px]:ml-0 min-[810px]:w-auto min-[810px]:p-6 ${right ? "min-[810px]:col-start-2" : ""}`}
+                    className={`ml-8 rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] min-[810px]:ml-0 min-[810px]:w-auto min-[810px]:p-6 ${right ? "min-[810px]:col-start-2" : ""}`}
                   >
                     <p className="text-[14px] font-medium leading-[1.4] text-[#666]">{period}</p>
                     <p className="mt-[7px] text-[18px] font-semibold leading-[1.3] text-black">{name}</p>

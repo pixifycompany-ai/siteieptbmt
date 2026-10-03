@@ -34,7 +34,7 @@ const NewsGrid = ({ limit = 6 }: { limit?: number }) => {
   });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-8 pt-6 md:px-6 md:pt-8">
+    <div className="mx-auto max-w-6xl pb-8 pt-6 md:px-6 md:pt-8">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {isLoading
           ? Array.from({ length: limit }).map((_, i) => (

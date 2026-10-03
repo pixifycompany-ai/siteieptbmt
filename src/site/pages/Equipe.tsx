@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
@@ -121,18 +121,27 @@ const Photo = ({ src, className, size }: { src?: { photo: string; position: stri
 const face =
   "absolute inset-0 overflow-hidden rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
 
-/** Card que vira no eixo X ao passar o mouse (componente "Flip Card" do Framer: vertical, 0.6s, easeInOut). */
+/**
+ * Card que vira no eixo X (componente "Flip Card" do Framer: vertical, 0.6s, easeInOut).
+ * Com mouse vira ao passar por cima; no toque (celular) e no teclado vira a cada toque/Enter.
+ */
 const FlipCard = ({ p }: { p: Person }) => {
   const [flipped, setFlipped] = useState(false);
+  const lastPointer = useRef("");
   const reduce = useReducedMotion();
   const transition = { duration: reduce ? 0 : 0.6, ease: "easeInOut" as const };
 
   return (
     <div
-      className="relative h-[280px] w-[250px] rounded-2xl outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[#0061ff] focus-visible:ring-offset-4 focus-visible:ring-offset-[#2a2d33]"
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
-      onClick={() => setFlipped((f) => !f)}
+      className="relative h-[280px] w-full rounded-2xl min-[580px]:w-[250px] outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[#0061ff] focus-visible:ring-offset-4 focus-visible:ring-offset-[#2a2d33]"
+      onPointerEnter={(e) => e.pointerType === "mouse" && setFlipped(true)}
+      onPointerLeave={(e) => e.pointerType === "mouse" && setFlipped(false)}
+      onPointerDown={(e) => (lastPointer.current = e.pointerType)}
+      onClick={() => {
+        // O clique do mouse viria logo depois do hover e desviraria o card.
+        if (lastPointer.current !== "mouse") setFlipped((f) => !f);
+        lastPointer.current = "";
+      }}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setFlipped((f) => !f)}
       role="button"
       tabIndex={0}
@@ -148,7 +157,11 @@ const FlipCard = ({ p }: { p: Person }) => {
         <Photo src={p.front} size={92} className="h-[92px] w-[92px] shrink-0 rounded-full" />
         <h2 className="mt-6 text-[20px] font-semibold leading-[1.4] text-[#2a2d33]">{p.name}</h2>
         <p className="text-[16px] font-normal leading-[1.4] text-[#2a2d33]/80">{p.role}</p>
-        <p className="absolute bottom-6 text-[10px] font-light leading-[1.4] text-[#2a2d33]/80">passe o mouse</p>
+        <p className="absolute bottom-6 text-[10px] font-light leading-[1.4] text-[#2a2d33]/80">
+          {/* Texto pelo tipo de aparelho, em CSS (funciona no HTML pré-renderizado). */}
+          <span className="[@media(hover:hover)]:hidden">toque no card</span>
+          <span className="hidden [@media(hover:hover)]:inline">passe o mouse</span>
+        </p>
       </motion.div>
 
       {/* Verso */}
@@ -179,7 +192,7 @@ const Equipe = () => (
       {/* Mesma divisão do original: fileiras de 4, 4 e 3 (no celular cada fileira empilha). */}
       <div className="mt-12 flex flex-col items-center gap-20 min-[810px]:gap-[72px]">
         {[TEAM.slice(0, 4), TEAM.slice(4, 8), TEAM.slice(8)].map((row, i) => (
-          <div key={i} className="flex max-w-[1096px] flex-wrap justify-center gap-8">
+          <div key={i} className="flex w-full max-w-[1096px] flex-wrap justify-center gap-8">
             {row.map((p) => (
               <FlipCard key={p.name} p={p} />
             ))}

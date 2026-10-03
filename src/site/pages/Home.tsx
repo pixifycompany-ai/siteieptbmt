@@ -113,7 +113,7 @@ const Hero = () => (
 );
 
 const Solutions = () => (
-  <section className="flex flex-col items-center justify-center bg-white px-4 py-8 min-[810px]:py-24 min-[1200px]:min-h-[900px] min-[1200px]:py-[219px]">
+  <section className="flex flex-col items-center justify-center bg-white px-6 py-8 min-[680px]:px-4 min-[810px]:py-24 min-[1200px]:min-h-[900px] min-[1200px]:py-[219px]">
     <SectionBadge>Soluções para você</SectionBadge>
     <SectionTitle className="mt-2.5 max-w-[1000px]">
       Como o Cartórios de Protesto de Mato Grosso pode te ajudar
@@ -122,12 +122,12 @@ const Solutions = () => (
       {SOLUTIONS.map((s) => (
         <article
           key={s.title}
-          className="group relative aspect-square w-full max-w-[300px] overflow-hidden rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
+          className="group relative aspect-square w-full overflow-hidden min-[680px]:max-w-[300px] rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
         >
           <img
             src={img(s.image, 640)}
             srcSet={srcSet(s.image)}
-            sizes="300px"
+            sizes="(min-width: 680px) 300px, 100vw"
             alt=""
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-900 ease-out-quint will-change-transform group-hover:scale-[1.08]"
@@ -152,8 +152,10 @@ const News = () => (
     </div>
     {/* As 6 notícias mais recentes, direto na página (sem rolagem interna). O zoom .9 mantém a
         escala do widget original, que rodava num iframe do blog com raiz 14.4px. */}
-    <div className="mx-4 mt-8" style={{ zoom: 0.9 }}>
-      <NewsGrid limit={6} />
+    <div className="mx-6 mt-8 md:mx-4">
+      <div style={{ zoom: 0.9 }}>
+        <NewsGrid limit={6} />
+      </div>
     </div>
     <div className="mt-2 flex justify-center px-4">
       <a

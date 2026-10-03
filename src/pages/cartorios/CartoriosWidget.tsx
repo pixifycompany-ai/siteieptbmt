@@ -7,7 +7,8 @@ import CartoriosSearch from "@/components/cartorios/CartoriosSearch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { sortByCity } from "@/lib/sortCartorios";
 
-const CartoriosWidget = () => {
+/** `embedded`: dentro de uma página do site, que já dá a margem lateral (sem padding próprio no celular). */
+const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
   useResetThemeForPublic();
   const [cartorios, setCartorios] = useState<Cartorio[] | null>(null);
   const [search, setSearch] = useState("");
@@ -45,7 +46,7 @@ const CartoriosWidget = () => {
 
   return (
     <div style={{ background: hexToRgba(s.widget_bg_color, s.widget_bg_opacity), minHeight: "100%" }}>
-      <div className="max-w-6xl mx-auto px-4 pt-6 pb-8 md:px-6 md:pt-8">
+      <div className={`max-w-6xl mx-auto pt-6 pb-8 md:px-6 md:pt-8 ${embedded ? "" : "px-4"}`}>
         <div className="mb-6">
           <CartoriosSearch value={search} onChange={setSearch} />
         </div>
