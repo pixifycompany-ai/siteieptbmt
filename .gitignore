@@ -34,3 +34,6 @@ assets-src/
 dist-ssr
 .vercel
 .env*
+
+# Supabase CLI (estado local)
+supabase/.temp/
