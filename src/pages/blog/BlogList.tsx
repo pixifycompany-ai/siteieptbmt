@@ -30,7 +30,7 @@ const BlogList = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const { data: settings } = useBlogSettings();
   const s = settings || defaultSettings;
-  const PER_PAGE = 10;
+  const PER_PAGE = 9; // grade 3×3
 
   // Fetch all unique tags
   useEffect(() => {
@@ -82,12 +82,13 @@ const BlogList = () => {
       query = query.contains("tags", selectedTags);
     }
 
-    query = query.range(page * PER_PAGE, (page + 1) * PER_PAGE - 1);
+    // Busca um post a mais só para saber se existe próxima página.
+    query = query.range(page * PER_PAGE, (page + 1) * PER_PAGE);
 
     const { data } = await query;
     if (data) {
-      setPosts(data);
-      setHasMore(data.length === PER_PAGE);
+      setPosts(data.slice(0, PER_PAGE));
+      setHasMore(data.length > PER_PAGE);
     }
   };
 
