@@ -20,6 +20,9 @@
         var open = function () {
           var popup = document.querySelector("[data-alert-popup]");
           if (!popup) return;
+          // A arte vem com loading="lazy" (quem já viu o aviso não a baixa); ao abrir, pede na hora.
+          var art = popup.querySelector("img");
+          if (art) art.loading = "eager";
           root.classList.add("alert-open");
           var btn = popup.querySelector("[data-alert-close]");
           if (btn) btn.focus({ preventScroll: true });
