@@ -9,6 +9,36 @@
     <script>
       try { if (localStorage.getItem("cpmt-cookie-consent")) document.documentElement.classList.add("cookie-ok"); } catch (e) {}
     </script>
+    <script>
+      // Comunicado urgente (src/site/components/AlertPopup.tsx): abre quando a página termina de carregar,
+      // uma vez por sessão do navegador. Trocar ALERT_ID faz um comunicado novo aparecer para todos.
+      (function () {
+        var ALERT_ID = "golpe-cenprot-2026-11";
+        var KEY = "cpmt-alert";
+        var root = document.documentElement;
+        try { if (sessionStorage.getItem(KEY) === ALERT_ID) return; } catch (e) {}
+        var open = function () {
+          var popup = document.querySelector("[data-alert-popup]");
+          if (!popup) return;
+          root.classList.add("alert-open");
+          var btn = popup.querySelector("[data-alert-close]");
+          if (btn) btn.focus({ preventScroll: true });
+        };
+        var close = function () {
+          if (!root.classList.contains("alert-open")) return;
+          root.classList.remove("alert-open");
+          try { sessionStorage.setItem(KEY, ALERT_ID); } catch (e) {}
+        };
+        // Funciona antes da hidratação do React: botões com data-alert-close, clique no fundo e Esc.
+        document.addEventListener("click", function (e) {
+          var t = e.target;
+          if (t instanceof Element && (t.closest("[data-alert-close]") || t.hasAttribute("data-alert-popup"))) close();
+        });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+        var later = function () { setTimeout(open, 250); };
+        document.readyState === "complete" ? later() : addEventListener("load", later, { once: true });
+      })();
+    </script>
     <title>Cartórios de Protesto de Mato Grosso | IEPTB-MT</title>
     <meta
       name="description"

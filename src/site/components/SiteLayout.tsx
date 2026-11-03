@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CookieBanner from "./CookieBanner";
+import AlertPopup from "./AlertPopup";
 import { useResetThemeForPublic } from "@/contexts/ThemeContext";
 
 type Props = {
@@ -50,6 +51,7 @@ const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, backgr
       <main className="pt-20">{children}</main>
       <Footer />
       <CookieBanner />
+      <AlertPopup />
     </div>
   );
 };

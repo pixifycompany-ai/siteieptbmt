@@ -57,7 +57,7 @@ for (const [route, { title, description }] of Object.entries(SEO)) {
   // site e banner de cookies oculto para quem já respondeu — sem elas haveria deslocamento de layout.
   html = html.replace(
     "</title>",
-    "</title>\n    <style>html.site-root{font-size:16px}html.cookie-ok [data-cookie-banner]{display:none}</style>",
+    "</title>\n    <style>html.site-root{font-size:16px}html.cookie-ok [data-cookie-banner]{display:none}html.alert-open{overflow:hidden;scrollbar-gutter:stable}html.alert-open [data-alert-popup]{display:flex}</style>",
   );
 
   // O conteúdo já vem no HTML: o JavaScript (hidratação, menus e animações de rolagem) é
