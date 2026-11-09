@@ -43,6 +43,12 @@ const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
   }, [cartorios, debounced]);
 
   const loading = cartorios === null;
+  // Na página do site a grade é sempre de colunas iguais (3 a partir de 960px); a largura fixa de card
+  // definida no painel (card_width) vale só para o widget do blog.
+  const gridCols = embedded
+    ? "grid grid-cols-1 md:grid-cols-2 min-[960px]:grid-cols-3"
+    : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+  const fixedWidth = !embedded && s.card_width > 0;
 
   return (
     <div style={{ background: hexToRgba(s.widget_bg_color, s.widget_bg_opacity), minHeight: "100%" }}>
@@ -57,7 +63,7 @@ const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
             <p className="text-sm text-gray-800 mb-4 text-center md:text-left" aria-hidden="true">
               &nbsp;
             </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: `${s.card_gap}px` }}>
+          <div className={gridCols} style={{ gap: `${s.card_gap}px` }}>
             {Array.from({ length: 6 }).map((_, i) => (
               <Skeleton key={i} className="h-96 w-full rounded-3xl" />
             ))}
@@ -73,7 +79,7 @@ const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
               <p className="text-center text-gray-800 py-12">
                 Nenhum cartório encontrado{debounced ? ` para "${search}"` : ""}.
               </p>
-            ) : s.card_width > 0 ? (
+            ) : fixedWidth ? (
               <div
                 className="grid justify-center"
                 style={{
@@ -86,7 +92,7 @@ const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style={{ gap: `${s.card_gap}px` }}>
+              <div className={gridCols} style={{ gap: `${s.card_gap}px` }}>
                 {filtered.map((c) => (
                   <CartorioCard key={c.id} cartorio={c} settings={s} />
                 ))}
