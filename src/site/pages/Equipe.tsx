@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SEO } from "../seo";
 import SiteLayout from "../components/SiteLayout";
@@ -84,12 +84,6 @@ const TEAM: Person[] = [
       "Responsável pela manutenção da limpeza, organização e conservação dos ambientes, garantindo um espaço agradável, seguro e higienizado para colaboradores e clientes.",
   },
   {
-    name: "Paulo Henrique",
-    role: "Assistente de Operações Comerciais",
-    description:
-      "Atua no suporte às atividades comerciais da empresa, auxiliando na organização de processos, atendimento a clientes, realização de atualizações cadastrais e acompanhamento de demandas operacionais.",
-  },
-  {
     name: "Lucas Matheus",
     role: "Assistente de Operações Comerciais",
     description:
@@ -116,6 +110,38 @@ const Photo = ({ src, className, size }: { src?: { photo: string; position: stri
   ) : (
     <div aria-hidden="true" className={className} style={{ backgroundImage: PLACEHOLDER, backgroundSize: "64px auto" }} />
   );
+
+/**
+ * Descrição do verso: ocupa o espaço que sobra no card e, se o texto não couber, reduz a fonte
+ * (de 14px até 11px) em vez de transbordar. Recalcula quando a largura do card muda.
+ */
+const FitText = ({ children, className }: { children: ReactNode; className: string }) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fit = () => {
+      let size = 14;
+      el.style.fontSize = `${size}px`;
+      while (el.scrollHeight > el.clientHeight + 1 && size > 11) {
+        size -= 0.5;
+        el.style.fontSize = `${size}px`;
+      }
+    };
+    fit();
+    document.fonts?.ready.then(fit);
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <p ref={ref} className={`overflow-hidden text-[14px] font-light leading-[1.45] ${className}`}>
+      {children}
+    </p>
+  );
+};
 
 // A sombra fica em cada face (e não no container): assim nada aparece por trás durante o giro.
 const face =
@@ -166,15 +192,20 @@ const FlipCard = ({ p }: { p: Person }) => {
 
       {/* Verso */}
       <motion.div
-        className={`${face} bg-[#0061ff] p-6 text-left`}
+        className={`${face} flex flex-col bg-[#0061ff] p-5 text-left`}
         initial={false}
         animate={{ rotateX: flipped ? 0 : 180 }}
         transition={transition}
       >
-        <h2 className="type-card text-white">{p.name}</h2>
-        <p className="type-small text-white">{p.role}</p>
-        <p className="type-small mt-3 pr-14 text-white/95">{p.description}</p>
-        <Photo src={p.back} size={64} className="absolute bottom-6 right-6 h-16 w-16 rounded-lg" />
+        {/* Foto ao lado do nome: a descrição usa a largura toda do card. */}
+        <div className="flex items-start gap-3">
+          <div className="min-w-0 flex-1">
+            <h2 className="type-card text-white">{p.name}</h2>
+            <p className="type-small mt-0.5 text-white/90">{p.role}</p>
+          </div>
+          <Photo src={p.back} size={48} className="h-12 w-12 shrink-0 rounded-lg" />
+        </div>
+        <FitText className="mt-3 min-h-0 flex-1 text-white/95">{p.description}</FitText>
       </motion.div>
     </div>
   );
