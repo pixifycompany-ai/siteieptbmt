@@ -43,16 +43,16 @@ const CartoriosWidget = ({ embedded = false }: { embedded?: boolean }) => {
   }, [cartorios, debounced]);
 
   const loading = cartorios === null;
-  // Na página do site a grade é sempre de colunas iguais (3 a partir de 960px); a largura fixa de card
+  // Na página do site a lista ocupa 90% da tela, em colunas iguais (3 a partir de 960px, 4 a partir de 1600px); a largura fixa de card
   // definida no painel (card_width) vale só para o widget do blog.
   const gridCols = embedded
-    ? "grid grid-cols-1 md:grid-cols-2 min-[960px]:grid-cols-3"
+    ? "grid grid-cols-1 md:grid-cols-2 min-[960px]:grid-cols-3 min-[1600px]:grid-cols-4"
     : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
   const fixedWidth = !embedded && s.card_width > 0;
 
   return (
     <div style={{ background: hexToRgba(s.widget_bg_color, s.widget_bg_opacity), minHeight: "100%" }}>
-      <div className={`max-w-6xl mx-auto pt-6 pb-8 md:px-6 md:pt-8 ${embedded ? "" : "px-4"}`}>
+      <div className={`mx-auto pt-6 pb-8 md:pt-8 ${embedded ? "" : "max-w-6xl px-4 md:px-6"}`}>
         <div className="mb-6">
           <CartoriosSearch value={search} onChange={setSearch} />
         </div>
