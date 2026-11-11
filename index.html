@@ -69,6 +69,27 @@
       content="Protesto de títulos com segurança jurídica em Mato Grosso. Consulta gratuita, envio eletrônico e cancelamento nos 79 cartórios do estado."
     />
     <meta name="twitter:image" content="https://www.cartoriosdeprotestomt.com.br/og-image.png" />
+    <script>
+      // Chat de atendimento (Omneo / Chatwoot). Carrega só depois da página pronta e ociosa,
+      // para não atrasar o primeiro carregamento. O blog (blog-app.html) não tem o chat.
+      (function (d, t) {
+        var BASE_URL = "https://app.omneo.com.br";
+        window.chatwootSettings = { locale: "pt_BR", position: "right" };
+        var load = function () {
+          var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          g.src = BASE_URL + "/packs/js/sdk.js";
+          g.async = true;
+          s.parentNode.insertBefore(g, s);
+          g.onload = function () {
+            window.chatwootSDK.run({ websiteToken: "p5GBuaqKzLUz4M9KyZYzqKbC", baseUrl: BASE_URL });
+          };
+        };
+        var idle = function () {
+          "requestIdleCallback" in window ? requestIdleCallback(load, { timeout: 4000 }) : setTimeout(load, 2000);
+        };
+        d.readyState === "complete" ? idle() : addEventListener("load", idle, { once: true });
+      })(document, "script");
+    </script>
   </head>
 
   <body>

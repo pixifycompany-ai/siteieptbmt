@@ -209,6 +209,14 @@ html.site-root {
    o layout (o espaço da barra de rolagem continua reservado). */
 html.alert-open { overflow: hidden; scrollbar-gutter: stable; }
 html.alert-open [data-alert-popup] { display: flex; }
+
+/* Chat (Omneo/Chatwoot): some enquanto o comunicado está aberto e, em telas estreitas, enquanto o aviso de
+   cookies está na tela (o botão do chat ficaria por cima do "Aceitar"). */
+html.alert-open .woot--bubble-holder,
+html.alert-open .woot-widget-holder { display: none !important; }
+@media (max-width: 959px) {
+  html.site-root:not(.cookie-ok) .woot--bubble-holder { display: none !important; }
+}
 .site .gradient-text {
   -webkit-background-clip: text;
   background-clip: text;
