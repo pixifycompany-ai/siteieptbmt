@@ -82,7 +82,22 @@
           s.parentNode.insertBefore(g, s);
           g.onload = function () {
             window.chatwootSDK.run({ websiteToken: "p5GBuaqKzLUz4M9KyZYzqKbC", baseUrl: BASE_URL });
+            styleBubble();
           };
+        };
+        // Bolha azul do IEPTB com balão branco chapado (estilos em src/index.css).
+        var ICON = "M4 4h16a1 1 0 011 1v11a1 1 0 01-1 1H9l-5 4V5a1 1 0 011-1z";
+        var styleBubble = function () {
+          var tries = 0;
+          var swapIcon = function () {
+            var svg = d.getElementById("woot-widget-bubble-icon");
+            var path = svg && svg.querySelector("path");
+            if (!path) return ++tries < 40 && setTimeout(swapIcon, 250);
+            svg.setAttribute("viewBox", "0 0 24 24");
+            path.setAttribute("d", ICON);
+            path.setAttribute("fill", "#fff");
+          };
+          swapIcon();
         };
         var idle = function () {
           "requestIdleCallback" in window ? requestIdleCallback(load, { timeout: 4000 }) : setTimeout(load, 2000);
