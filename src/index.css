@@ -210,6 +210,16 @@ html.site-root {
 html.alert-open { overflow: hidden; scrollbar-gutter: stable; }
 html.alert-open [data-alert-popup] { display: flex; }
 
+/* Card de destino de uma âncora do menu (ex.: /servicos#legislacao): contorno azul que pulsa e some. */
+@keyframes site-flash {
+  0%, 60% { box-shadow: 0 0 0 4px rgba(0, 97, 255, 0.55), 0 20px 40px -18px rgba(0, 97, 255, 0.45); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 97, 255, 0); }
+}
+.site [data-flash] { animation: site-flash 1.8s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .site [data-flash] { animation: none; }
+}
+
 /* Botão flutuante do WhatsApp (WhatsAppButton): some enquanto o comunicado está aberto e, em telas
    estreitas, enquanto o aviso de cookies está na tela (ficaria por cima do "Aceitar"). */
 html.alert-open [data-whatsapp-float] { display: none; }

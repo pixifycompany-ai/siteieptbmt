@@ -6,6 +6,7 @@ import { EXTERNAL, WHATSAPP_URL, img, srcSet } from "../data";
 
 const MAIN = [
   {
+    id: "consulta-protesto",
     title: "Consulta de Protesto",
     description: "Pesquisa gratuita por CPF ou CNPJ na base nacional do Cartórios de Protesto.",
     cta: "Consultar agora",
@@ -13,6 +14,7 @@ const MAIN = [
     image: "LFyuOmQeLW8xYCSaK9Ai5xqY0",
   },
   {
+    id: "central-de-remessa",
     title: "Central de Remessa",
     description: "Envio eletrônico de títulos aos 79 cartórios do estado de MT.",
     cta: "Acessar CRA-MT",
@@ -20,6 +22,7 @@ const MAIN = [
     image: "REtfIkNvsjxYxCsD790UZo1Dquw",
   },
   {
+    id: "cancelamento-eletronico",
     title: "Cancelamento Eletrônico",
     description: "Baixa do protesto após quitação da dívida pelo devedor.",
     cta: "Solicitar baixa",
@@ -28,13 +31,14 @@ const MAIN = [
   },
 ];
 
-type Resource = { title: string; description: string; icon: ReactNode; href: string };
+type Resource = { id?: string; title: string; description: string; icon: ReactNode; href: string };
 
 const iconProps = { size: 24, weight: "regular" as const };
 
 const RESOURCES: Resource[] = [
-  { title: "Convênios", description: "Empresas e órgãos públicos", icon: <Building {...iconProps} />, href: WHATSAPP_URL },
+  { id: "convenios", title: "Convênios", description: "Empresas e órgãos públicos", icon: <Building {...iconProps} />, href: WHATSAPP_URL },
   {
+    id: "legislacao",
     title: "Legislação",
     description: "Marco regulatório do protesto",
     icon: <BookOpen {...iconProps} />,
@@ -113,10 +117,11 @@ const Servicos = () => (
         {MAIN.map((s) => (
           <a
             key={s.title}
+            id={s.id}
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block h-[400px] overflow-hidden rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
+            className="group relative block h-[400px] scroll-mt-[150px] min-[810px]:scroll-mt-[190px] overflow-hidden rounded-lg bg-gradient-to-br from-[#0061ff] to-[#0057e3]"
           >
             <img
               src={img(s.image, 960)}
@@ -146,10 +151,11 @@ const Servicos = () => (
         {RESOURCES.map((r) => (
           <a
             key={r.title}
+            id={r.id}
             href={r.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-[250px] flex-col overflow-hidden rounded-xl border border-[#0061ff]/30 bg-white p-6 outline-none transition-[transform,border-color,box-shadow] duration-500 ease-out-quint hover:-translate-y-1 hover:border-[#0061ff] hover:shadow-[0_20px_40px_-18px_rgba(0,97,255,0.45)] focus-visible:border-[#0061ff] focus-visible:ring-2 focus-visible:ring-[#0061ff]/40"
+            className="group relative flex h-[250px] scroll-mt-[150px] min-[810px]:scroll-mt-[190px] flex-col overflow-hidden rounded-xl border border-[#0061ff]/30 bg-white p-6 outline-none transition-[transform,border-color,box-shadow] duration-500 ease-out-quint hover:-translate-y-1 hover:border-[#0061ff] hover:shadow-[0_20px_40px_-18px_rgba(0,97,255,0.45)] focus-visible:border-[#0061ff] focus-visible:ring-2 focus-visible:ring-[#0061ff]/40"
           >
             {/* brilho azul que sobe do rodapé do card no hover */}
             <span

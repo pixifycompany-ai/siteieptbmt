@@ -23,7 +23,7 @@ const DEFAULT_DESCRIPTION =
  * aqui voltamos a 16px para manter as medidas do site original.
  */
 const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, background = "#eff2f5" }: Props) => {
-  const { pathname } = useLocation();
+  const { pathname, hash, key } = useLocation();
   useResetThemeForPublic();
 
   useEffect(() => {
@@ -42,9 +42,27 @@ const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, backgr
     set('meta[property="og:url"]', `https://www.cartoriosdeprotestomt.com.br${pathname === "/" ? "/" : pathname}`);
   }, [title, description, pathname]);
 
+  // Troca de página: volta ao topo. Com âncora (ex.: /servicos#legislacao, vindo do menu): rola até o
+  // card e o destaca. Repete a rolagem logo depois porque as seções abaixo da dobra (content-visibility)
+  // só ganham a altura real quando renderizadas.
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    if (!target) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    const go = () => target.scrollIntoView({ block: "start" });
+    go();
+    const again = window.setTimeout(go, 250);
+    target.removeAttribute("data-flash");
+    void target.offsetWidth; // reinicia a animação se o mesmo item for clicado de novo
+    target.setAttribute("data-flash", "");
+    const clear = window.setTimeout(() => target.removeAttribute("data-flash"), 2000);
+    return () => {
+      window.clearTimeout(again);
+      window.clearTimeout(clear);
+    };
+  }, [pathname, hash, key]);
 
   return (
     <div className="site min-h-screen" style={{ background }}>

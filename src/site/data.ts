@@ -49,27 +49,27 @@ export const SERVICOS_MENU: MenuItem[] = [
   {
     title: "Consulta Protesto",
     description: "Consulte gratuitamente protestos em qualquer cartório do país pelo CPF ou CNPJ",
-    href: "/servicos",
+    href: "/servicos#consulta-protesto",
   },
   {
     title: "Central de Remessa de Arquivos",
     description: "Distribuição eletrônica de títulos para os 78 cartórios de protesto do Mato Grosso",
-    href: "/servicos",
+    href: "/servicos#central-de-remessa",
   },
   {
     title: "Cancelamento Eletrônico de Protesto",
     description: "Cancele protestos online, 24h por dia, de qualquer lugar do Brasil",
-    href: "/servicos",
+    href: "/servicos#cancelamento-eletronico",
   },
   {
     title: "Convênios",
     description: "Protesto eletrônico de multas, títulos e dívidas para órgãos públicos e empresas",
-    href: "/servicos",
+    href: "/servicos#convenios",
   },
   {
     title: "Legislação",
     description: "Leis federais e normas da Corregedoria sobre o protesto extrajudicial",
-    href: "/servicos",
+    href: "/servicos#legislacao",
   },
   {
     title: "Tabela de Emolumentos",
