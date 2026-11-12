@@ -132,7 +132,7 @@ const Parceiros = () => (
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 flex h-[51px] items-center justify-center rounded-lg bg-white px-6 text-[16px] font-medium text-[#0061ff] transition-colors duration-300 hover:bg-[#eff2f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a2d33]"
+            className="mt-2 flex h-[51px] items-center justify-center rounded-lg bg-white px-6 text-[16px] font-medium text-[#2a2d33] transition-colors duration-300 hover:bg-[#eff2f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a2d33]"
           >
             Falar com a equipe
           </a>
