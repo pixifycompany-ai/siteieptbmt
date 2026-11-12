@@ -22,7 +22,7 @@ const PARTNERS: Partner[] = [
   {
     name: "TJMT",
     fullName: "Tribunal de Justiça do Estado de Mato Grosso",
-    description: "Órgão do Poder Judiciário estadual, responsável pela fiscalização dos serviços notariais e de registro em Mato Grosso.",
+    description: "Órgão máximo do Poder Judiciário de Mato Grosso, responsável pela Justiça estadual em todas as comarcas do estado.",
     logo: "/site/parceiros/tjmt.webp",
     logoWidth: 250,
     url: "https://www.tjmt.jus.br",
