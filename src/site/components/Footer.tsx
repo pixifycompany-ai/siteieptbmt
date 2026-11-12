@@ -68,8 +68,7 @@ const Footer = () => {
         <div className="flex flex-col gap-[21px] min-[810px]:items-end min-[810px]:gap-[14px] min-[810px]:self-stretch min-[810px]:pt-[98px]">
           <ul className="space-y-[19px] min-[810px]:space-y-[11px] min-[810px]:text-right">
             {links.map((l) => (
-              // Como no original, o link da página atual fica oculto (mas mantém o espaço).
-              <li key={l.label} className={l.to === pathname ? "invisible" : undefined}>
+              <li key={l.label}>
                 {"external" in l ? (
                   <a
                     href={l.to}
@@ -78,9 +77,11 @@ const Footer = () => {
                     {l.label}
                   </a>
                 ) : (
+                  // A página atual aparece destacada em azul (em vez de sumir e deixar um buraco na lista).
                   <Link
                     to={l.to}
-                    className="text-[16px] font-light leading-6 text-[#eff2f5] transition-colors hover:text-[#0099ff]"
+                    aria-current={l.to === pathname ? "page" : undefined}
+                    className="text-[16px] font-light leading-6 text-[#eff2f5] transition-colors hover:text-[#0099ff] aria-[current=page]:text-[#0099ff]"
                   >
                     {l.label}
                   </Link>
