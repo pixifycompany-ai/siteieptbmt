@@ -138,16 +138,19 @@ const Navbar = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-20 bg-white">
       <nav className="flex h-full items-center justify-between px-4 min-[810px]:px-10 min-[1200px]:px-16">
-        <div className="flex items-center gap-[68px]">
+        <div className="flex items-center gap-[68px] min-[1200px]:max-[1439px]:gap-11">
           <Link to="/" aria-label="Página inicial" className="text-[#2a2d33]">
             <LogoMark className="h-[34px] w-[34px]" />
           </Link>
-          <div className="hidden items-center gap-10 min-[1200px]:flex">
+          <div className="hidden items-center gap-10 min-[1200px]:flex min-[1200px]:max-[1439px]:gap-7">
             <Dropdown label="Institucional" items={INSTITUCIONAL_MENU} />
             <Dropdown label="Serviços" items={SERVICOS_MENU} />
             <a href={blogUrl("/blog")} className={navClass}>
               Notícias
             </a>
+            <Link to="/parceiros" className={navClass}>
+              Parceiros
+            </Link>
             <Link to="/contato" className={navClass}>
               Contato
             </Link>
@@ -198,6 +201,7 @@ const Navbar = () => {
             <MobileSection title="Serviços" items={SERVICOS_MENU} onNavigate={() => setMobileOpen(false)} />
             {[
               ["Notícias", blogUrl("/blog")],
+              ["Parceiros", "/parceiros"],
               ["Contato", "/contato"],
               ["Privacidade", "/privacidade"],
             ].map(([label, href]) => (

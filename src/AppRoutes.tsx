@@ -11,6 +11,7 @@ const Diretoria = lazy(() => import("@/site/pages/Diretoria"));
 const Equipe = lazy(() => import("@/site/pages/Equipe"));
 const CartoriosDeProtesto = lazy(() => import("@/site/pages/CartoriosDeProtesto"));
 const Privacidade = lazy(() => import("@/site/pages/Privacidade"));
+const Parceiros = lazy(() => import("@/site/pages/Parceiros"));
 
 // Blog, CMS e login (com Supabase Auth) — carregados só quando usados
 const BlogRoutes = lazy(() => import("@/BlogRoutes"));
@@ -35,6 +36,7 @@ const AppRoutes = () =>
       <Route path="/equipe" element={<Equipe />} />
       <Route path="/cartoriosdeprotesto" element={<CartoriosDeProtesto />} />
       <Route path="/privacidade" element={<Privacidade />} />
+      <Route path="/parceiros" element={<Parceiros />} />
       <Route path="/*" element={<BlogRoutes />} />
     </Routes>
   </Suspense>

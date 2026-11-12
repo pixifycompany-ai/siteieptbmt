@@ -24,6 +24,7 @@ const contactLines = [
 const links = [
   { label: "Sobre Nós", to: "/instituicao" },
   { label: "Cartórios de Protesto", to: "/cartoriosdeprotesto" },
+  { label: "Parceiros", to: "/parceiros" },
   { label: "Serviços", to: "/servicos" },
   { label: "Notícias", to: blogUrl("/blog"), external: true },
 ];

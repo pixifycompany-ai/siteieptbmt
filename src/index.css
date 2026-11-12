@@ -210,14 +210,26 @@ html.site-root {
 html.alert-open { overflow: hidden; scrollbar-gutter: stable; }
 html.alert-open [data-alert-popup] { display: flex; }
 
-/* Card de destino de uma âncora do menu (ex.: /servicos#legislacao): contorno azul que pulsa e some. */
+/* Card de destino de uma âncora do menu (ex.: /servicos#legislacao): moldura azul que some aos poucos.
+   Desenhada num ::after por cima do conteúdo e por DENTRO do card: as seções com content-visibility
+   recortam o que passa da borda delas, e a foto do card fica numa camada acima de outline/box-shadow. */
 @keyframes site-flash {
-  0%, 60% { box-shadow: 0 0 0 4px rgba(0, 97, 255, 0.55), 0 20px 40px -18px rgba(0, 97, 255, 0.45); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 97, 255, 0); }
+  0%, 60% { opacity: 1; }
+  100% { opacity: 0; }
 }
-.site [data-flash] { animation: site-flash 1.8s ease-out; }
+.site [data-flash]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border: 4px solid #0061ff;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  animation: site-flash 1.8s ease-out;
+}
 @media (prefers-reduced-motion: reduce) {
-  .site [data-flash] { animation: none; }
+  .site [data-flash]::after { animation-duration: 2.5s; animation-timing-function: steps(1, end); }
 }
 
 /* Botão flutuante do WhatsApp (WhatsAppButton): some enquanto o comunicado está aberto e, em telas

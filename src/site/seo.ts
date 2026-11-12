@@ -38,6 +38,11 @@ export const SEO: Record<string, { title: string; description: string }> = {
     description:
       "Encontre o cartório de protesto mais próximo: lista dos 79 cartórios de Mato Grosso com endereço, telefone, e-mail e localidades atendidas.",
   },
+  "/parceiros": {
+    title: "Parceiros | Cartórios de Protesto de Mato Grosso",
+    description:
+      "Conheça as instituições parceiras dos Cartórios de Protesto de Mato Grosso: TJMT, PGE-MT, AMM, ANOREG-MT, Energisa e outras.",
+  },
   "/privacidade": {
     title: "Aviso de Privacidade | Cartórios de Protesto de Mato Grosso",
     description:

@@ -72,6 +72,12 @@ export const SERVICOS_MENU: MenuItem[] = [
     href: "/servicos#legislacao",
   },
   {
+    title: "Portal do Contribuinte PGE-MT",
+    description: "Confira as orientações sobre débitos como IPVA/Licenciamento e outros.",
+    href: "https://www.pge.mt.gov.br/portal-do-contribuinte",
+    external: true,
+  },
+  {
     title: "Tabela de Emolumentos",
     description: "Custas e taxas oficiais dos serviços de protesto — 2026",
     href: EXTERNAL.tabelaEmolumentos,
