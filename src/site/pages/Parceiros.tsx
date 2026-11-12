@@ -97,7 +97,7 @@ const Parceiros = () => (
         <div className="flex flex-col items-center text-center">
           <Reveal immediate>
             <span className="inline-flex h-6 items-center rounded-full bg-[#2a2d33] px-3 type-eyebrow text-[#eff2f5] min-[810px]:h-[26px]">
-              Quem caminha com a gente
+              Quem confia no protesto
             </span>
           </Reveal>
           <h1 className="type-hero mt-3 text-[#0061ff]">
@@ -105,8 +105,8 @@ const Parceiros = () => (
           </h1>
           <Reveal immediate delay={0.2}>
             <p className="type-lead mx-auto mt-3 max-w-[720px] text-balance text-[#2a2d33]/80">
-              Instituições que trabalham ao lado dos Cartórios de Protesto de Mato Grosso para oferecer um serviço de
-              protesto mais rápido, seguro e acessível.
+              Órgãos públicos, prefeituras e empresas que confiam nos Cartórios de Protesto de Mato Grosso e utilizam o
+              protesto de títulos de forma eletrônica, rápida e segura.
             </p>
           </Reveal>
         </div>

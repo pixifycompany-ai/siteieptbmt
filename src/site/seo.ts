@@ -41,7 +41,7 @@ export const SEO: Record<string, { title: string; description: string }> = {
   "/parceiros": {
     title: "Parceiros | Cartórios de Protesto de Mato Grosso",
     description:
-      "Conheça as instituições parceiras dos Cartórios de Protesto de Mato Grosso: TJMT, PGE-MT, AMM, ANOREG-MT, Energisa e outras.",
+      "Órgãos públicos, prefeituras e empresas que utilizam o protesto de títulos nos Cartórios de Protesto de Mato Grosso: TJMT, PGE-MT, AMM, ANOREG-MT, Energisa e outros.",
   },
   "/privacidade": {
     title: "Aviso de Privacidade | Cartórios de Protesto de Mato Grosso",
