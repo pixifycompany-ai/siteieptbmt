@@ -122,9 +122,9 @@ const Parceiros = () => (
           ))}
         </ul>
 
-        <Reveal className="mt-12 flex flex-col items-center gap-4 rounded-2xl bg-[#eff2f5] px-6 py-10 text-center min-[810px]:mt-16">
-          <h2 className="type-title text-[#2a2d33]">Quer ser nosso parceiro?</h2>
-          <p className="type-body max-w-[560px] text-balance text-[#2a2d33]/80">
+        <Reveal className="mt-12 flex flex-col items-center gap-4 rounded-2xl bg-[#2a2d33] px-6 py-10 text-center min-[810px]:mt-16 min-[810px]:py-14">
+          <h2 className="type-title text-[#00d4d4]">Quer ser nosso parceiro?</h2>
+          <p className="type-body max-w-[560px] text-balance text-white">
             Órgãos públicos, prefeituras e empresas podem firmar convênio para protestar títulos e dívidas de forma
             eletrônica.
           </p>
@@ -132,7 +132,7 @@ const Parceiros = () => (
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 flex h-[51px] items-center justify-center rounded-lg bg-[#0061ff] px-6 text-[16px] font-light text-white transition-colors duration-300 hover:bg-[#2a2d33]"
+            className="mt-2 flex h-[51px] items-center justify-center rounded-lg bg-white px-6 text-[16px] font-medium text-[#0061ff] transition-colors duration-300 hover:bg-[#eff2f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#2a2d33]"
           >
             Falar com a equipe
           </a>
