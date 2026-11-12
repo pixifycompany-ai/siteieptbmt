@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CookieBanner from "./CookieBanner";
 import AlertPopup from "./AlertPopup";
+import WhatsAppButton from "./WhatsAppButton";
 import { useResetThemeForPublic } from "@/contexts/ThemeContext";
 
 type Props = {
@@ -50,6 +51,7 @@ const SiteLayout = ({ children, title, description = DEFAULT_DESCRIPTION, backgr
       <Navbar />
       <main className="pt-20">{children}</main>
       <Footer />
+      <WhatsAppButton />
       <CookieBanner />
       <AlertPopup />
     </div>

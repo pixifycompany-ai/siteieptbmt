@@ -210,68 +210,11 @@ html.site-root {
 html.alert-open { overflow: hidden; scrollbar-gutter: stable; }
 html.alert-open [data-alert-popup] { display: flex; }
 
-/* Chat (Omneo/Chatwoot): bolha 56px no azul do IEPTB com balão branco (ícone trocado pelo script do index.html). */
-.woot-widget-bubble {
-  width: 56px !important;
-  height: 56px !important;
-  background: #0061ff !important;
-  border: 0 !important;
-  box-shadow: 0 10px 30px -8px rgba(0, 97, 255, 0.55) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s ease !important;
-}
-.woot-widget-bubble svg,
-.woot-widget-bubble img {
-  flex: none !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  margin: 0 !important;
-  display: block !important;
-}
-.woot-widget-bubble:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 14px 34px -8px rgba(0, 97, 255, 0.7) !important;
-}
-/* botão de fechar: não pula de lugar e o X fica centrado */
-.woot-widget-bubble.woot--close {
-  bottom: 20px !important;
-  width: 56px !important;
-  height: 56px !important;
-}
-.woot-widget-bubble.woot--close::before,
-.woot-widget-bubble.woot--close::after {
-  top: 50% !important;
-  left: 50% !important;
-  width: 2px !important;
-  height: 20px !important;
-  margin: -10px 0 0 -1px !important;
-  background: #fff !important;
-  border-radius: 2px !important;
-}
-.woot-widget-bubble button,
-.woot-widget-bubble .woot-widget-close,
-.woot-widget-bubble .woot-widget-close-button {
-  all: unset !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  cursor: pointer !important;
-}
-@media (prefers-reduced-motion: reduce) {
-  .woot-widget-bubble { transition: none !important; }
-}
-
-/* Chat (Omneo/Chatwoot): some enquanto o comunicado está aberto e, em telas estreitas, enquanto o aviso de
-   cookies está na tela (o botão do chat ficaria por cima do "Aceitar"). */
-html.alert-open .woot--bubble-holder,
-html.alert-open .woot-widget-holder { display: none !important; }
+/* Botão flutuante do WhatsApp (WhatsAppButton): some enquanto o comunicado está aberto e, em telas
+   estreitas, enquanto o aviso de cookies está na tela (ficaria por cima do "Aceitar"). */
+html.alert-open [data-whatsapp-float] { display: none; }
 @media (max-width: 959px) {
-  html.site-root:not(.cookie-ok) .woot--bubble-holder { display: none !important; }
+  html.site-root:not(.cookie-ok) [data-whatsapp-float] { display: none; }
 }
 .site .gradient-text {
   -webkit-background-clip: text;
